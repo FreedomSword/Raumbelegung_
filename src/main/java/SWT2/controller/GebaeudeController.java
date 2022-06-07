@@ -24,17 +24,11 @@ public class GebaeudeController {
         return  mav;
     }
 
-   @ModelAttribute("gebaeude")
-    public List<Gebaeude> populateList(Model model) {
-        List <Gebaeude> gebaeudeList = gebaeudeRepository.findAll();
-        return  gebaeudeList;
-    }
-
     @GetMapping("/addGebaeudeForm")
     public ModelAndView addGebaeudeForm() {
         ModelAndView mav = new ModelAndView("addGebaeudeForm");
         Gebaeude newGebaeude = new Gebaeude();
-        mav.addObject("gebaeude", newGebaeude);
+        mav.addObject("gebaeudeDropdown", newGebaeude);
         return mav;
     }
 

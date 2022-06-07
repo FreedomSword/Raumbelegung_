@@ -42,13 +42,6 @@
               <input type="text" th:field="*{raum.typ}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
               <input type="number" th:field="*{raum.gebaeude}" placeholder="Gebäude eingeben" class="form-control col-4 mb-4"/>
 
-              <select class="form-control" th:field="*{raum.gebaeude.id}" id="dropGebaeude">
-                  <option th:each="geb : ${gebaeude}"
-                          th:value="${geb.id}"
-                          th:text="${geb.bezeichnung}"></option>
-              </select>
-
-
               <button class="btn btn-primary" type="submit">Speichern</button>
               <input type="hidden" th:field="*{raum.id}"/>
 
