@@ -3,10 +3,12 @@ package SWT2.controller;
 import SWT2.model.Gebaeude;
 import SWT2.repository.GebaeudeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,6 +22,12 @@ public class GebaeudeController {
         List <Gebaeude> list = gebaeudeRepository.findAll();
         mav.addObject("gebaeude", list);
         return  mav;
+    }
+
+   @ModelAttribute("gebaeude")
+    public List<Gebaeude> populateList(Model model) {
+        List <Gebaeude> gebaeudeList = gebaeudeRepository.findAll();
+        return  gebaeudeList;
     }
 
     @GetMapping("/addGebaeudeForm")

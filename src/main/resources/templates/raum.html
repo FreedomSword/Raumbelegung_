@@ -11,7 +11,23 @@
 
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menü
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/showGebaeude">Gebäude</a>
+                    <a class="dropdown-item" href="/showSensor">Sensoren</a>
+                    <a class="dropdown-item" href="/showRaum">Räume</a>
+                </div>
+            </li>
+        </ul>
 
+    </div>
+</nav>
   <main>
       <div class = container>
 
@@ -24,8 +40,8 @@
           <tr>
             <th scope="col">Bezeichnung</th>
             <th scope="col">Typ</th>
-            <th scope="col">Maximale Belegung</th>
-            <th scope="col">Aktuelle Belegung</th>
+            <th scope="col">Max. Bel.</th>
+            <th scope="col">Akt. Bel.</th>
             <th scope="col">Gebäude</th>
           </tr>
         </thead>
@@ -35,7 +51,7 @@
               <td th:text="${raum.typ}"></td>
               <td th:text="${raum.max_belegung}"></td>
               <td th:text="${raum.akt_belegung}"></td>
-             <td th:text="${raum.gebaeude.id}"></td>
+             <td th:text="${raum.gebaeude.bezeichnung}"></td>
               <td>
                   <a th:href="@{/showRaumUpdateForm(raumId=${raum.id})}" class="btn btn-info">Bearbeiten</a>
                   <a th:href="@{/deleteRaum(raumId=${raum.id})}" class="btn btn-danger">Löschen</a>

@@ -11,6 +11,23 @@
 
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menü
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/showGebaeude">Gebäude</a>
+                    <a class="dropdown-item" href="/showSensor">Sensoren</a>
+                    <a class="dropdown-item" href="/showRaum">Räume</a>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</nav>
   <main>
       <div class = container>
 
@@ -24,6 +41,13 @@
               <input type="number" th:field="*{raum.max_belegung}" placeholder="Maximale Belegung eingeben" class="form-control col-4 mb-4"/>
               <input type="text" th:field="*{raum.typ}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
               <input type="number" th:field="*{raum.gebaeude}" placeholder="Gebäude eingeben" class="form-control col-4 mb-4"/>
+
+              <select class="form-control" th:field="*{raum.gebaeude.id}" id="dropGebaeude">
+                  <option th:each="geb : ${gebaeude}"
+                          th:value="${geb.id}"
+                          th:text="${geb.bezeichnung}"></option>
+              </select>
+
 
               <button class="btn btn-primary" type="submit">Speichern</button>
               <input type="hidden" th:field="*{raum.id}"/>

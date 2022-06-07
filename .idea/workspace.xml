@@ -65,7 +65,7 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/simon/Raumbelegung(inclGUI_inclMQTT)/src/main/resources/templates",
+    "last_opened_file_path": "C:/Users/simon/Desktop/Raumbelegung_-master",
     "spring.configuration.checksum": "cf1a7411daee34ef80fe35640b5a10b5"
   }
 }]]></component>
@@ -96,9 +96,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Swt2RaumbelegungNeuApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Raumbelegung_-master" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Swt2RaumbelegungNeuApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ACTIVE_PROFILES" />
-      <module name="Raumbelegung(inclGUI_inclMQTT)" />
+      <module name="Raumbelegung_-master" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -124,6 +131,7 @@
       <workItem from="1654265442458" duration="621000" />
       <workItem from="1654330357686" duration="1093000" />
       <workItem from="1654428051919" duration="4853000" />
+      <workItem from="1654608107612" duration="5005000" />
     </task>
     <servers />
   </component>
