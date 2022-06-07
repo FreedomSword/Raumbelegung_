@@ -18,6 +18,25 @@
           <hr/>
 
           <a th:href="@{/addGebaeudeForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
+
+          <table class="table table-bordered table-striped" id="RaumTable">
+              <thead>
+              <tr>
+                  <th scope="col">Bezeichnung</th>
+                  <th scope="col">Typ</th>
+                  <th scope="col">Maximale Belegung</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="raum: ${raum}">
+                  <td th:text="${raum.bezeichnung}"></td>
+                  <td th:text="${raum.typ}"></td>
+                  <td th:text="${raum.max_belegung}"></td>
+              </tr>
+              </tbody>
+          </table>
+
     <table class="table table-bordered table-striped" id="gebaeudeTable">
         <thead>
           <tr>
@@ -30,19 +49,26 @@
         </thead>
         <tbody>
           <tr th:each="gebaeude: ${gebaeude}">
+
               <td th:text="${gebaeude.bezeichnung}"></td>
               <td th:text="${gebaeude.strasse}"></td>
               <td th:text="${gebaeude.hausnummer}"></td>
               <td th:text="${gebaeude.plz}"></td>
               <td th:text="${gebaeude.stadt}"></td>
               <td>
-                  <a th:href="@{/showUpdateForm(gebaeudeId=${gebaeude.Id})}" class="btn btn-info">Bearbeiten</a>
-                  <a th:href="@{/deleteGebaeude(gebaeudeId=${gebaeude.Id})}" class="btn btn-danger">Löschen</a>
+
+
+
               </td>
 
           </tr>
         </tbody>
       </table>
+
+          <form id="form1" action="showMessage.jsp" method="post">
+              <a th:href="@{/saveRaum/(gebaeudeId=${gebaeude.} , raumId=${raum.id})}" class="btn btn-info" onclick="document.getElementById('form1').submit();"><%=n%></a>
+              <input type="hidden" name="mess" value=<%=n%>
+          </form>
       </div>
 
   </main>

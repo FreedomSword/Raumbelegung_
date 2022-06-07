@@ -14,30 +14,26 @@
   <main>
       <div class = container>
 
-      <h3>Gebäudeliste</h3>
+      <h3>Sensorliste</h3>
           <hr/>
 
-          <a th:href="@{/addGebaeudeForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
+          <a th:href="@{/addSensorForm}" class="btn btn-primary mb-2">Sensor hinzufügen</a>
     <table class="table table-bordered table-striped" id="gebaeudeTable">
         <thead>
           <tr>
-            <th scope="col">Bezeichnung</th>
-            <th scope="col">strasse</th>
-            <th scope="col">Hausnummer</th>
-            <th scope="col">Postleitzahl</th>
-            <th scope="col">Stadt</th>
+            <th scope="col">ID</th>
+            <th scope="col">Raum</th>
+            <th scope="col">Typ</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="gebaeude: ${gebaeude}">
-              <td th:text="${gebaeude.bezeichnung}"></td>
-              <td th:text="${gebaeude.strasse}"></td>
-              <td th:text="${gebaeude.hausnummer}"></td>
-              <td th:text="${gebaeude.plz}"></td>
-              <td th:text="${gebaeude.stadt}"></td>
+          <tr th:each="sensor: ${sensor}">
+              <td th:text="${sensor.id}"></td>
+              <td th:text="${sensor.raum.id}"></td>
+              <td th:text="${sensor.typ}"></td>
               <td>
-                  <a th:href="@{/showGebaeudeUpdateForm(gebaeudeId=${gebaeude.id})}" class="btn btn-info">Bearbeiten</a>
-                  <a th:href="@{/deleteGebaeude(gebaeudeId=${gebaeude.id})}" class="btn btn-danger">Löschen</a>
+                  <a th:href="@{/showSensorUpdateForm(sensorId=${sensor.id})}" class="btn btn-info">Bearbeiten</a>
+                  <a th:href="@{/deleteSensor(sensorId=${sensor.id})}" class="btn btn-danger">Löschen</a>
               </td>
 
           </tr>

@@ -11,88 +11,31 @@
 
 </head>
 <body>
-  <header>
-    <a href="main.html"> Uni der Zukunft </a>
-        </header>
-     
-    <nav class="navbar navbar-inverse bg-primary d-flex justify-content-evenly">
-    
-      <div class="btn-group">
-          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Gebäuden
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">INFORMATIK Gebäude</a>
-            <a class="dropdown-item" href="#">wirtschaft Gebäude </a>
-            <a class="dropdown-item" href="#">kalb else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="gebaeude.html">Alle Gebäuden anzeigen</a>
-          </div>
-       
-      </div> 
-        <div class="btn-group">
-         <a href="Mensen.html " class="btn-primary" >Mensen</a>
-          </div> 
-        
-      </div> 
-  
-        <a href="www.ilias.fh-dortmund.de" class="btn-primary"> ILLIAS</a> 
-  
-        <a href="ds.fh-dortmund.de/ods" class=" btn-primary">ODS</a>
-  
-      </nav>
-
   <main>
       <div class = container>
 
-      <h3>Gebäude hinzufügen</h3>
+      <h3>Raum hinzufügen</h3>
 
           <hr/>
 
-          <form th:action="@{/saveGebaeude}" th:object="${gebaeude}" method="post">
-              <input type="text" th:field="*{bezeichnung}" placeholder="Bezeichnung eingeben" class="form-control col-4 mb-4"/>
-              <input type="text" th:field="*{strasse}" placeholder="strasse eingeben" class="form-control col-4 mb-4"/>
-              <input type="number" th:field="*{hausnummer}" placeholder="Hausnummer eingeben" class="form-control col-4 mb-4"/>
-              <input type="number" th:field="*{plz}" placeholder="Postleitzahl eingeben" class="form-control col-4 mb-4"/>
-              <input type="text" th:field="*{stadt}" placeholder="Stadt eingeben" class="form-control col-4 mb-4"/>
+          <form th:action="@{/saveRaum}" method="post">
+              <input type="number" th:field="*{raum.akt_belegung}" placeholder="Aktuelle Belegung" class="form-control col-4 mb-4"/>
+              <input type="text" th:field="*{raum.bezeichnung}" placeholder="Bezeichnung eingeben" class="form-control col-4 mb-4"/>
+              <input type="number" th:field="*{raum.max_belegung}" placeholder="Maximale Belegung eingeben" class="form-control col-4 mb-4"/>
+              <input type="text" th:field="*{raum.typ}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
+              <input type="number" th:field="*{raum.gebaeude}" placeholder="Gebäude eingeben" class="form-control col-4 mb-4"/>
 
               <button class="btn btn-primary" type="submit">Speichern</button>
-              <input type="hidden" th:field="*{id}"/>
+              <input type="hidden" th:field="*{raum.id}"/>
+
           </form>
 
           <hr/>
 
-          <a th:href="@{showGebaeude}"> Zur Liste zurückkehren</a>
+          <a th:href="@{showRaum}"> Zur Liste zurückkehren</a>
 
       </div>
   </main>
-  <section >
-    <!-- Footer -->
-    <footer class="text-center text-white bg-primary">
-      <!-- Grid container -->
-      <div class="container p-4 pb-0">
-        <!-- Section: CTA -->
-        <section class="">
-        <p class="d-flex justify-content-center align-items-center">
-            <span class="me-3">Register for free</span>   <a href="Login.html">
-           <button type="button" class="btn btn-outline-light btn-rounded">
-              Sign up!
-            </button>
-          </p></a>
-        </section>
-        <!-- Section: CTA -->
-      </div>
-      <!-- Grid container -->
-  
-      <!-- Copyright -->
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2020 Copyright:
-         DIGITAL HEROES
-      </div>
-      <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
-  </section>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

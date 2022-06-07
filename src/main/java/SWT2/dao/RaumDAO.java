@@ -1,7 +1,5 @@
 package SWT2.dao;
 
-
-
 import SWT2.model.Raum;
 
 import java.util.List;
@@ -9,6 +7,9 @@ import java.util.List;
 public interface RaumDAO {
 
     int save(Raum raum);
+
+    int updateBelegung(Raum raum, int id);
+
 
     int update(Raum raum, int id);
 

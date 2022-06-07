@@ -21,8 +21,21 @@ public class Sensor {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
-        private int raumID;
+        private int id;
 
+        @ManyToOne
+        private Raum raum;
+
+        private int typ;
+
+
+        @Override
+        public String toString() {
+                return "Sensor{" +
+                        "id =" + id +
+                        ", Raum ='" + raum.getId() + '\'' +
+                        ", typ='" + typ + '\''  +
+                        '}';
+        }
     }
 

@@ -19,14 +19,21 @@ public class RaumDAOImpl implements RaumDAO {
 
     @Override
     public int save(Raum raum) {
-        return jdbcTemplate.update("INSERT INTO tbl_raum (bezeichnung, typ, max_belegung, akt_belegung, gebaeudeId) VALUES (?,?,?,?,?)", new Object[] {raum.getBezeichnung(), raum.getTyp(), raum.getMax_belegung(),
-                raum.getAkt_belegung(), raum.getGebaeudeId()});
-    }
+        return jdbcTemplate.update("INSERT INTO tbl_raum (bezeichnung,  typ, max_belegung, akt_belegung, gebaeude_id) VALUES (?,?,?,?,?)", new Object[] {raum.getBezeichnung(), raum.getTyp(), raum.getMax_belegung(),
+                raum.getAkt_belegung(), raum.getGebaeude()});
+
+        }
 
     @Override
     public int update(Raum raum, int id) {
         return jdbcTemplate.update("UPDATE tbl_raum SET bezeichnung = ?, typ = ?, max_belegung = ?, akt_belegung = ?, gebaeudeId = ? WHERE ID = ?", new Object[] {raum.getBezeichnung(), raum.getTyp(), raum.getMax_belegung(),
-                raum.getAkt_belegung(), raum.getGebaeudeId(), id});
+                raum.getAkt_belegung(), raum.getGebaeude(), id});
+    }
+
+    @Override
+    public int updateBelegung(Raum raum, int id) {
+        return jdbcTemplate.update("UPDATE tbl_raum SET akt_belegung = ? WHERE ID = ?", new Object[] {raum.getBezeichnung(), raum.getTyp(), raum.getMax_belegung(),
+                raum.getAkt_belegung(), raum.getGebaeude(), id});
     }
 
     @Override

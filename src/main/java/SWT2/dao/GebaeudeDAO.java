@@ -4,7 +4,6 @@ import SWT2.model.Gebaeude;
 
 import java.util.List;
 
-
 public interface GebaeudeDAO {
 
     int save(Gebaeude gebaeude);

@@ -11,42 +11,30 @@
 
 </head>
 <body>
-
   <main>
       <div class = container>
 
-      <h3>Raumliste</h3>
+      <h3>Sensor hinzufügen</h3>
+
           <hr/>
 
-          <a th:href="@{/addRaumForm}" class="btn btn-primary mb-2">Raum hinzufügen</a>
-    <table class="table table-bordered table-striped" id="gebaeudeTable">
-        <thead>
-          <tr>
-            <th scope="col">Bezeichnung</th>
-            <th scope="col">Typ</th>
-            <th scope="col">Maximale Belegung</th>
-            <th scope="col">Aktuelle Belegung</th>
-            <th scope="col">Gebäude</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="raum: ${raum}">
-              <td th:text="${raum.bezeichnung}"></td>
-              <td th:text="${raum.typ}"></td>
-              <td th:text="${raum.max_belegung}"></td>
-              <td th:text="${raum.akt_belegung}"></td>
-             <td th:text="${raum.gebaeude.id}"></td>
-              <td>
-                  <a th:href="@{/showRaumUpdateForm(raumId=${raum.id})}" class="btn btn-info">Bearbeiten</a>
-                  <a th:href="@{/deleteRaum(raumId=${raum.id})}" class="btn btn-danger">Löschen</a>
-              </td>
+          <form th:action="@{/saveSensor}" method="post">
+              <input type="text" th:field="*{sensor.raum}" placeholder="Raum eingeben" class="form-control col-4 mb-4"/>
+              <input type="number" th:field="*{sensor.typ}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
 
-          </tr>
-        </tbody>
-      </table>
+
+              <button class="btn btn-primary" type="submit">Speichern</button>
+              <input type="hidden" th:field="*{sensor.id}"/>
+
+          </form>
+
+          <hr/>
+
+          <a th:href="@{showSensor}"> Zur Liste zurückkehren</a>
+
       </div>
-
   </main>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

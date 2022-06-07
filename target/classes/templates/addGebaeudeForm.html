@@ -49,15 +49,15 @@
 
           <hr/>
 
-          <form th:action="@{/saveGebaeude}" th:object="${gebaeude}" method="post">
-              <input type="text" th:field="*{bezeichnung}" placeholder="Bezeichnung eingeben" class="form-control col-4 mb-4"/>
-              <input type="text" th:field="*{strasse}" placeholder="strasse eingeben" class="form-control col-4 mb-4"/>
-              <input type="number" th:field="*{hausnummer}" placeholder="Hausnummer eingeben" class="form-control col-4 mb-4"/>
-              <input type="number" th:field="*{plz}" placeholder="Postleitzahl eingeben" class="form-control col-4 mb-4"/>
-              <input type="text" th:field="*{stadt}" placeholder="Stadt eingeben" class="form-control col-4 mb-4"/>
+          <form th:action="@{/saveGebaeude}" method="post">
+              <input type="text" th:field="*{gebaeude.bezeichnung}" placeholder="Bezeichnung eingeben" class="form-control col-4 mb-4"/>
+              <input type="text" th:field="*{gebaeude.strasse}" placeholder="strasse eingeben" class="form-control col-4 mb-4"/>
+              <input type="number" th:field="*{gebaeude.hausnummer}" placeholder="Hausnummer eingeben" class="form-control col-4 mb-4"/>
+              <input type="number" th:field="*{gebaeude.plz}" placeholder="Postleitzahl eingeben" class="form-control col-4 mb-4"/>
+              <input type="text" th:field="*{gebaeude.stadt}" placeholder="Stadt eingeben" class="form-control col-4 mb-4"/>
 
               <button class="btn btn-primary" type="submit">Speichern</button>
-              <input type="hidden" th:field="*{id}"/>
+              <input type="hidden" th:field="*{gebaeude.id}"/>
           </form>
 
           <hr/>

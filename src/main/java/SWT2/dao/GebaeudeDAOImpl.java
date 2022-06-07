@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 
-public class GebauedeDAOImpl implements GebaeudeDAO {
+public class GebaeudeDAOImpl implements GebaeudeDAO {
 
     @Autowired
     JdbcTemplate jdbcTemplate;

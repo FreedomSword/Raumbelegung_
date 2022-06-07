@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="ALL" />
+    <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e6f6b0b-bddf-463b-b8de-9cdcf78b3bae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SWT2/MqttBeans.java" afterDir="false" />
-    </list>
+    <list default="true" id="cc49451e-500e-438c-94f6-3fc27ab4c277" name="Changes" comment="Success" />
+    <list id="5768b6e1-e90d-4447-87f3-4c6b1d8a2ac0" name="New changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="module" />
     </option>
   </component>
   <component name="Git.Settings">
@@ -36,40 +27,70 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="28qSk3kuOCyUFIdabXjD19tfNxY" />
+  <component name="ProjectId" id="2A1DRdWgKb81Vp67V60da6hrVp3" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/Raumbelegung(inclGUI)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "last_opened_file_path": "E:/simon/Raumbelegung(inclGUI_inclMQTT)/src/main/resources/templates",
+    "spring.configuration.checksum": "cf1a7411daee34ef80fe35640b5a10b5"
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\simon\Downloads\demo\src\main\resources\templates" />
+      <recent name="E:\simon\Raumbelegung(inclGUI_inclMQTT)\src\main\resources\templates" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="SWT2.controller" />
+      <recent name="SWT2.repository" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.Swt2RaumbelegungNeuApplication">
     <configuration name="Swt2RaumbelegungNeuApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="Raumbelegung(inclGUI)" />
+      <module name="Raumbelegung(inclGUI_inclMQTT)" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -77,8 +98,7 @@
     </configuration>
     <configuration name="Swt2RaumbelegungNeuApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ACTIVE_PROFILES" />
-      <option name="DEBUG_MODE" value="true" />
-      <module name="Raumbelegung(inclGUI)" />
+      <module name="Raumbelegung(inclGUI_inclMQTT)" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -86,38 +106,63 @@
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3e6f6b0b-bddf-463b-b8de-9cdcf78b3bae" name="Changes" comment="" />
-      <created>1651942763110</created>
+      <changelist id="cc49451e-500e-438c-94f6-3fc27ab4c277" name="Changes" comment="" />
+      <changelist id="5768b6e1-e90d-4447-87f3-4c6b1d8a2ac0" name="New changelist" comment="" />
+      <created>1654168196513</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1651942763110</updated>
-      <workItem from="1651942764183" duration="6653000" />
-      <workItem from="1652339570497" duration="6000" />
-      <workItem from="1652339702657" duration="182000" />
-      <workItem from="1652340323107" duration="461000" />
-      <workItem from="1652344913403" duration="976000" />
-      <workItem from="1652346005329" duration="4110000" />
-      <workItem from="1654069558834" duration="273000" />
+      <updated>1654168196513</updated>
+      <workItem from="1654168198188" duration="3305000" />
+      <workItem from="1654181699538" duration="10587000" />
+      <workItem from="1654192723360" duration="133000" />
+      <workItem from="1654194381587" duration="296000" />
+      <workItem from="1654194878030" duration="148000" />
+      <workItem from="1654195080894" duration="1034000" />
+      <workItem from="1654238760220" duration="1203000" />
+      <workItem from="1654265442458" duration="621000" />
+      <workItem from="1654330357686" duration="1093000" />
+      <workItem from="1654428051919" duration="4853000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/SWT2/dao/RaumDAOImpl.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/SWT2/dao/RaumDAOImpl.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/SWT2/dao/RaumDAOImpl.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/SWT2/dao/GebaeudeDAOImpl.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/SWT2/dao/GebaeudeDAOImpl.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XPathView.XPathProjectComponent">
+    <history />
+    <find-history />
   </component>
 </project>
