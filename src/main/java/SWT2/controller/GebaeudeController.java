@@ -28,12 +28,13 @@ public class GebaeudeController {
     public ModelAndView addGebaeudeForm() {
         ModelAndView mav = new ModelAndView("addGebaeudeForm");
         Gebaeude newGebaeude = new Gebaeude();
-        mav.addObject("gebaeudeDropdown", newGebaeude);
+        mav.addObject("gebaeude", newGebaeude);
         return mav;
     }
 
     @PostMapping("/saveGebaeude")
     public RedirectView saveGebaeude(@ModelAttribute Gebaeude gebaeude) {
+
         gebaeudeRepository.save(gebaeude);
         return new RedirectView("/showGebaeude");
     }

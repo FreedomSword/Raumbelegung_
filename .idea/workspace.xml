@@ -4,28 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc49451e-500e-438c-94f6-3fc27ab4c277" name="Changes" comment="Success">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="ae928a98-3b75-41ea-9b0d-9a65450adb11" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/MqttBeans.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SWT2/MqttBeans.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/controller/RaumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SWT2/controller/RaumController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/dao/RaumDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SWT2/dao/RaumDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/controller/GebaeudeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SWT2/controller/GebaeudeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/controller/MqttController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SWT2/controller/MqttController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addGebaeudeForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addGebaeudeForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/gebaeude.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/gebaeude.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/SWT2/controller/GebaeudeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SWT2/controller/GebaeudeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SWT2/controller/RaumController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SWT2/controller/RaumController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/addGebaeudeForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/addGebaeudeForm.html" afterDir="false" />
     </list>
-    <list id="5768b6e1-e90d-4447-87f3-4c6b1d8a2ac0" name="New changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="ChangesViewManager">
-    <option name="groupingKeys">
-      <option value="module" />
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -45,146 +38,46 @@
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
         <entry key="com.haulmont.jpb.jpaPalette" value="false" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
   </component>
-  <component name="ProjectId" id="2A1DRdWgKb81Vp67V60da6hrVp3" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/simon/Desktop/Raumbelegung_-master",
-    "spring.configuration.checksum": "cf1a7411daee34ef80fe35640b5a10b5"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
-    ]
-  }
-}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\simon\Raumbelegung(inclGUI_inclMQTT)\src\main\resources\templates" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="SWT2.controller" />
-      <recent name="SWT2.repository" />
-    </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="SpringBootApplicationConfigurationType" />
-      </set>
-    </option>
-  </component>
-  <component name="RunManager" selected="Spring Boot.Swt2RaumbelegungNeuApplication">
-    <configuration name="Swt2RaumbelegungNeuApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="Raumbelegung(inclGUI_inclMQTT)" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Swt2RaumbelegungNeuApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="Raumbelegung_-master" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Swt2RaumbelegungNeuApplication (3)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <component name="RunManager">
+    <configuration name="Swt2RaumbelegungNeuApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="Raumbelegung_" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SWT2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Swt2RaumbelegungNeuApplication (4)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="Raumbelegung" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Swt2RaumbelegungNeuApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <option name="ACTIVE_PROFILES" />
-      <module name="Raumbelegung" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.Swt2RaumbelegungNeuApplication" />
+      </list>
+    </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="cc49451e-500e-438c-94f6-3fc27ab4c277" name="Changes" comment="" />
-      <changelist id="5768b6e1-e90d-4447-87f3-4c6b1d8a2ac0" name="New changelist" comment="" />
-      <created>1654168196513</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1654168196513</updated>
-      <workItem from="1654168198188" duration="3305000" />
-      <workItem from="1654181699538" duration="10587000" />
-      <workItem from="1654192723360" duration="133000" />
-      <workItem from="1654194381587" duration="296000" />
-      <workItem from="1654194878030" duration="148000" />
-      <workItem from="1654195080894" duration="1034000" />
-      <workItem from="1654238760220" duration="1203000" />
-      <workItem from="1654265442458" duration="621000" />
-      <workItem from="1654330357686" duration="1093000" />
-      <workItem from="1654428051919" duration="4853000" />
-      <workItem from="1654608107612" duration="5005000" />
-      <workItem from="1654613229757" duration="727000" />
-      <workItem from="1654673447731" duration="4583000" />
-    </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/SWT2/dao/GebaeudeDAOImpl.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/SWT2/dao/GebaeudeDAOImpl.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
-  <component name="XPathView.XPathProjectComponent">
-    <history />
-    <find-history />
   </component>
 </project>

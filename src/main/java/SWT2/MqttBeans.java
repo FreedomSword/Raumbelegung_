@@ -148,16 +148,8 @@ public class MqttBeans {
                     }
                 }
                 catch(Exception e) {
-                    e.printStackTrace();
+
                 }
-
-
-              //  Raum r = rDAO.getById(s.getById(Integer.parseInt(payload[0])).getRaumID());
-
-           //     rDAO.updateBelegung(Raum r, s.getById(Integer.parseInt(payload[0])).getRaumID());
-
-
-
 
             }
         };
@@ -165,29 +157,6 @@ public class MqttBeans {
 
     }
 
-/*
-    @Bean
-    @ServiceActivator(inputChannel = "mqttInputChannel")
-    public MessageHandler addActivity() {
-        return new MessageHandler() {
-
-            GebauedeDAOImpl gdao = new GebauedeDAOImpl();
-            SensorDAO sdao = new SensorDAOImpl();
-
-            String[] payload = new String[3];
-
-            @Override
-            public void handleMessage(Message<?> message) throws MessagingException {
-                String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-                if (topic.equals("myTopic")) {
-                    gdao.getById(1);
-
-                }
-
-            }
-        };
-
-    }*/
     @Bean
     public MessageChannel mqttOutboundChannel() {
         return new DirectChannel();

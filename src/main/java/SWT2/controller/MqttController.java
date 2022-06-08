@@ -30,8 +30,5 @@ public class MqttController {
             ex.printStackTrace();
             return ResponseEntity.ok("fail");
         }
-
-
-
     }
 }
