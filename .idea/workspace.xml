@@ -5,29 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae928a98-3b75-41ea-9b0d-9a65450adb11" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/raumFiltered.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/MqttBeans.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SWT2/MqttBeans.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/controller/GebaeudeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SWT2/controller/GebaeudeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/controller/RaumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SWT2/controller/RaumController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/dao/GebaeudeDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/dao/GebaeudeDAOImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/dao/RaumDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/dao/RaumDAOImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/dao/SensorDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/dao/SensorDAOImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SWT2/repository/RaumRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SWT2/repository/RaumRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addGebaeudeForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addGebaeudeForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/gebaeude.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/gebaeude.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/raum.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/raum.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SWT2/controller/GebaeudeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SWT2/controller/RaumController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SWT2/dao/GebaeudeDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SWT2/dao/RaumDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SWT2/dao/RaumDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SWT2/dao/SensorDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/addGebaeudeForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/addGebaeudeForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/gebaeude.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/gebaeude.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addRaumForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addRaumForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SWT2/controller/GebaeudeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SWT2/controller/GebaeudeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SWT2/controller/RaumController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SWT2/controller/RaumController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,20 +52,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/SWT2_Raumbelegung/Raumbelegung/src/main/resources/templates",
-    "settings.editor.selected.configurable": "preferences.editor",
-    "spring.configuration.checksum": "88bddba742e8fd3aebf1abeed79810ef"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="show.run.dashboard.notification" value="false" />
+  </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -93,15 +73,15 @@
   </component>
   <component name="RunManager">
     <configuration name="Swt2RaumbelegungNeuApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="ACTIVE_PROFILES" />
-      <module name="Raumbelegung" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
+      <module name="Raumbelegung_" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="SWT2.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="SWT2.Swt2RaumbelegungNeuApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -124,6 +104,9 @@
       <workItem from="1654685560669" duration="5768000" />
       <workItem from="1654697342506" duration="456000" />
       <workItem from="1654697867408" duration="3000000" />
+      <workItem from="1654702328666" duration="87000" />
+      <workItem from="1654702608582" duration="1879000" />
+      <workItem from="1654709192837" duration="4163000" />
     </task>
     <servers />
   </component>
@@ -140,5 +123,18 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog>
+          <selected-grouping-rules>
+            <grouping-rule id="XBreakpointGroupingByClassRule" />
+            <grouping-rule id="XBreakpointGroupingByPackageRule" />
+            <grouping-rule id="by-file" />
+          </selected-grouping-rules>
+        </breakpoints-dialog>
+      </breakpoints-dialog>
+    </breakpoint-manager>
   </component>
 </project>

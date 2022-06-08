@@ -6,6 +6,7 @@ import SWT2.model.Raum;
 import SWT2.repository.GebaeudeRepository;
 import SWT2.repository.RaumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -29,6 +30,7 @@ public class RaumController {
         ModelAndView mav = new ModelAndView("raum");
         List<Raum> list = raumRepository.findAll();
         mav.addObject("raum", list);
+
         return  mav;
     }
 
@@ -48,36 +50,29 @@ public class RaumController {
         ModelAndView mav = new ModelAndView("addRaumForm");
         Raum newRaum = new Raum();
         mav.addObject("raum", newRaum);
+
         return mav;
     }
 
     @PostMapping("/saveRaum")
     public RedirectView saveRaum(@ModelAttribute Raum raum) {
-        System.out.println(raum.getId());
-        System.out.println(raum.getAkt_belegung());
-        System.out.println(raum.getMax_belegung());
-        System.out.println(raum.getTyp());
-        System.out.println(gebaeudeRepository.findById(raum.getGebaeude().getId()).toString());
+
         Optional<Gebaeude> optionalGebaeude = gebaeudeRepository.findById(raum.getGebaeude().getId());
         Gebaeude gebaeude = optionalGebaeude.get();
         raum.setGebaeude(gebaeude);
         System.out.println(gebaeude);
         raumRepository.save(raum);
-
         return new RedirectView("/showRaum");
     }
-
     @GetMapping("/assignGebaeude/{id}")
     public ModelAndView assignGebaeude(@PathVariable int id) {
         ModelAndView mav = new ModelAndView("assignGebaeude");
         List<Gebaeude> list = gebaeudeRepository.findAll();
-
         Raum raum = raumRepository.getById(id);
         mav.addObject("raum", raum);
         mav.addObject("gebaeude", list);
         return  mav;
     }
-
     @GetMapping("/showRaumUpdateForm")
     public ModelAndView showRaumUpdateForm(@RequestParam int raumId) {
         ModelAndView mav = new ModelAndView("addRaumForm");
@@ -85,12 +80,16 @@ public class RaumController {
         mav.addObject("raum", raum);
         return mav;
     }
-
     @GetMapping("/deleteRaum")
     public RedirectView deleteRaum(@RequestParam int raumId) {
         raumRepository.deleteById(raumId);
         return new RedirectView("/showRaum");
     }
-
+    @ModelAttribute("gebaeude")
+    public List<Gebaeude> populateList(Model model) {
+        List <Gebaeude> gebaeudeList = gebaeudeRepository.findAll();
+        model.addAttribute("gebaeuden", gebaeudeList);
+        return  gebaeudeList;
+    }
 }
 

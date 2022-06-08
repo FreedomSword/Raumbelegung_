@@ -2,11 +2,9 @@ package SWT2.controller;
 
 
 import SWT2.model.Gebaeude;
-import SWT2.model.Raum;
 import SWT2.repository.GebaeudeRepository;
 import SWT2.repository.RaumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -22,7 +20,6 @@ public class GebaeudeController {
     @Autowired
     private RaumRepository raumRepository;
 
-    @Autowired
 
 
     @GetMapping("/showGebaeude")
@@ -32,7 +29,6 @@ public class GebaeudeController {
         mav.addObject("gebaeude", list);
         return  mav;
     }
-
    /* @GetMapping("/showBuildingRooms")
     public ModelAndView showGebaeude(@RequestParam int gebaeudeId) {
         ModelAndView mav = new ModelAndView("raumFiltered");
@@ -40,7 +36,6 @@ public class GebaeudeController {
         mav.addObject("raumFiltered", list);
         return  mav;
     }*/
-
     @GetMapping("/addGebaeudeForm")
     public ModelAndView addGebaeudeForm() {
         ModelAndView mav = new ModelAndView("addGebaeudeForm");
@@ -48,14 +43,12 @@ public class GebaeudeController {
         mav.addObject("gebaeude", newGebaeude);
         return mav;
     }
-
     @PostMapping("/saveGebaeude")
     public RedirectView saveGebaeude(@ModelAttribute Gebaeude gebaeude) {
 
         gebaeudeRepository.save(gebaeude);
         return new RedirectView("/showGebaeude");
     }
-
     @GetMapping("/showGebaeudeUpdateForm")
     public ModelAndView showGebaeudeUpdateForm(@RequestParam int gebaeudeId) {
         ModelAndView mav = new ModelAndView("addGebaeudeForm");
@@ -63,11 +56,9 @@ public class GebaeudeController {
         mav.addObject("gebaeude", gebaeude);
         return mav;
     }
-
     @GetMapping("/deleteGebaeude")
         public RedirectView deleteGebaeude(@RequestParam int gebaeudeId) {
         gebaeudeRepository.deleteById(gebaeudeId);
         return new RedirectView("/showGebaeude");
         }
-
 }

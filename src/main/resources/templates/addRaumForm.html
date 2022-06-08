@@ -34,14 +34,24 @@
       <h3>Raum hinzufügen</h3>
 
           <hr/>
+          <table>
+              <tr th:each="gebauede : ${#gebaueden}">
+                  <td th:text="${gebauede.id}"></td>
+                  <td th:text="${gebauede.bezeichnung}"></td>
+              </tr>
+          </table>
 
           <form th:action="@{/saveRaum}" method="post">
               <input type="number" th:field="*{raum.akt_belegung}" placeholder="Aktuelle Belegung" class="form-control col-4 mb-4"/>
               <input type="text" th:field="*{raum.bezeichnung}" placeholder="Bezeichnung eingeben" class="form-control col-4 mb-4"/>
               <input type="number" th:field="*{raum.max_belegung}" placeholder="Maximale Belegung eingeben" class="form-control col-4 mb-4"/>
               <input type="text" th:field="*{raum.typ}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
-              <input type="number" th:field="*{raum.gebaeude}" placeholder="Gebäude eingeben" class="form-control col-4 mb-4"/>
-
+              <select th:field="*{raum.gebaeude}" class="form-control">
+                  <option th:each="gebauede : ${gebaeuden}"
+                      th:value="${gebauede.id}"
+                      th:text="${gebauede.bezeichnung}">
+                  </option>
+              </select>
               <button class="btn btn-primary" type="submit">Speichern</button>
               <input type="hidden" th:field="*{raum.id}"/>
 
