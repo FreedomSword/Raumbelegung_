@@ -4,7 +4,9 @@ import SWT2.model.Raum;
 import SWT2.model.Sensor;
 import SWT2.repository.RaumRepository;
 import SWT2.repository.SensorRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -26,11 +28,21 @@ public class SensorController {
     @GetMapping("/showSensor")
     public ModelAndView showSensor() {
         ModelAndView mav = new ModelAndView("sensor");
-        List<Sensor> sList = sensorRepository.findAll();
         List<Sensor> list = sensorRepository.findAll();
         mav.addObject("sensor", list);
         return  mav;
     }
+    @GetMapping("/sensorenFiltered")
+    public ModelAndView sensorenFiltered(@RequestParam int raumid) {
+        ModelAndView mav = new ModelAndView("sensorenFiltered");
+        Raum r = raumRepository.getById(raumid);
+        List<Sensor> list = sensorRepository.findAllSensors(raumid);
+        mav.addObject("raum", r );
+        mav.addObject("sensor", list);
+        return  mav;
+
+    }
+
 
     @GetMapping("/addSensorForm")
     public ModelAndView addSensorForm() {
@@ -42,16 +54,10 @@ public class SensorController {
 
     @PostMapping("/saveSensor")
     public RedirectView saveSensor(@ModelAttribute Sensor sensor) {
-        System.out.println(sensor.getId());
-        System.out.println(sensor.getRaum());
-        System.out.println(sensor.getTyp());
-        System.out.println(raumRepository.findById(sensor.getRaum().getId()));
         Optional<Raum> optionalRaum = raumRepository.findById(sensor.getRaum().getId());
         Raum raum = optionalRaum.get();
         sensor.setRaum(raum);
-        System.out.println(raum);
         sensorRepository.save(sensor);
-
         return new RedirectView("/showSensor");
     }
 /*
@@ -87,6 +93,11 @@ public class SensorController {
         sensorRepository.deleteById(sensorId);
         return new RedirectView("/showSensor");
     }
-
+    @ModelAttribute("raueme")
+    public List<Raum> populateList(@NotNull Model model) {
+        List<Raum> rauemeList = raumRepository.findAll();
+        model.addAttribute("raueme", rauemeList);
+        return  rauemeList;
+    }
 }
 

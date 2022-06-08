@@ -36,10 +36,14 @@
           <hr/>
 
           <form th:action="@{/saveSensor}" method="post">
-              <input type="text" th:field="*{sensor.raum}" placeholder="Raum eingeben" class="form-control col-4 mb-4"/>
+              <select th:field="*{sensor.raum}" class="form-control">
+                  <option th:each="raum : ${raueme}"
+                          th:value="${raum.id}"
+                          th:text="${raum.bezeichnung}">
+                  </option>
+              </select>
+       <br>
               <input type="number" th:field="*{sensor.typ}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
-
-
               <button class="btn btn-primary" type="submit">Speichern</button>
               <input type="hidden" th:field="*{sensor.id}"/>
 
