@@ -50,4 +50,6 @@ public class RaumDAOImpl implements RaumDAO {
     public Raum getById(int id) {
         return jdbcTemplate.queryForObject("SELECT * FROM tbl_raum WHERE ID = ?", new BeanPropertyRowMapper<Raum>(Raum.class),id);
     }
+
+
 }

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Raumbelegung_-master" />
         <module name="Raumbelegung(inclGUI_inclMQTT)" />
+        <module name="Raumbelegung" />
         <module name="demo" />
         <module name="Raumbelegung_" />
       </profile>
@@ -16,6 +17,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Raumbelegung" options="-parameters" />
       <module name="Raumbelegung(inclGUI_inclMQTT)" options="-parameters" />
       <module name="Raumbelegung_" options="-parameters" />
       <module name="Raumbelegung_-master" options="-parameters" />

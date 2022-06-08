@@ -55,15 +55,6 @@ public class RaumController {
         return new RedirectView("/showRaum");
     }
 
-  /*  @PostMapping("/saveRaum/{gebaeudeId}")
-    public RedirectView saveRaum(@ModelAttribute Raum raum, @PathVariable int gebaeudeId) {
-
-        Gebaeude gebaeude = gebaeudeRepository.findById(gebaeudeId).get();
-        raum.setGebaeude(gebaeude);
-        raumRepository.save(raum);
-        return new RedirectView("/showRaum");
-    }
-*/
     @GetMapping("/assignGebaeude/{id}")
     public ModelAndView assignGebaeude(@PathVariable int id) {
         ModelAndView mav = new ModelAndView("assignGebaeude");

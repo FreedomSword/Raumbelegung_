@@ -2,6 +2,9 @@ package SWT2;
 
 import SWT2.dao.*;
 import SWT2.model.Raum;
+import SWT2.model.Sensor;
+import SWT2.repository.RaumRepository;
+import SWT2.repository.SensorRepository;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +23,8 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
+
+import java.util.Optional;
 
 
 @Configuration
@@ -69,38 +74,89 @@ public class MqttBeans {
     public MessageHandler handler() {
         return new MessageHandler() {
 
-            SensorDAOImpl s = new SensorDAOImpl();
+            @Autowired
+            private SensorDAO sDAO;
 
             @Autowired
             private RaumDAO rDAO;
+
+            @Autowired
+                    private RaumRepository rRepo;
+
+            @Autowired
+            private SensorRepository sRepo;
             Nachricht n  = new Nachricht();
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
                 String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-                if(topic.equals("myTopic")) {
-                   // System.out.println("This is our topic");
+
+                try {
+
+                    if (topic.equals("myTopic")) {
+                        // System.out.println("This is our topic");
+                    }
+
+                    //Daten der Sensoren in String umwandeln
+                    String msg = message.getPayload().toString();
+
+                    //Daten der Sensoren trennen
+                    String[] payload = new String[3];
+                    payload = msg.split(",");
+
+                    //Daten der Sensoren als einzelne Strings speichern
+                    for (int i = 0; i < payload.length; i++) {
+                        payload[i] = n.nachrichtUmwandeln(payload[i]);
+                    }
+
+                    System.out.println("Sensor ID: " + payload[0]);
+                    System.out.println("Sensor Typ: " + payload[1]);
+                    System.out.println("Sensor Value: " + payload[2]);
+
+
+                    //payload[0] = id
+                    //payload[1] = Typ
+                    //payload[2] = eingabe
+
+
+                    System.out.println("Länge Arry: " + payload.length);
+                    if (Integer.parseInt(payload[1]) == 0) {
+                        //Bewegungssensor
+                        System.out.println("Case 0: Bewegungsssensor erkannt");
+                        Optional<Sensor> sOp = sRepo.findById(Integer.parseInt(payload[0]));
+                        Sensor s = sOp.get();
+                        System.out.println(s);
+                        Raum r = s.getRaum();
+                        System.out.println(r.toString());
+                        if (Integer.parseInt(payload[2]) == 0) {
+                            r.setAkt_belegung(r.getAkt_belegung() - 1);
+                            System.out.println("Aktuelle Belegung um 1 verringert");
+                        } else {
+                            r.setAkt_belegung(r.getAkt_belegung() + 1);
+                            System.out.println("Aktuelle Belegung um 1 erhöht");
+                        }
+
+                        rRepo.save(r);
+
+
+                    } else {
+                        //Temperatursensor
+
+
+                        //Lichtsensor
+
+
+                    }
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
                 }
 
-                //Daten der Sensoren in String umwandeln
-                String msg =   message.getPayload().toString();
-
-                //Daten der Sensoren trennen
-                String[] payload =msg.split(",");
-
-                //Daten der Sensoren als einzelne Strings speichern
-                for(int i = 0; i < payload.length; i++) {
-                    payload[i] = n.nachrichtUmwandeln(payload[i]);
-                }
-
-                //payload[0] = id
-                //payload[1] = art
-                //payload[2] = eingabe
 
               //  Raum r = rDAO.getById(s.getById(Integer.parseInt(payload[0])).getRaumID());
 
            //     rDAO.updateBelegung(Raum r, s.getById(Integer.parseInt(payload[0])).getRaumID());
 
-                for(String a:payload) System.out.println(a);
+
 
 
             }
