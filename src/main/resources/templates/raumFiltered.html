@@ -31,30 +31,30 @@
   <main>
       <div class = container>
 
-      <h3>Gebäudeliste</h3>
+  <h3 th:object="${gebaeude}"><span th:utext="${gebaeude.bezeichnung}"></span></h3>
           <hr/>
 
-          <a th:href="@{/addGebaeudeForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
+          <a th:href="@{/addRaumForm}" class="btn btn-primary mb-2">Raum hinzufügen</a>
     <table class="table table-bordered table-striped" id="gebaeudeTable">
         <thead>
           <tr>
             <th scope="col">Bezeichnung</th>
-            <th scope="col">strasse</th>
-            <th scope="col">Hausnummer</th>
-            <th scope="col">Postleitzahl</th>
-            <th scope="col">Stadt</th>
+            <th scope="col">Typ</th>
+            <th scope="col">Max. Bel.</th>
+            <th scope="col">Akt. Bel.</th>
+            <th scope="col">Gebäude</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="gebaeude: ${gebaeude}">
-              <td th:text="${gebaeude.bezeichnung}"></td>
-              <td th:text="${gebaeude.strasse}"></td>
-              <td th:text="${gebaeude.hausnummer}"></td>
-              <td th:text="${gebaeude.plz}"></td>
-              <td th:text="${gebaeude.stadt}"></td>
+          <tr th:each="raum: ${raum}">
+              <td th:text="${raum.bezeichnung}"></td>
+              <td th:text="${raum.typ}"></td>
+              <td th:text="${raum.max_belegung}"></td>
+              <td th:text="${raum.akt_belegung}"></td>
+             <td  th:text="${raum.gebaeude.bezeichnung}"></td>
               <td>
-                  <a th:href="@{/showGebaeudeUpdateForm(gebaeudeId=${gebaeude.id})}" class="btn btn-info">Bearbeiten</a>
-                  <a th:href="@{/deleteGebaeude(gebaeudeId=${gebaeude.id})}" class="btn btn-danger">Löschen</a>
+                  <a th:href="@{/showRaumUpdateForm(raumId=${raum.id})}" class="btn btn-info">Bearbeiten</a>
+                  <a th:href="@{/deleteRaum(raumId=${raum.id})}" class="btn btn-danger">Löschen</a>
               </td>
 
           </tr>
@@ -63,7 +63,6 @@
       </div>
 
   </main>
-
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

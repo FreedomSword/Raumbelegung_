@@ -1,6 +1,5 @@
 package SWT2;
 
-import SWT2.dao.*;
 import SWT2.model.Raum;
 import SWT2.model.Sensor;
 import SWT2.repository.RaumRepository;
@@ -74,11 +73,6 @@ public class MqttBeans {
     public MessageHandler handler() {
         return new MessageHandler() {
 
-            @Autowired
-            private SensorDAO sDAO;
-
-            @Autowired
-            private RaumDAO rDAO;
 
             @Autowired
                     private RaumRepository rRepo;
@@ -107,32 +101,43 @@ public class MqttBeans {
                     for (int i = 0; i < payload.length; i++) {
                         payload[i] = n.nachrichtUmwandeln(payload[i]);
                     }
-
+                    System.out.println("");
+                    System.out.println("------------------------");
+                    System.out.println("NEUE SENSORDATEN:");
                     System.out.println("Sensor ID: " + payload[0]);
                     System.out.println("Sensor Typ: " + payload[1]);
                     System.out.println("Sensor Value: " + payload[2]);
+                    System.out.println("");
 
 
                     //payload[0] = id
                     //payload[1] = Typ
                     //payload[2] = eingabe
 
-
-                    System.out.println("Länge Arry: " + payload.length);
                     if (Integer.parseInt(payload[1]) == 0) {
                         //Bewegungssensor
                         System.out.println("Case 0: Bewegungsssensor erkannt");
                         Optional<Sensor> sOp = sRepo.findById(Integer.parseInt(payload[0]));
                         Sensor s = sOp.get();
-                        System.out.println(s);
                         Raum r = s.getRaum();
-                        System.out.println(r.toString());
                         if (Integer.parseInt(payload[2]) == 0) {
-                            r.setAkt_belegung(r.getAkt_belegung() - 1);
-                            System.out.println("Aktuelle Belegung um 1 verringert");
+
+                            if(r.getAkt_belegung() == 0) {
+                                System.out.println("Aktuelle Belegung = 0! Deshalb wurden die Daten verworfen");
+                            }
+
+                            else {
+                                r.setAkt_belegung(r.getAkt_belegung() - 1);
+                                System.out.println("Aktuelle Belegung um 1 verringert");
+                                System.out.println("Alte Belegung: " + (r.getAkt_belegung() + 1) + " Neue Belegung: " + r.getAkt_belegung());
+                            }
+
                         } else {
                             r.setAkt_belegung(r.getAkt_belegung() + 1);
-                            System.out.println("Aktuelle Belegung um 1 erhöht");
+                            System.out.println("Aktuelle Belegung um 1 erhoeht");
+                            System.out.println("Aktuelle Belegung um 1 verringert");
+                            System.out.println("Alte Belegung: " + (r.getAkt_belegung()-1) + " Neue Belegung: " + r.getAkt_belegung());
+
                         }
 
                         rRepo.save(r);

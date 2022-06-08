@@ -51,7 +51,7 @@
               <td th:text="${raum.typ}"></td>
               <td th:text="${raum.max_belegung}"></td>
               <td th:text="${raum.akt_belegung}"></td>
-             <td th:text="${raum.gebaeude.bezeichnung}"></td>
+             <td><a th:text="${raum.gebaeude.bezeichnung}" th:href="@{/showBuildingRooms(gebaeudeId=${raum.gebaeude.id})}">raum.html</a> </td>
               <td>
                   <a th:href="@{/showRaumUpdateForm(raumId=${raum.id})}" class="btn btn-info">Bearbeiten</a>
                   <a th:href="@{/deleteRaum(raumId=${raum.id})}" class="btn btn-danger">Löschen</a>

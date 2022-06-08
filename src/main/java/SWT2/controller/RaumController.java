@@ -1,5 +1,6 @@
 package SWT2.controller;
 
+
 import SWT2.model.Gebaeude;
 import SWT2.model.Raum;
 import SWT2.repository.GebaeudeRepository;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +17,7 @@ public class RaumController {
 
     @Autowired
     private RaumRepository raumRepository;
+
 
     @Autowired
     private GebaeudeRepository gebaeudeRepository;
@@ -29,6 +30,17 @@ public class RaumController {
         List<Raum> list = raumRepository.findAll();
         mav.addObject("raum", list);
         return  mav;
+    }
+
+    @GetMapping("/showBuildingRooms")
+    public ModelAndView showBuildingRooms(@RequestParam int gebaeudeId) {
+            ModelAndView mav = new ModelAndView("raumFiltered");
+            Gebaeude g = gebaeudeRepository.getById(gebaeudeId);
+            List<Raum> list = raumRepository.findAllRooms(gebaeudeId);
+            mav.addObject("gebaeude", g );
+            mav.addObject("raum", list);
+            return  mav;
+
     }
 
     @GetMapping("/addRaumForm")
