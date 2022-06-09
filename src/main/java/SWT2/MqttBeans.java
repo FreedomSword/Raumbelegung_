@@ -114,14 +114,18 @@ public class MqttBeans {
                     //payload[1] = Typ
                     //payload[2] = eingabe
 
-                    if (Integer.parseInt(payload[1]) == 0) {
+                    //Sensortypbestimmung (1 = Bewegungssensor)
+                    if (Integer.parseInt(payload[1]) == 1) {
                         //Bewegungssensor
                         System.out.println("Case 0: Bewegungsssensor erkannt");
                         Optional<Sensor> sOp = sRepo.findById(Integer.parseInt(payload[0]));
                         Sensor s = sOp.get();
                         Raum r = s.getRaum();
+
+                        //Value entscheidet ob herein oder heraus
                         if (Integer.parseInt(payload[2]) == 0) {
 
+                            //Aktuelle Belegung bereits 0?
                             if(r.getAkt_belegung() == 0) {
                                 System.out.println("Aktuelle Belegung = 0! Deshalb wurden die Daten verworfen");
                             }
@@ -132,6 +136,7 @@ public class MqttBeans {
                                 System.out.println("Alte Belegung: " + (r.getAkt_belegung() + 1) + " Neue Belegung: " + r.getAkt_belegung());
                             }
 
+                        //1 Person herein
                         } else {
                             r.setAkt_belegung(r.getAkt_belegung() + 1);
                             System.out.println("Aktuelle Belegung um 1 erhoeht");

@@ -48,6 +48,7 @@
               <td th:text="${sensor.id}"></td>
                 <td><a th:text="${sensor.raum.bezeichnung}" th:href="@{/sensorenFiltered(raumid=${sensor.raum.id})}">WRITE SOMETHING HERE -</a> </td>
               <td th:text="${sensor.typ}"></td>
+
               <td>
                   <a th:href="@{/showSensorUpdateForm(sensorId=${sensor.id})}" class="btn btn-info">Bearbeiten</a>
                   <a th:href="@{/deleteSensor(sensorId=${sensor.id})}" class="btn btn-danger">Löschen</a>

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="tbl_sensor")
+@Table(name="tbl_sensortyp")
 
 @Data
 
@@ -19,29 +19,23 @@ import java.util.List;
 
 
 
-public class Sensor {
+public class Sensortyp {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 
-        @ManyToOne
-        private Raum raum;
+        private String bezeichnung;
 
-        @ManyToOne
-        private Sensortyp sensortyp;
-
-        private int typ;
-
-
+        @OneToMany(mappedBy = "sensortyp", cascade = CascadeType.ALL)
+        private List<Sensor> sensors = new ArrayList<>();
 
 
         @Override
         public String toString() {
-                return "Sensor{" +
+                return "Sensortyp{" +
                         "id =" + id +
-                        ", Raum ='" + raum.getId() + '\'' +
-                        ", typ='" + typ + '\''  +
+                        ", Bezeichung='" + bezeichnung + '\''  +
                         '}';
         }
     }

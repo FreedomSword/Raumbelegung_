@@ -43,7 +43,13 @@
                   </option>
               </select>
        <br>
-              <input type="number" th:field="*{sensor.typ}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
+              <select th:field="*{sensor.typ}" class="form-control">
+                  <option th:each="sensortyp : ${sensortypen}"
+                          th:value="${sensortyp.id}"
+                          th:text="${sensortyp.bezeichnung}">
+                  </option>
+              </select>
+              <br>
               <button class="btn btn-primary" type="submit">Speichern</button>
               <input type="hidden" th:field="*{sensor.id}"/>
 

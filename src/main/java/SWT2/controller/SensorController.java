@@ -1,9 +1,12 @@
 package SWT2.controller;
 
+
 import SWT2.model.Raum;
 import SWT2.model.Sensor;
+import SWT2.model.Sensortyp;
 import SWT2.repository.RaumRepository;
 import SWT2.repository.SensorRepository;
+import SWT2.repository.SensortypRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -22,6 +25,9 @@ public class SensorController {
 
     @Autowired
     private RaumRepository raumRepository;
+
+    @Autowired
+    private SensortypRepository sensortypRepository;
 
 
 
@@ -43,7 +49,6 @@ public class SensorController {
 
     }
 
-
     @GetMapping("/addSensorForm")
     public ModelAndView addSensorForm() {
         ModelAndView mav = new ModelAndView("addSensorForm");
@@ -60,16 +65,7 @@ public class SensorController {
         sensorRepository.save(sensor);
         return new RedirectView("/showSensor");
     }
-/*
-    @PostMapping("/saveRaum/{gebaeudeId}")
-    public RedirectView saveRaum(@ModelAttribute Sensor raum, @PathVariable int gebaeudeId) {
 
-        Gebaeude gebaeude = gebaeudeRepository.findById(gebaeudeId).get();
-        raum.setGebaeude(gebaeude);
-        senorRepository.save(raum);
-        return new RedirectView("/showRaum");
-    }
-*/
     @GetMapping("/assignSensor/{id}")
     public ModelAndView assignSensor(@PathVariable int id) {
         ModelAndView mav = new ModelAndView("assignGebaeude");
@@ -98,6 +94,13 @@ public class SensorController {
         List<Raum> rauemeList = raumRepository.findAll();
         model.addAttribute("raueme", rauemeList);
         return  rauemeList;
+    }
+
+    @ModelAttribute("sensortyp")
+    public List<Sensortyp> populateListSensortyp(Model model) {
+        List <Sensortyp> sensortypList = sensortypRepository.findAll();
+        model.addAttribute("sensortypen", sensortypList);
+        return  sensortypList;
     }
 }
 
