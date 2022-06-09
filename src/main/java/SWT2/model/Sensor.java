@@ -31,7 +31,6 @@ public class Sensor {
         @ManyToOne
         private Sensortyp sensortyp;
 
-        private int typ;
 
 
 
@@ -41,7 +40,7 @@ public class Sensor {
                 return "Sensor{" +
                         "id =" + id +
                         ", Raum ='" + raum.getId() + '\'' +
-                        ", typ='" + typ + '\''  +
+                        ", typ='" + sensortyp.getBezeichnung() + '\''  +
                         '}';
         }
     }

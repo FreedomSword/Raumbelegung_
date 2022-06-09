@@ -49,19 +49,9 @@ public class SensorController {
 
     }
 
-    @GetMapping("/addSensorForm")
-    public ModelAndView addSensorForm() {
-        ModelAndView mav = new ModelAndView("addSensorForm");
-        Sensor newSensor = new Sensor();
-        mav.addObject("sensor", newSensor);
-        return mav;
-    }
-
     @PostMapping("/saveSensor")
-    public RedirectView saveSensor(@ModelAttribute Sensor sensor) {
-        Optional<Raum> optionalRaum = raumRepository.findById(sensor.getRaum().getId());
-        Raum raum = optionalRaum.get();
-        sensor.setRaum(raum);
+    public RedirectView saveSensor(@ModelAttribute Sensor sensor, @RequestParam int raumId) {
+        sensor.setRaum((raumRepository.findById(raumId)).get());
         sensorRepository.save(sensor);
         return new RedirectView("/showSensor");
     }
@@ -84,6 +74,16 @@ public class SensorController {
         return mav;
     }
 
+    @GetMapping("/showSensorAddForm")
+    public ModelAndView showSensorAddForm(@RequestParam int raumId) {
+        ModelAndView mav = new ModelAndView("addSensorForm");
+        Sensor newSensor = new Sensor();
+        mav.addObject("sensor", newSensor);
+        Raum raum = raumRepository.findById(raumId).get();
+        mav.addObject("raum", raum);
+        return mav;
+    }
+
     @GetMapping("/deleteSensor")
     public RedirectView deleteSensor(@RequestParam int sensorId) {
         sensorRepository.deleteById(sensorId);
@@ -102,5 +102,6 @@ public class SensorController {
         model.addAttribute("sensortypen", sensortypList);
         return  sensortypList;
     }
+
 }
 

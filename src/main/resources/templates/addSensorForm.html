@@ -35,15 +35,15 @@
 
           <hr/>
 
-          <form th:action="@{/saveSensor}" method="post">
-              <select th:field="*{sensor.raum}" class="form-control">
+          <form th:action="@{/saveSensor(raumId=${raum.id})}" method="post">
+          <!---    <select th:field="*{sensor.raum}" class="form-control">
                   <option th:each="raum : ${raueme}"
                           th:value="${raum.id}"
                           th:text="${raum.bezeichnung}">
                   </option>
-              </select>
+              </select> -->
        <br>
-              <select th:field="*{sensor.typ}" class="form-control">
+              <select th:field="*{sensor.sensortyp}" class="form-control">
                   <option th:each="sensortyp : ${sensortypen}"
                           th:value="${sensortyp.id}"
                           th:text="${sensortyp.bezeichnung}">
