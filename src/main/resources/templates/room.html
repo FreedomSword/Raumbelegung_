@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,74 +19,51 @@
                     Menü
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/showGebaeude">Gebäude</a>
+                    <a class="dropdown-item" href="/showBuilding">Gebäude</a>
                     <a class="dropdown-item" href="/showSensor">Sensoren</a>
-                    <a class="dropdown-item" href="/showRaum">Räume</a>
+                    <a class="dropdown-item" href="/showRoom">Räume</a>
                 </div>
             </li>
         </ul>
 
     </div>
 </nav>
-
   <main>
-    <table class="table table-hover table-striped">
+      <div class = container>
+
+      <h3>Raumliste</h3>
+          <hr/>
+
+          <a th:href="@{/addRoomForm}" class="btn btn-primary mb-2">Raum hinzufügen</a>
+    <table class="table table-bordered table-striped" id="roomTable">
         <thead>
           <tr>
-            <th scope="col">Mensa</th>
-            <th scope="col">Anzahl Personen</th>
-            <th scope="col">Kapazitaet</th>
+            <th scope="col">Bezeichnung</th>
+            <th scope="col">Typ</th>
+            <th scope="col">Max. Bel.</th>
+            <th scope="col">Akt. Bel.</th>
+            <th scope="col">Gebäude</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Kostbar</th>
-            
-            <td>Otto</td>
-            <td>50</td>
-          </tr>
-          <tr>
-            <th scope="row">Tu mensa</th>
-           
-            <td>10</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <th scope="row">kalb</th>
-            <td>150</td>
-            <td>150</td>
+          <tr th:each="room: ${room}">
+              <td th:text="${room.name}"></td>
+              <td th:text="${room.type}"></td>
+              <td th:text="${room.max_occupancy}"></td>
+              <td th:text="${room.cur_occupancy}"></td>
+             <td><a th:text="${room.building.name}" th:href="@{/showBuildingRooms(buildingId=${room.building.bId})}">room.html</a> </td>
+              <td>
+                  <a th:href="@{/UpdateRoomForm(roomId=${room.rId})}" class="btn btn-info">Bearbeiten</a>
+                  <a th:href="@{/deleteRoom(roomId=${room.rId})}" class="btn btn-danger">Löschen</a>
+                  <a th:href="@{/addSensorForm(roomId=${room.rId})}" class="btn btn-success">Sensor hinzufügen</a>
+              </td>
+
           </tr>
         </tbody>
       </table>
-      <section >
-        <!-- Footer -->
-        <footer class="text-center text-white bg-primary">
-          <!-- Grid container -->
-          <div class="container p-4 pb-0">
-            <!-- Section: CTA -->
-            <section class="">
-            <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3">Register for free</span>   <a href="Login.html">
-               <button type="button" class="btn btn-outline-light btn-rounded">
-                  Sign up!
-                </button>
-              </p></a>
-            </section>
-            <!-- Section: CTA -->
-          </div>
-          <!-- Grid container -->
-      
-          <!-- Copyright -->
-          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2020 Copyright:
-             DIGITAL HEROES
-          </div>
-          <!-- Copyright -->
-        </footer>
-        <!-- Footer -->
-      </section>
-  </main>
+      </div>
 
+  </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

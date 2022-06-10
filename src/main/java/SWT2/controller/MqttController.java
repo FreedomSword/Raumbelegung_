@@ -19,7 +19,7 @@ public class MqttController {
 
     @Autowired
     MqttGateway mqtGateway;
-    @PostMapping("/sendMessage")
+    //@PostMapping("/sendMessage")
     public ResponseEntity<?> publish(@RequestBody String mqttMessage) {
         try {
             JsonObject convertObject = new Gson().fromJson(mqttMessage,JsonObject.class);

@@ -12,7 +12,7 @@ import java.util.List;
 public interface SensorRepository extends JpaRepository<Sensor, Integer> {
 
 
-    @Query("SELECT r FROM Sensor r WHERE r.raum.id = ?1")
+    //Find all sensors where room = x
+    @Query("SELECT s FROM Sensor s WHERE s.sid = ?1")
     List<Sensor> findAllSensors(int id);
-
 }

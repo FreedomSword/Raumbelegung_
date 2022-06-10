@@ -20,9 +20,9 @@
                           Menü
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="/showGebaeude">Gebäude</a>
+                          <a class="dropdown-item" href="/showBuilding">Gebäude</a>
                           <a class="dropdown-item" href="/showSensor">Sensoren</a>
-                          <a class="dropdown-item" href="/showRaum">Räume</a>
+                          <a class="dropdown-item" href="/showRoom">Räume</a>
                       </div>
                   </li>
               </ul>
@@ -35,23 +35,18 @@
 
           <hr/>
 
-          <form th:action="@{/saveSensor(raumId=${raum.id})}" method="post">
-          <!---    <select th:field="*{sensor.raum}" class="form-control">
-                  <option th:each="raum : ${raueme}"
-                          th:value="${raum.id}"
-                          th:text="${raum.bezeichnung}">
-                  </option>
-              </select> -->
+          <form th:action="@{/saveSensor(roomId=${room.getRid})}" method="post">
+
        <br>
-              <select th:field="*{sensor.sensortyp}" class="form-control">
-                  <option th:each="sensortyp : ${sensortypen}"
-                          th:value="${sensortyp.id}"
-                          th:text="${sensortyp.bezeichnung}">
+              <select th:field="*{sensor.sensortype}" class="form-control">
+                  <option th:each="sensortype : ${sensortype}"
+                          th:value="${sensortype.stId}"
+                          th:text="${sensortype.name}">
                   </option>
               </select>
               <br>
               <button class="btn btn-primary" type="submit">Speichern</button>
-              <input type="hidden" th:field="*{sensor.id}"/>
+              <input type="hidden" th:field="*{sensor.sId}"/>
 
           </form>
 

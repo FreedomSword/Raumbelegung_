@@ -19,9 +19,9 @@
                     Menü
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/showGebaeude">Gebäude</a>
+                    <a class="dropdown-item" href="/showBuilding">Gebäude</a>
                     <a class="dropdown-item" href="/showSensor">Sensoren</a>
-                    <a class="dropdown-item" href="/showRaum">Räume</a>
+                    <a class="dropdown-item" href="/showRoom">Räume</a>
                 </div>
             </li>
         </ul>
@@ -31,39 +31,27 @@
   <main>
       <div class = container>
 
-      <h3>Raumliste</h3>
+      <h3>Raum hinzufügen</h3>
+
           <hr/>
 
-          <a th:href="@{/addRaumForm}" class="btn btn-primary mb-2">Raum hinzufügen</a>
-    <table class="table table-bordered table-striped" id="gebaeudeTable">
-        <thead>
-          <tr>
-            <th scope="col">Bezeichnung</th>
-            <th scope="col">Typ</th>
-            <th scope="col">Max. Bel.</th>
-            <th scope="col">Akt. Bel.</th>
-            <th scope="col">Gebäude</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="raum: ${raum}">
-              <td th:text="${raum.bezeichnung}"></td>
-              <td th:text="${raum.typ}"></td>
-              <td th:text="${raum.max_belegung}"></td>
-              <td th:text="${raum.akt_belegung}"></td>
-             <td><a th:text="${raum.gebaeude.bezeichnung}" th:href="@{/showBuildingRooms(gebaeudeId=${raum.gebaeude.id})}">raum.html</a> </td>
-              <td>
-                  <a th:href="@{/showRaumUpdateForm(raumId=${raum.id})}" class="btn btn-info">Bearbeiten</a>
-                  <a th:href="@{/deleteRaum(raumId=${raum.id})}" class="btn btn-danger">Löschen</a>
-                  <a th:href="@{/showSensorAddForm(raumId=${raum.id})}" class="btn btn-success">Sensor hinzufügen</a>
-              </td>
+          <form th:action="@{/saveRoomInBuilding(buildingId=${building.BId})}" method="post">
+              <input type="number" th:field="*{room.cur_occupancy}" placeholder="Aktuelle Belegung" class="form-control col-4 mb-4"/>
+              <input type="text" th:field="*{room.name}" placeholder="Bezeichnung eingeben" class="form-control col-4 mb-4"/>
+              <input type="number" th:field="*{room.max_occupancy}" placeholder="Maximale Belegung eingeben" class="form-control col-4 mb-4"/>
+              <input type="text" th:field="*{room.type}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
+              <button class="btn btn-primary" type="submit">Speichern</button>
+              <input type="hidden" th:field="*{room.rId}"/>
 
-          </tr>
-        </tbody>
-      </table>
+          </form>
+
+          <hr/>
+
+          <a th:href="@{showRoom}"> Zur Liste zurückkehren</a>
+
       </div>
-
   </main>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

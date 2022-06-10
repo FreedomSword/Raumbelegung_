@@ -19,9 +19,9 @@
                     Menü
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/showGebaeude">Gebäude</a>
+                    <a class="dropdown-item" href="/showBuilding">Gebäude</a>
                     <a class="dropdown-item" href="/showSensor">Sensoren</a>
-                    <a class="dropdown-item" href="/showRaum">Räume</a>
+                    <a class="dropdown-item" href="/showRoom">Räume</a>
                 </div>
             </li>
         </ul>
@@ -31,37 +31,31 @@
   <main>
       <div class = container>
 
-      <h3>Gebäudeliste</h3>
+      <h3>Raum hinzufügen</h3>
+
+          <hr/>
+          <form th:action="@{/saveRoom}" method="post">
+              <input type="number" th:field="*{room.cur_occupancy}" placeholder="Aktuelle Belegung" class="form-control col-4 mb-4"/>
+              <input type="text" th:field="*{room.name}" placeholder="Bezeichnung eingeben" class="form-control col-4 mb-4"/>
+              <input type="number" th:field="*{room.max_occupancy}" placeholder="Maximale Belegung eingeben" class="form-control col-4 mb-4"/>
+              <input type="text" th:field="*{room.type}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
+              <select th:field="*{room.building}" class="form-control">
+                  <option th:each="building : ${building}"
+                      th:value="${building.bId}"
+                      th:text="${building.name}">
+                  </option>
+              </select>
+              </br>
+              <button class="btn btn-primary" type="submit">Speichern</button>
+              <input type="hidden" th:field="*{room.getRid}"/>
+
+          </form>
+
           <hr/>
 
-          <a th:href="@{/addGebaeudeForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
-    <table class="table table-bordered table-striped" id="gebaeudeTable">
-        <thead>
-          <tr>
-            <th scope="col">Bezeichnung</th>
-            <th scope="col">strasse</th>
-            <th scope="col">Hausnummer</th>
-            <th scope="col">Postleitzahl</th>
-            <th scope="col">Stadt</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="gebaeude: ${gebaeude}">
-              <td th:text="${gebaeude.bezeichnung}"></td>
-              <td th:text="${gebaeude.strasse}"></td>
-              <td th:text="${gebaeude.hausnummer}"></td>
-              <td th:text="${gebaeude.plz}"></td>
-              <td th:text="${gebaeude.stadt}"></td>
-              <td>
-                  <a th:href="@{/showGebaeudeUpdateForm(gebaeudeId=${gebaeude.id})}" class="btn btn-info">Bearbeiten</a>
-                  <a th:href="@{/deleteGebaeude(gebaeudeId=${gebaeude.id})}" class="btn btn-danger">Löschen</a>
-              </td>
+          <a th:href="@{showRoom}"> Zur Liste zurückkehren</a>
 
-          </tr>
-        </tbody>
-      </table>
       </div>
-
   </main>
 
 

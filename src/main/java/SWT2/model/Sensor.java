@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="tbl_sensor")
@@ -23,13 +21,14 @@ public class Sensor {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id;
+        @Column(name = "sid")
+        private int sid;
 
         @ManyToOne
-        private Raum raum;
+        private Room room;
 
         @ManyToOne
-        private Sensortyp sensortyp;
+        private Sensortype sensortype;
 
 
 
@@ -38,9 +37,9 @@ public class Sensor {
         @Override
         public String toString() {
                 return "Sensor{" +
-                        "id =" + id +
-                        ", Raum ='" + raum.getId() + '\'' +
-                        ", typ='" + sensortyp.getBezeichnung() + '\''  +
+                        "id =" + sid +
+                        ", Raum ='" + room.getRid() + '\'' +
+                        ", typ='" + sensortype.getName() + '\''  +
                         '}';
         }
     }

@@ -19,9 +19,9 @@
                     Menü
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/showGebaeude">Gebäude</a>
+                    <a class="dropdown-item" href="/showBuilding">Gebäude</a>
                     <a class="dropdown-item" href="/showSensor">Sensoren</a>
-                    <a class="dropdown-item" href="/showRaum">Räume</a>
+                    <a class="dropdown-item" href="/showRoom">Räume</a>
                 </div>
             </li>
         </ul>
@@ -31,7 +31,7 @@
 <main>
     <div class = container>
 
-        <h3 th:object="${raum}"><span th:utext="${raum.bezeichnung}"></span></h3>
+        <h3 th:object="${room}"><span th:utext="${room.name}"></span></h3>
         <hr/>
 
         <a th:href="@{/addSensorForm}" class="btn btn-primary mb-2">Sensor hinzufügen</a>
@@ -45,12 +45,12 @@
             </thead>
             <tbody>
             <tr th:each="sensor: ${sensor}">
-                <td th:text="${sensor.id}"></td>
-                <td th:text="${sensor.raum.bezeichnung}"></td>
-                <td th:text="${sensor.typ}"></td>
+                <td th:text="${sensor.sid}"></td>
+                <td th:text="${sensor.room.name}"></td>
+                <td th:text="${sensor.type}"></td>
                 <td>
-                    <a th:href="@{/showSensorUpdateForm(raumid=${sensor.id})}" class="btn btn-info">Bearbeiten</a>
-                    <a th:href="@{/deleteSensor(sensorId=${sensor.id})}" class="btn btn-danger">Löschen</a>
+                    <a th:href="@{/SensorUpdateForm(roomId=${sensor.sid})}" class="btn btn-info">Bearbeiten</a>
+                    <a th:href="@{/deleteSensor(sensorId=${sensor.sid})}" class="btn btn-danger">Löschen</a>
                 </td>
 
             </tr>

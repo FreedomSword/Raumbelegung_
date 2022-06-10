@@ -19,9 +19,9 @@
                     Menü
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/showGebaeude">Gebäude</a>
+                    <a class="dropdown-item" href="/showBuilding">Gebäude</a>
                     <a class="dropdown-item" href="/showSensor">Sensoren</a>
-                    <a class="dropdown-item" href="/showRaum">Räume</a>
+                    <a class="dropdown-item" href="/showRoom">Räume</a>
                 </div>
             </li>
         </ul>
@@ -34,10 +34,11 @@
       <h3>Gebäudeliste</h3>
           <hr/>
 
-          <a th:href="@{/addGebaeudeForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
-    <table class="table table-bordered table-striped" id="gebaeudeTable">
+          <a th:href="@{/addBuildingForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
+    <table class="table table-bordered table-striped" id="buildingTable">
         <thead>
           <tr>
+              <th scope="col">ID</th>
             <th scope="col">Bezeichnung</th>
             <th scope="col">strasse</th>
             <th scope="col">Hausnummer</th>
@@ -46,15 +47,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="gebaeude: ${gebaeude}">
-              <td th:text="${gebaeude.bezeichnung}"></td>
-              <td th:text="${gebaeude.strasse}"></td>
-              <td th:text="${gebaeude.hausnummer}"></td>
-              <td th:text="${gebaeude.plz}"></td>
-              <td th:text="${gebaeude.stadt}"></td>
+          <tr th:each="building: ${building}">
+              <td th:text="${building.BId}"></td>
+              <td th:text="${building.name}"></td>
+              <td th:text="${building.street}"></td>
+              <td th:text="${building.houseNumber}"></td>
+              <td th:text="${building.postalCode}"></td>
+              <td th:text="${building.city}"></td>
               <td>
-                  <a th:href="@{/showGebaeudeUpdateForm(gebaeudeId=${gebaeude.id})}" class="btn btn-info">Bearbeiten</a>
-                  <a th:href="@{/deleteGebaeude(gebaeudeId=${gebaeude.id})}" class="btn btn-danger">Löschen</a>
+                  <a th:href="@{/BuildingUpdateForm(buildingId=${building.bId})}" class="btn btn-info">Bearbeiten</a>
+                  <a th:href="@{/deleteBuilding(buildingId=${building.bId})}" class="btn btn-danger">Löschen</a>
+                  <a th:href="@{/AddRoomInBuildingForm(buildingId=${building.bId})}" class="btn btn-success">Raum hinzufügen</a>
               </td>
 
           </tr>

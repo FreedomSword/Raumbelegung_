@@ -1,8 +1,8 @@
 package SWT2;
 
-import SWT2.model.Raum;
+import SWT2.model.Room;
 import SWT2.model.Sensor;
-import SWT2.repository.RaumRepository;
+import SWT2.repository.RoomRepository;
 import SWT2.repository.SensorRepository;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannel
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.integration.mqtt.support.MqttHeaders;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
@@ -34,6 +33,8 @@ public class MqttBeans {
     private String password;
     @Value("${MQTT.URL}")
     private String url;
+
+
 
     public MqttPahoClientFactory mqttPahoClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
@@ -68,38 +69,37 @@ public class MqttBeans {
         return adapter;
     }
 
+
     @Bean
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
         return new MessageHandler() {
 
-
             @Autowired
-                    private RaumRepository rRepo;
+            private RoomRepository rRepo;
 
             @Autowired
             private SensorRepository sRepo;
-            Nachricht n  = new Nachricht();
+            Message n  = new Message();
+
+
             @Override
-            public void handleMessage(Message<?> message) throws MessagingException {
+            public void handleMessage(org.springframework.messaging.Message<?> message) throws MessagingException {
                 String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
 
                 try {
 
-                    if (topic.equals("myTopic")) {
-                        // System.out.println("This is our topic");
-                    }
 
-                    //Daten der Sensoren in String umwandeln
+                    //Convert sensor data in string
                     String msg = message.getPayload().toString();
 
-                    //Daten der Sensoren trennen
+                    //Separate individual data
                     String[] payload = new String[3];
                     payload = msg.split(",");
 
-                    //Daten der Sensoren als einzelne Strings speichern
+                    //Save data as individual strings
                     for (int i = 0; i < payload.length; i++) {
-                        payload[i] = n.nachrichtUmwandeln(payload[i]);
+                        payload[i] = n.convertMessage(payload[i]);
                     }
                     System.out.println("");
                     System.out.println("------------------------");
@@ -111,48 +111,54 @@ public class MqttBeans {
 
 
                     //payload[0] = id
-                    //payload[1] = Typ
-                    //payload[2] = eingabe
+                    //payload[1] = type
+                    //payload[2] = insert value
 
-                    //Sensortypbestimmung (1 = Bewegungssensor)
+
+                    //Determination of sensor type
+
+                    //1 = Motion sensor
                     if (Integer.parseInt(payload[1]) == 1) {
-                        //Bewegungssensor
                         System.out.println("Case 0: Bewegungsssensor erkannt");
                         Optional<Sensor> sOp = sRepo.findById(Integer.parseInt(payload[0]));
                         Sensor s = sOp.get();
-                        Raum r = s.getRaum();
+                        Room r = s.getRoom();
 
-                        //Value entscheidet ob herein oder heraus
+                       //Determination of the insert value
+
+                        //0 = Going out
                         if (Integer.parseInt(payload[2]) == 0) {
 
-                            //Aktuelle Belegung bereits 0?
-                            if(r.getAkt_belegung() == 0) {
+                            //Current occupancy = 0?
+                            if(r.getCur_occupancy() == 0) {
+
+                                //Do nothing (Due to the simulation of the data, incorrect entries can logically occur, which are intercepted here)
                                 System.out.println("Aktuelle Belegung = 0! Deshalb wurden die Daten verworfen");
                             }
 
                             else {
-                                r.setAkt_belegung(r.getAkt_belegung() - 1);
+
+                                //Current occupancy - 1
+                                r.setCur_occupancy(r.getCur_occupancy() - 1);
                                 System.out.println("Aktuelle Belegung um 1 verringert");
-                                System.out.println("Alte Belegung: " + (r.getAkt_belegung() + 1) + " Neue Belegung: " + r.getAkt_belegung());
+                                System.out.println("Alte Belegung: " + (r.getCur_occupancy() + 1) + " Neue Belegung: " + r.getCur_occupancy());
                             }
 
-                        //1 Person herein
+                        //1 = Going in
                         } else {
-                            r.setAkt_belegung(r.getAkt_belegung() + 1);
+                            r.setCur_occupancy(r.getCur_occupancy() + 1);
                             System.out.println("Aktuelle Belegung um 1 erhoeht");
                             System.out.println("Aktuelle Belegung um 1 verringert");
-                            System.out.println("Alte Belegung: " + (r.getAkt_belegung()-1) + " Neue Belegung: " + r.getAkt_belegung());
+                            System.out.println("Alte Belegung: " + (r.getCur_occupancy()-1) + " Neue Belegung: " + r.getCur_occupancy());
 
                         }
 
                         rRepo.save(r);
 
 
-                    } else {
-                        //Temperatursensor
+                                           //Temperature sensor
 
-
-                        //Lichtsensor
+                        //Light sensor
 
 
                     }
