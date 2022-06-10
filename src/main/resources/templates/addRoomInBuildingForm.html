@@ -35,13 +35,13 @@
 
           <hr/>
 
-          <form th:action="@{/saveRoomInBuilding(buildingId=${building.BId})}" method="post">
+          <form th:action="@{/saveRoomInBuilding(buildingId=${building.bid})}" method="post">
               <input type="number" th:field="*{room.cur_occupancy}" placeholder="Aktuelle Belegung" class="form-control col-4 mb-4"/>
               <input type="text" th:field="*{room.name}" placeholder="Bezeichnung eingeben" class="form-control col-4 mb-4"/>
               <input type="number" th:field="*{room.max_occupancy}" placeholder="Maximale Belegung eingeben" class="form-control col-4 mb-4"/>
               <input type="text" th:field="*{room.type}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
               <button class="btn btn-primary" type="submit">Speichern</button>
-              <input type="hidden" th:field="*{room.rId}"/>
+              <input type="hidden" th:field="*{room.rid}"/>
 
           </form>
 

@@ -82,6 +82,8 @@ public class SensorController {
     public ModelAndView showSensorUpdateForm(@RequestParam int sensorId) {
         ModelAndView mav = new ModelAndView("addSensorInRoomForm");
         Sensor sensor = sRepository.findById(sensorId).get();
+        Room room = rRepository.findById(sensor.getRoom().getRid()).get();
+        mav.addObject("room", room);
         mav.addObject("sensor", sensor);
         return mav;
     }

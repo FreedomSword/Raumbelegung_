@@ -41,13 +41,13 @@
               <input type="text" th:field="*{room.type}" placeholder="Typ eingeben" class="form-control col-4 mb-4"/>
               <select th:field="*{room.building}" class="form-control">
                   <option th:each="building : ${building}"
-                      th:value="${building.bId}"
+                      th:value="${building.bid}"
                       th:text="${building.name}">
                   </option>
               </select>
               </br>
               <button class="btn btn-primary" type="submit">Speichern</button>
-              <input type="hidden" th:field="*{room.getRid}"/>
+              <input type="hidden" th:field="*{room.rid}"/>
 
           </form>
 

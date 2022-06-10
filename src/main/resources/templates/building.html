@@ -48,16 +48,16 @@
         </thead>
         <tbody>
           <tr th:each="building: ${building}">
-              <td th:text="${building.BId}"></td>
+              <td th:text="${building.Bid}"></td>
               <td th:text="${building.name}"></td>
               <td th:text="${building.street}"></td>
               <td th:text="${building.houseNumber}"></td>
               <td th:text="${building.postalCode}"></td>
               <td th:text="${building.city}"></td>
               <td>
-                  <a th:href="@{/BuildingUpdateForm(buildingId=${building.bId})}" class="btn btn-info">Bearbeiten</a>
-                  <a th:href="@{/deleteBuilding(buildingId=${building.bId})}" class="btn btn-danger">Löschen</a>
-                  <a th:href="@{/AddRoomInBuildingForm(buildingId=${building.bId})}" class="btn btn-success">Raum hinzufügen</a>
+                  <a th:href="@{/BuildingUpdateForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
+                  <a th:href="@{/deleteBuilding(buildingId=${building.bid})}" class="btn btn-danger">Löschen</a>
+                  <a th:href="@{/AddRoomInBuildingForm(buildingId=${building.bid})}" class="btn btn-success">Raum hinzufügen</a>
               </td>
 
           </tr>

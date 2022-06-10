@@ -47,7 +47,7 @@ public class Room {
                 ", typ='" + type + '\'' +
                 ", max_belegung=" + max_occupancy +
                 ", akt_belegung=" + cur_occupancy +
-                ", gebaeude=" + building.getBId() +
+                ", gebaeude=" + building.getBid() +
                 '}';
     }
 }

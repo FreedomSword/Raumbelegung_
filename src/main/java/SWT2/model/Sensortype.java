@@ -24,7 +24,7 @@ public class Sensortype {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "stid")
-        private int stId;
+        private int stid;
         @Column(name = "name")
         private String name;
 
@@ -35,7 +35,7 @@ public class Sensortype {
         @Override
         public String toString() {
                 return "Sensortyp{" +
-                        "id =" + stId +
+                        "id =" + stid +
                         ", Bezeichung='" + name + '\''  +
                         '}';
         }

@@ -35,18 +35,18 @@
 
           <hr/>
 
-          <form th:action="@{/saveSensor(roomId=${room.getRid})}" method="post">
+          <form th:action="@{/saveSensor(roomId=${room.rid})}" method="post">
 
        <br>
               <select th:field="*{sensor.sensortype}" class="form-control">
                   <option th:each="sensortype : ${sensortype}"
-                          th:value="${sensortype.stId}"
+                          th:value="${sensortype.stid}"
                           th:text="${sensortype.name}">
                   </option>
               </select>
               <br>
               <button class="btn btn-primary" type="submit">Speichern</button>
-              <input type="hidden" th:field="*{sensor.sId}"/>
+              <input type="hidden" th:field="*{sensor.sid}"/>
 
           </form>
 

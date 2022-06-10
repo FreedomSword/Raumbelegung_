@@ -34,10 +34,10 @@
       <h3>Raumliste</h3>
           <hr/>
 
-          <a th:href="@{/addRoomForm}" class="btn btn-primary mb-2">Raum hinzufügen</a>
     <table class="table table-bordered table-striped" id="roomTable">
         <thead>
           <tr>
+              <th scope="col">ID</th>
             <th scope="col">Bezeichnung</th>
             <th scope="col">Typ</th>
             <th scope="col">Max. Bel.</th>
@@ -47,15 +47,16 @@
         </thead>
         <tbody>
           <tr th:each="room: ${room}">
+              <td th:text="${room.rid}"></td>
               <td th:text="${room.name}"></td>
               <td th:text="${room.type}"></td>
               <td th:text="${room.max_occupancy}"></td>
               <td th:text="${room.cur_occupancy}"></td>
-             <td><a th:text="${room.building.name}" th:href="@{/showBuildingRooms(buildingId=${room.building.bId})}">room.html</a> </td>
+             <td><a th:text="${room.building.name}" th:href="@{/showBuildingRooms(buildingId=${room.building.bid})}">room.html</a> </td>
               <td>
-                  <a th:href="@{/UpdateRoomForm(roomId=${room.rId})}" class="btn btn-info">Bearbeiten</a>
-                  <a th:href="@{/deleteRoom(roomId=${room.rId})}" class="btn btn-danger">Löschen</a>
-                  <a th:href="@{/addSensorForm(roomId=${room.rId})}" class="btn btn-success">Sensor hinzufügen</a>
+                  <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
+                  <a th:href="@{/deleteRoom(roomId=${room.rid})}" class="btn btn-danger">Löschen</a>
+                  <a th:href="@{/addSensorForm(roomId=${room.rid})}" class="btn btn-success">Sensor hinzufügen</a>
               </td>
 
           </tr>

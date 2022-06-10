@@ -47,7 +47,7 @@
             <tr th:each="sensor: ${sensor}">
                 <td th:text="${sensor.sid}"></td>
                 <td th:text="${sensor.room.name}"></td>
-                <td th:text="${sensor.type}"></td>
+                <td th:text="${sensor.sensortype.name}"></td>
                 <td>
                     <a th:href="@{/SensorUpdateForm(roomId=${sensor.sid})}" class="btn btn-info">Bearbeiten</a>
                     <a th:href="@{/deleteSensor(sensorId=${sensor.sid})}" class="btn btn-danger">Löschen</a>

@@ -55,7 +55,7 @@ public class BuildingController {
     }
 
     //Delete the building from database
-    @GetMapping("/deletBuilding")
+    @GetMapping("/deleteBuilding")
         public RedirectView deleteBuilding(@RequestParam int buildingId) {
         bRepository.deleteById(buildingId);
         return new RedirectView("/showBuilding");

@@ -50,7 +50,7 @@ public class RoomController {
     public RedirectView saveRoom(@ModelAttribute Room room, HttpServletRequest request) {
 
         String referer = request.getHeader("Referer");
-        Optional<Building> buildingOptional = bRepository.findById(room.getBuilding().getBId());
+        Optional<Building> buildingOptional = bRepository.findById(room.getBuilding().getBid());
         Building building = buildingOptional.get();
         room.setBuilding(building);
         rRepository.save(room);
@@ -65,7 +65,7 @@ public class RoomController {
         return new RedirectView("/showRoom");
     }
 
-    //Show room add form by klicking on "Add Room" button in rooms view
+/*    //Show room add form by klicking on "Add Room" button in rooms view
     @GetMapping("/addRoomForm")
     public ModelAndView showAddRoomForm() {
         ModelAndView mav = new ModelAndView("addRoomForm");
@@ -73,7 +73,7 @@ public class RoomController {
         mav.addObject("room", room);
 
         return mav;
-    }
+    }*/
 
     //Show room add form by klicking on "Add Room" button in buildings view without needed to insert building
     @GetMapping("/AddRoomInBuildingForm")

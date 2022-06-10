@@ -24,7 +24,7 @@ public class Building {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bid")
-    private int bId;
+    private int bid;
     @Column(name = "name")
     private String name;
     @Column(name = "street")
@@ -43,7 +43,7 @@ public class Building {
     @Override
     public String toString() {
         return "Gebaeude{" +
-                "id=" + bId +
+                "id=" + bid +
                 ", bezeichnung='" + name + '\'' +
                 ", strasse='" + street + '\'' +
                 ", hausnummer=" + houseNumber +

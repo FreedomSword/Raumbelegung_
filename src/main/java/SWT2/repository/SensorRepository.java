@@ -13,6 +13,6 @@ public interface SensorRepository extends JpaRepository<Sensor, Integer> {
 
 
     //Find all sensors where room = x
-    @Query("SELECT s FROM Sensor s WHERE s.sid = ?1")
+    @Query("SELECT s FROM Sensor s WHERE s.room.rid = ?1")
     List<Sensor> findAllSensors(int id);
 }
