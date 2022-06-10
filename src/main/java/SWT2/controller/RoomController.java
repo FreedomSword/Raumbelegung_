@@ -33,9 +33,9 @@ public class RoomController {
     }
 
     //Show Rooms in explicit Building
-    @GetMapping("/showBuildingRooms")
+    @GetMapping("/buildingDetails")
     public ModelAndView showRoomListOfBuilding(@RequestParam int buildingId) {
-            ModelAndView mav = new ModelAndView("roomsInBuilding");
+            ModelAndView mav = new ModelAndView("buildingDetails");
             Building building = bRepository.getById(buildingId);
             List<Room> list = rRepository.findAllRooms(buildingId);
             mav.addObject("building", building );
@@ -62,7 +62,7 @@ public class RoomController {
         Building building = (bRepository.findById(buildingId)).get();
         room.setBuilding(building);
         rRepository.save(room);
-        return new RedirectView("/showRoom");
+        return new RedirectView("/roomDetails?roomId=" + room.getRid());
     }
 
 /*    //Show room add form by klicking on "Add Room" button in rooms view

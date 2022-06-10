@@ -31,7 +31,7 @@
   <main>
       <div class = container>
 
-      <h3>Gebäudeliste</h3>
+      <h3>Alle Gebäude</h3>
           <hr/>
 
           <a th:href="@{/addBuildingForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
@@ -49,7 +49,7 @@
         <tbody>
           <tr th:each="building: ${building}">
               <td th:text="${building.Bid}"></td>
-              <td th:text="${building.name}"></td>
+              <td><a th:text="${building.name}" th:href="@{/buildingDetails(buildingId=${building.bid})}">room.html</a></td>
               <td th:text="${building.street}"></td>
               <td th:text="${building.houseNumber}"></td>
               <td th:text="${building.postalCode}"></td>

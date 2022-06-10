@@ -31,7 +31,7 @@
   <main>
       <div class = container>
 
-      <h3>Raumliste</h3>
+      <h3>Alle Räume</h3>
           <hr/>
 
     <table class="table table-bordered table-striped" id="roomTable">
@@ -48,11 +48,11 @@
         <tbody>
           <tr th:each="room: ${room}">
               <td th:text="${room.rid}"></td>
-              <td th:text="${room.name}"></td>
+              <td><a th:text="${room.name}" th:href="@{/roomDetails(roomId=${room.rid})}"></a></td>
               <td th:text="${room.type}"></td>
               <td th:text="${room.max_occupancy}"></td>
               <td th:text="${room.cur_occupancy}"></td>
-             <td><a th:text="${room.building.name}" th:href="@{/showBuildingRooms(buildingId=${room.building.bid})}">room.html</a> </td>
+             <td><a th:text="${room.building.name}" th:href="@{/buildingDetails(buildingId=${room.building.bid})}">room.html</a> </td>
               <td>
                   <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
                   <a th:href="@{/deleteRoom(roomId=${room.rid})}" class="btn btn-danger">Löschen</a>

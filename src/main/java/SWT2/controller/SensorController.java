@@ -37,9 +37,9 @@ public class SensorController {
     }
 
     //Show Sensors in Explicit Rooms
-    @GetMapping("/sensorenFiltered")
+    @GetMapping("/roomDetails")
     public ModelAndView showSensorsInRoom(@RequestParam int roomId) {
-        ModelAndView mav = new ModelAndView("sensorsInRoom");
+        ModelAndView mav = new ModelAndView("roomDetails");
         Room r = rRepository.getById(roomId);
         List<Sensor> list = sRepository.findAllSensors(roomId);
         mav.addObject("room", r );
@@ -54,7 +54,7 @@ public class SensorController {
     public RedirectView saveSensor(@ModelAttribute Sensor sensor, @RequestParam int roomId) {
         sensor.setRoom((rRepository.findById(roomId)).get());
         sRepository.save(sensor);
-        return new RedirectView("/showSensor");
+        return new RedirectView("/roomDetails?roomId=" + roomId);
     }
 
     //Show sensor add form by klicking on "Add Sensor" button at rooms view without needed to insert room
