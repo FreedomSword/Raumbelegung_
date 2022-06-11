@@ -1,0 +1,77 @@
+
+CREATE TABLE tbl_building
+(
+    bid INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    housenumber INT(4)  unsigned CHECK (houseNumber >= 1),
+    postalcode INT(5) unsigned NOT NULL,
+    city VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE tbl_room
+(
+    rid INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    max_occupancy INT NOT NULL,
+    cur_occupancy INT NOT NULL,
+    building_bid INT NOT NULL,
+    FOREIGN KEY (building_bid)
+    REFERENCES tbl_building(bid)
+);
+
+CREATE TABLE tbl_sensortype
+(
+    stid INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL
+    );
+
+INSERT INTO tbl_sensortype (name) VALUES ("Bewegungssensor");
+INSERT INTO tbl_sensortype (name) VALUES ("Temperatursensor");
+
+CREATE TABLE tbl_sensor
+(
+    sid INT PRIMARY KEY AUTO_INCREMENT,
+    room_rid INT NOT NULL,
+    sensortype_stid INT NOT NULL,
+    FOREIGN KEY (room_rid)
+    REFERENCES tbl_room(rid),
+    FOREIGN KEY(sensortype_stid)
+    REFERENCES tbl_sensortype(stid)
+);
+
+CREATE TABLE tbl_user (
+	uid INT PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(255) NOT NULL,
+	full_name VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,
+	enabled TINYINT(4) DEFAULT NULL,
+	UNIQUE KEY email_UNIQUE (email)
+);
+
+INSERT INTO tbl_user (email, password, full_name, enabled) VALUES ("patrick","$2a$10$cTUErxQqYVyU2qmQGIktpup5chLEdhD2zpzNEyYqmxrHHJbSNDOG.", "Pattrick K.",  "1");
+
+CREATE TABLE tbl_role (
+	roleid INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(255) NOT NULL
+);
+
+INSERT INTO tbl_role (name) VALUES ("Admin");
+INSERT INTO tbl_role (name) VALUES ("User");
+
+CREATE TABLE tbl_user_role (
+	uid INT NOT NULL,
+	roleid INT NOT NULL,
+	KEY user_fk_idx (uid),
+	KEY role_fk_idx (roleid),
+	FOREIGN KEY (uid) REFERENCES tbl_user (uid),
+	FOREIGN KEY (roleid) REFERENCES tbl_role (roleid)
+);
+
+INSERT INTO tbl_user_role (uid, roleid) VALUES ("1", "1"); -- user patrick has role Admin
+
+
+
+

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 
 <head>
@@ -27,9 +28,20 @@
         </ul>
 
     </div>
+    <form th:action="@{/logout}" method="post">
+        <p>
+            Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+        </p>
+        <input type="submit" value="Sign Out" />
+    </form>
+
 </nav>
   <main>
       <div class = container>
+
+         <span>[[${#request.userPrincipal.principal.fullName}]]</span>
+          <span sec:authentication="principal.authorities">Roles</span>
+
 
       <h3>Alle Gebäude</h3>
           <hr/>

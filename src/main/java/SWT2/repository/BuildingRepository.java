@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface BuildingRepository extends JpaRepository<Building, Integer> {
 
 
+
+    //GetUserbyUsername
+
 }
