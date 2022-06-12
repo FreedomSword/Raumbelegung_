@@ -72,6 +72,17 @@ CREATE TABLE tbl_user_role (
 
 INSERT INTO tbl_user_role (uid, roleid) VALUES ("1", "1"); -- user patrick has role Admin
 
+CREATE TABLE tbl_reservation (
+    resid INT PRIMARY KEY AUTO_INCREMENT,
+    fromDT DATETIME NOT NULL,
+    toDT DATETIME NOT NULL,
+    uid INT NOT NULL,
+    rid INT NOT NULL,
 
+
+    FOREIGN KEY (uid) REFERENCES tbl_user (uid),
+    FOREIGN KEY (rid) REFERENCES tbl_room (rid)
+
+);
 
 

@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tbl_user")
@@ -42,6 +44,14 @@ public class User {
             joinColumns = @JoinColumn(name = "uid"),
             inverseJoinColumns = @JoinColumn(name = "roleid")
     )
-    private List<Role> roles = new ArrayList<>();
+    private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
+
+
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
 }

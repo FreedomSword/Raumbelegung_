@@ -48,16 +48,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/register", "/register_success", "/", "/process_register","/css/**", "/js/**", "/webjars/**").permitAll() // here i allowed the CSS pages  so it dont get blocked by spring security
-                .antMatchers("/").hasAnyAuthority("User", "Admin")
-                .antMatchers("/new").hasAnyAuthority("Admin")
-                .antMatchers("/edit/**").hasAnyAuthority("Admin")
-                .antMatchers("/delete/**").hasAuthority("Admin")
+                .antMatchers("/register", "/register_success", "/", "/process_register","/css/**", "/js/**", "/webjars/**", "/login", "/logout").permitAll() // here i allowed the CSS pages  so it dont get blocked by spring security
+                .antMatchers("/").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/new").hasAnyAuthority("ADMIN")
+                .antMatchers("/edit/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/delete/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login") // loginpage() method allows us to use a custom LOGIN page instead of the default one
-                .permitAll().defaultSuccessUrl("/showBuilding")
+                .formLogin()
+                .loginPage("/login") // loginpage() method allows us to use a custom LOGIN page instead of the default one
+                .defaultSuccessUrl("/showBuilding")
                 .and()
-                .logout().logoutSuccessUrl("/").permitAll();
+                .logout()
+                .logoutSuccessUrl("/");
     }
 }

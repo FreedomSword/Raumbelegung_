@@ -9,7 +9,7 @@ import java.util.*;
 
 public class CustomUserDetails implements UserDetails {
 
-    private User user ;
+    private User user;
 
     public CustomUserDetails(User user) {
         this.user = user;
@@ -17,16 +17,16 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<Role> roles = user.getRoles();
-        List <SimpleGrantedAuthority> authorities = new ArrayList<>();
+        Set<Role> roles = user.getRoles();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        for(Role role : roles) {
+        for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 
         return authorities;
-
     }
+
 
     @Override
     public String getPassword() {
@@ -60,5 +60,17 @@ public class CustomUserDetails implements UserDetails {
 
     public String getFullName() {
         return user.getFull_name();
+    }
+
+    public String getRoles() {
+        String s = "";
+        Set<Role> roles = user.getRoles();
+        roles.toArray();
+
+        for (Role r : roles) {
+
+            s += r.getName();
+        }
+    return s;
     }
 }

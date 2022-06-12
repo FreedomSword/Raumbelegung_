@@ -1,11 +1,9 @@
 package SWT2.repository;
 
-import SWT2.model.Building;
+import SWT2.model.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BuildingRepository extends JpaRepository<Building, Integer> {
-
-
+public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 }

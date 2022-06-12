@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 
@@ -40,13 +40,18 @@
       <div class = container>
 
          <span>[[${#request.userPrincipal.principal.fullName}]]</span>
-          <span sec:authentication="principal.authorities">Roles</span>
+          <span>[[${#request.userPrincipal.principal.roles}]]</span>
 
 
       <h3>Alle Gebäude</h3>
           <hr/>
 
-          <a th:href="@{/addBuildingForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
+          <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
+              <a th:href="@{/addBuildingForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
+          </div>
+          <div sec:authorize="hasRole('ADMIN')">
+              This content is only shown to administrators.§§
+          </div>
     <table class="table table-bordered table-striped" id="buildingTable">
         <thead>
           <tr>

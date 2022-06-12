@@ -39,6 +39,9 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Sensor> sensor = new ArrayList<>();
 
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
+
     @Override
     public String toString() {
         return "Raum{" +

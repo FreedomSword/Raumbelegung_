@@ -1,6 +1,8 @@
 package SWT2.controller;
 
+import SWT2.model.Role;
 import SWT2.model.User;
+import SWT2.repository.RoleRepository;
 import SWT2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +21,8 @@ public class UserController {
     @Autowired
     UserRepository uRepository;
 
+    @Autowired
+    RoleRepository roleRepository;
     @GetMapping("")
 
     public String viewHomePage() {
@@ -48,6 +52,9 @@ public class UserController {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.setEnabled(true);
+
+        Role roleUser = roleRepository.findByName("User");
+        user.addRole(roleUser);
 
         uRepository.save(user);
 
