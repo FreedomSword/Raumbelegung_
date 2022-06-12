@@ -45,23 +45,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
-    @Override
+
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/register", "/register_success", "/", "/process_register").permitAll()
+                .antMatchers("/register", "/register_success", "/", "/process_register","/css/**", "/js/**", "/webjars/**").permitAll() // here i allowed the CSS pages  so it dont get blocked by spring security
                 .antMatchers("/").hasAnyAuthority("User", "Admin")
                 .antMatchers("/new").hasAnyAuthority("Admin")
                 .antMatchers("/edit/**").hasAnyAuthority("Admin")
                 .antMatchers("/delete/**").hasAuthority("Admin")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .usernameParameter("email")
-                .defaultSuccessUrl("/showBuilding")
-                .permitAll()
+                .formLogin().loginPage("/login") // loginpage() method allows us to use a custom LOGIN page instead of the default one
+                .permitAll().defaultSuccessUrl("/showBuilding")
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();
-        ;
     }
 }
-

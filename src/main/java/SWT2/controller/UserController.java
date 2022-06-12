@@ -35,6 +35,13 @@ public class UserController {
         return "signup_form";
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new User());
+
+        return "login";
+    }
+
     @PostMapping("/process_register")
     public String processRegister(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
