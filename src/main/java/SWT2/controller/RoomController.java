@@ -49,7 +49,6 @@ public class RoomController {
     @PostMapping("/saveRoom")
     public RedirectView saveRoom(@ModelAttribute Room room, HttpServletRequest request) {
 
-        String referer = request.getHeader("Referer");
         Optional<Building> buildingOptional = bRepository.findById(room.getBuilding().getBid());
         Building building = buildingOptional.get();
         room.setBuilding(building);

@@ -21,7 +21,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resid")
-    private int redid;
+    private int resid;
 
     private LocalDate fromDT;
 

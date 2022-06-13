@@ -58,8 +58,8 @@ CREATE TABLE tbl_role (
 	name VARCHAR(255) NOT NULL
 );
 
-INSERT INTO tbl_role (name) VALUES ("Admin");
-INSERT INTO tbl_role (name) VALUES ("User");
+INSERT INTO tbl_role (name) VALUES ("ADMIN");
+INSERT INTO tbl_role (name) VALUES ("USER");
 
 CREATE TABLE tbl_user_role (
 	uid INT NOT NULL,

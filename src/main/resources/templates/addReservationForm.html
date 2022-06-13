@@ -27,7 +27,6 @@
         </ul>
 
     </div>
-
     <form th:action="@{/logout}" method="post">
         <p>
             Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
@@ -40,30 +39,24 @@
         <span>LOGGED IN AS : [[${#request.userPrincipal.principal.fullName}]]  ,</span>
         <span>YOUR ROLES ARE :[[${#request.userPrincipal.principal.roles}]]</span>
 
-        <h3 th:object="${room}"><span th:utext="${room.name}"></span></h3>
+        <h3>Raum hinzufügen</h3>
+
         <hr/>
-        <table class="table table-bordered table-striped" id="gebaeudeTable">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Typ</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="sensor: ${sensor}">
-                <td th:text="${sensor.sid}"></td>
-                <td th:text="${sensor.sensortype.name}"></td>
-                <td>
-                    <a th:href="@{/SensorUpdateForm(sensorId=${sensor.sid})}" class="btn btn-info">Bearbeiten</a>
-                    <a th:href="@{/deleteSensor(sensorId=${sensor.sid})}" class="btn btn-danger">Löschen</a>
-                </td>
 
-            </tr>
-            </tbody>
-        </table>
+        <form th:action="@{/addReservationForm(roomId=${room.rid},uId=${user.uid})}" method="post">
+                <input type="date" th:field="*{reservation.fromDT}" placeholder="Reservation Time" class="form-control col-4 mb-4"/>
+                <input type="date" th:field="*{reservation.toDT}" placeholder="Reservation until" class="form-control col-4 mb-4"/>
+                </br>
+                <button class="btn btn-primary" type="submit">Speichern</button>
+                <input type="hidden" th:field="*{reservation.resid}"/>
+
+        </form>
+
+        <hr/>
+
+        <a th:href="@{showRoom}"> Zur Liste zurückkehren</a>
+
     </div>
-
-
 </main>
 
 
