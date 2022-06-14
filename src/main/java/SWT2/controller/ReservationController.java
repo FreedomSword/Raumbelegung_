@@ -39,20 +39,26 @@ public class ReservationController {
 
     //saving a reservation
     @GetMapping("/addReservationForm")
-    public ModelAndView showReservationAddForm(@RequestParam int roomId) {
+    public ModelAndView showReservationAddForm(@RequestParam int roomId,int userId) {
         ModelAndView mav = new ModelAndView("addReservationForm");
         Reservation reservation = new Reservation();
-        mav.addObject("reservation", reservation);
+
         Room room = rRepository.findById(roomId).get();
+        User user = uRepository.findById(userId).get();
 
         mav.addObject("room", room);
+        mav.addObject("user", user);
+        mav.addObject("reservation", reservation);
         return mav;
     }
+
     @PostMapping("/saveReservation")
-    public RedirectView saveReservation(@ModelAttribute Reservation reservation, @RequestParam int roomId) {
+    public RedirectView saveReservation(@ModelAttribute Reservation reservation, @RequestParam int roomId,int userId) {
         Room room = (rRepository.findById(roomId)).get();
         reservation.setRoom(room);
-        reservation.setUser(uRepository.findById(1).get());
+
+        User user = (uRepository.findById(userId)).get();
+        reservation.setUser(user);
         resRepository.save(reservation);
         return new RedirectView("/showRoom");
     }

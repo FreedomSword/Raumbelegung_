@@ -35,7 +35,7 @@
 
         <hr/>
 
-        <form th:action="@{/saveReservation(roomId=${room.rid})}" method="post">
+        <form th:action="@{/saveReservation(roomId=${room.rid},userId=${1})}" method="post">
                 <input type="date" th:field="*{reservation.fromDT}" placeholder="Reservation Time" class="form-control col-4 mb-4"/>
                 <input type="date" th:field="*{reservation.toDT}" placeholder="Reservation until" class="form-control col-4 mb-4"/>
                 </br>

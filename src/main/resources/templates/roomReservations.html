@@ -36,8 +36,8 @@
 
         <h3 th:object="${room}"><span th:utext="${room.name}"></span></h3>
         <hr/>
-
-        <a th:href="@{/addReservationForm(roomId=${room.rid})}" class="btn btn-primary mb-2">Reservation hinzufügen</a>
+<!--HOW TO FIND THE USER -->
+        <a th:href="@{/addReservationForm(roomId=${room.rid},userId=${1})}" class="btn btn-primary mb-2">Reservation hinzufügen</a>
         <table class="table table-bordered table-striped" id="roomTable">
             <thead>
             <tr>
@@ -52,6 +52,7 @@
                 <td th:text="${reservation.resid}"></td>
                 <td th:text="${reservation.fromDT}"></td>
                 <td th:text="${reservation.toDT}"></td>
+                <td th:text="${reservation.user.full_name}"></td>
 
 
 
