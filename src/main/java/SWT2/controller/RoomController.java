@@ -2,8 +2,10 @@ package SWT2.controller;
 
 import SWT2.model.Building;
 import SWT2.model.Room;
+import SWT2.model.Sensor;
 import SWT2.repository.BuildingRepository;
 import SWT2.repository.RoomRepository;
+import SWT2.repository.SensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,9 @@ public class RoomController {
     @Autowired
     private BuildingRepository bRepository;
 
+    @Autowired
+    private SensorRepository sRepository;
+
     /////////////////TABLE VIEWS/////////////////
 
     //Show Rooms
@@ -32,28 +37,19 @@ public class RoomController {
         return  mav;
     }
 
-    //Show Rooms in explicit Building
-    @GetMapping("/buildingDetails")
-    public ModelAndView showRoomListOfBuilding(@RequestParam int buildingId) {
-            ModelAndView mav = new ModelAndView("buildingDetails");
-            Building building = bRepository.getById(buildingId);
-            List<Room> list = rRepository.findAllRooms(buildingId);
-            mav.addObject("building", building );
-            mav.addObject("room", list);
-            return  mav;
-    }
+
 
     /////////////////ADDING/////////////////
 
     //Save the Room to the Database
     @PostMapping("/saveRoom")
-    public RedirectView saveRoom(@ModelAttribute Room room, HttpServletRequest request) {
+    public RedirectView saveRoom(@ModelAttribute Room room) {
 
         Optional<Building> buildingOptional = bRepository.findById(room.getBuilding().getBid());
         Building building = buildingOptional.get();
         room.setBuilding(building);
         rRepository.save(room);
-        return new RedirectView("/showRoom");
+        return new RedirectView("/buildingDetails(buildingId=${building.bid})");
     }
 
     @PostMapping("/saveRoomInBuilding")
@@ -61,18 +57,19 @@ public class RoomController {
         Building building = (bRepository.findById(buildingId)).get();
         room.setBuilding(building);
         rRepository.save(room);
-        return new RedirectView("/roomDetails?roomId=" + room.getRid());
+        return new RedirectView("/buildingDetails?buildingId=" + buildingId );
+    }
+    @GetMapping("/roomDetails")
+    public ModelAndView showSensorListOfRoom(@RequestParam int roomId) {
+        ModelAndView mav = new ModelAndView("roomDetails");
+        Room room = rRepository.findById(roomId).get();
+        List<Sensor> list = sRepository.findAllSensors(roomId);
+        mav.addObject("room", room );
+        mav.addObject("sensor", list);
+        return  mav;
     }
 
-/*    //Show room add form by klicking on "Add Room" button in rooms view
-    @GetMapping("/addRoomForm")
-    public ModelAndView showAddRoomForm() {
-        ModelAndView mav = new ModelAndView("addRoomForm");
-        Room room = new Room();
-        mav.addObject("room", room);
 
-        return mav;
-    }*/
 
     //Show room add form by klicking on "Add Room" button in buildings view without needed to insert building
     @GetMapping("/AddRoomInBuildingForm")
@@ -89,15 +86,18 @@ public class RoomController {
     //Delete the Room from the Database
     @GetMapping("/deleteRoom")
     public RedirectView deleteRaum(@RequestParam int roomId) {
+        Building building = bRepository.findById(rRepository.findById(roomId).get().getBuilding().getBid()).get();
         rRepository.deleteById(roomId);
-        return new RedirectView("/showRoom");
+        return new RedirectView("/buildingDetails?buildingId=" + building.getBid());
     }
 
     //Show room update form
     @GetMapping("/UpdateRoomForm")
     public ModelAndView showRoomUpdateForm(@RequestParam int roomId) {
-        ModelAndView mav = new ModelAndView("addRoomForm");
+        ModelAndView mav = new ModelAndView("addRoomInBuildingForm");
         Room room = rRepository.findById(roomId).get();
+        Building building = bRepository.findById(room.getBuilding().getBid()).get();
+        mav.addObject("building", building);
         mav.addObject("room", room);
         return mav;
     }

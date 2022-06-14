@@ -37,15 +37,6 @@ public class SensorController {
     }
 
     //Show Sensors in Explicit Rooms
-    @GetMapping("/roomDetails")
-    public ModelAndView showSensorsInRoom(@RequestParam int roomId) {
-        ModelAndView mav = new ModelAndView("roomDetails");
-        Room r = rRepository.getById(roomId);
-        List<Sensor> list = sRepository.findAllSensors(roomId);
-        mav.addObject("room", r );
-        mav.addObject("sensor", list);
-        return  mav;
-    }
 
     /////////////////ADDING/////////////////
 

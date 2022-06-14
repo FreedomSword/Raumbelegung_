@@ -2,11 +2,15 @@ package SWT2.controller;
 
 
 import SWT2.model.Building;
+import SWT2.model.Room;
 import SWT2.repository.BuildingRepository;
+import SWT2.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,9 +18,22 @@ public class BuildingController {
     @Autowired
     private BuildingRepository bRepository;
 
+    @Autowired
+    private RoomRepository rRepository;
+
     /////////////////TABLE VIEWS/////////////////
 
     //Show Buildings
+
+    @GetMapping("/index")
+    public ModelAndView index() {
+            ModelAndView mav = new ModelAndView("index");
+            List <Building> list = bRepository.findAll();
+
+            mav.addObject("building", list);
+            return  mav;
+        }
+
     @GetMapping("/showBuilding")
     public ModelAndView showBuilding() {
         ModelAndView mav = new ModelAndView("building");
@@ -59,5 +76,16 @@ public class BuildingController {
         public RedirectView deleteBuilding(@RequestParam int buildingId) {
         bRepository.deleteById(buildingId);
         return new RedirectView("/showBuilding");
+    }
+
+    //Show Rooms in explicit Building
+    @GetMapping("/buildingDetails")
+    public ModelAndView showRoomListOfBuilding(@RequestParam int buildingId) {
+        ModelAndView mav = new ModelAndView("buildingDetails");
+        Building building = bRepository.getById(buildingId);
+        List<Room> list = rRepository.findAllRooms(buildingId);
+        mav.addObject("building", building );
+        mav.addObject("room", list);
+        return  mav;
     }
 }

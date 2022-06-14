@@ -1,27 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Material Design for Bootstrap</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/montserrat-font.css">
 </head>
+
 <body>
-<form  name="loginForm" th:action="@{login}"method="post">
-    <fieldset>
-        <legend>PLEASE LOGIN :DD</legend>
-        <div th:if="${param.error}" >
-INVALID USERNAME OR PASSWORD !!!!
-        </div>
-<div th:if="${param.logout}">
-YOU HAVE BEEN LOGGED OUT
-</div>
-<label for?="username">USERNAME</label>
-<input type="text" name="username"/>
-        <label for?="password">password</label>
-        <input type="password" name="password"/>
-<div>
-    <button type="submit" class="btn">LOGIN</button>
-</div>
-    </fieldset>
-</form>
+
+
+        <!------------------------ AB HIER DEN CONTENT------------------------->
+
+
+        <section class="w-100 bg-image " style="margin-top: 25vh; height: 25vh">
+            <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="card" style="border-radius: 15px;">
+                                <div class="card-body p-5">
+                                    <h2 class="text-uppercase text-center mb-5">Login</h2>
+                                    <form th:action="login" method="post">
+                                        <div th:if="${param.error}" >
+                                            INVALID USERNAME OR PASSWORD !!!!
+                                        </div>
+                                        <div th:if="${param.logout}">
+                                            YOU HAVE BEEN LOGGED OUT
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="form3Example1cg" class="form-control form-control-lg" name="username"/>
+                                            <label class="form-label" for="form3Example1cg">Username</label>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="form3Example3cg" class="form-control form-control-lg" name="password" />
+                                            <label class="form-label" for="form3Example3cg">Password</label>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                        <button type="submit"
+                                                class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+                                        </div>
+
+                                        <p class="text-center text-muted mt-5 mb-0">Dont have an Account? <a href="/register"
+                                                                                                                class="fw-bold text-body"><u>Register here</u></a></p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!------------------------BIS HIER DEN CONTENT------------------------->
+
+
 </body>
+
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+
+
 </html>
