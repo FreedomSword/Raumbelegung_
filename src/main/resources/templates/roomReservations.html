@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -27,40 +27,47 @@
         </ul>
 
     </div>
-    <form th:action="@{/logout}" method="post">
-        <p>
-            Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-        </p>
-        <input type="submit" value="Sign Out" />
-    </form>
+
 </nav>
 <main>
-
 
     <div class = container>
         <span>LOGGED IN AS : [[${#request.userPrincipal.principal.fullName}]]  ,</span>
         <span>YOUR ROLES ARE :[[${#request.userPrincipal.principal.roles}]]</span>
 
-        <h3>Raum reservieren</h3>
 
+
+        <h3 th:object="${room}"><span th:utext="${room.name}"></span></h3>
         <hr/>
+<!--HOW TO FIND THE USER -->
+        <a th:href="@{/addReservationForm(roomId=${room.rid},userId=${1})}" class="btn btn-primary mb-2">Reservation hinzufügen</a>
+        <table class="table table-bordered table-striped" id="roomTable">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">FROM</th>
+                <th scope="col">TILL</th>
+                <th scope="col">reserved by </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reservation: ${reservation}">
+                <td th:text="${reservation.resid}"></td>
+                <td th:text="${reservation.fromDT}"></td>
+                <td th:text="${reservation.toDT}"></td>
+                <td th:text="${reservation.user.full_name}"></td>
 
-        <form th:action="@{/saveReservation(roomId=${room.rid},userId=${1})}" method="post">
-                <input type="date" th:field="*{reservation.fromDT}" placeholder="Reservation Time" class="form-control col-4 mb-4"/>
-                <input type="date" th:field="*{reservation.toDT}" placeholder="Reservation until" class="form-control col-4 mb-4"/>
-                </br>
-                <input type="hidden" th:field="*{reservation.resid}"/>
 
-            <button class="btn btn-primary" type="submit">Speichern</button>
-        </form>
 
-        <hr/>
+<!--         BUTTONS MUST BE ADDED EDIT , DELETE, etc ... -->
 
-        <a th:href="@{showRoom}"> Zur Liste zurückkehren</a>
-
+            </tr>
+            </tbody>
+        </table>
     </div>
-</main>
 
+
+</main>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

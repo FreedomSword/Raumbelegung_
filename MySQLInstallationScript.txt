@@ -76,12 +76,12 @@ CREATE TABLE tbl_reservation (
     resid INT PRIMARY KEY AUTO_INCREMENT,
     fromDT DATETIME NOT NULL,
     toDT DATETIME NOT NULL,
-    uid INT NOT NULL,
-    rid INT NOT NULL,
+    user_uid INT NOT NULL,
+    room_rid INT NOT NULL,
 
 
-    FOREIGN KEY (uid) REFERENCES tbl_user (uid),
-    FOREIGN KEY (rid) REFERENCES tbl_room (rid)
+    FOREIGN KEY (user_uid) REFERENCES tbl_user (uid),
+    FOREIGN KEY (room_rid) REFERENCES tbl_room (rid)
 
 );
 
