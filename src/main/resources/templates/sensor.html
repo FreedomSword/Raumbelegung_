@@ -27,19 +27,13 @@
         </ul>
 
     </div>
-    <form th:action="@{/logout}" method="post">
-        <p>
-            Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-        </p>
-        <input type="submit" value="Sign Out" />
-    </form>
+
 </nav>
 
 
   <main>
       <div class = container>
-          <span>LOGGED IN AS : [[${#request.userPrincipal.principal.fullName}]]  ,</span>
-          <span>YOUR ROLES ARE :[[${#request.userPrincipal.principal.roles}]]</span>
+
 
       <h3>Alle Sensoren</h3>
           <hr/>

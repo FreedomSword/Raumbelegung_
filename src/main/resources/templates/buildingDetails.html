@@ -27,18 +27,12 @@
         </ul>
 
     </div>
-    <form th:action="@{/logout}" method="post">
-        <p>
-            Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-        </p>
-        <input type="submit" value="Sign Out" />
-    </form>
+
 </nav>
   <main>
 
       <div class = container>
-          <span>LOGGED IN AS : [[${#request.userPrincipal.principal.fullName}]]  ,</span>
-          <span>YOUR ROLES ARE :[[${#request.userPrincipal.principal.roles}]]</span>
+
 
   <h3 th:object="${building}"><span th:utext="${building.name}"></span></h3>
           <hr/>
@@ -65,6 +59,8 @@
                   <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
                   <a th:href="@{/deleteRoom(roomId=${room.rid})}" class="btn btn-danger">Löschen</a>
                   <a th:href="@{/addSensorForm(roomId=${room.rid})}" class="btn btn-success">Sensor hinzufügen</a>
+                  <a th:href="@{/addReservationForm(roomId=${room.rid})}" class="btn btn-info"> Reserve Room</a>
+                  <a th:href="@{/roomReservations(roomId=${room.rid})}" class="btn btn-info">Room Reservation</a>
               </td>
 
           </tr>

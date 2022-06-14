@@ -1,5 +1,6 @@
 package SWT2.controller;
 
+import SWT2.model.Building;
 import SWT2.model.Reservation;
 import SWT2.model.Room;
 import SWT2.model.User;
@@ -10,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class ReservationController {
@@ -27,39 +26,35 @@ public class ReservationController {
     @Autowired
     RoomRepository rRepository;
 
-    @GetMapping("/ShowReservations")
-    public ModelAndView showReservations(){
-        ModelAndView mav = new ModelAndView("reservation");
-        List<Reservation> list = resRepository.findAll();
+    //Show all the Reservations of one Room
+    @GetMapping("/roomReservations")
+    public ModelAndView roomReservations(@RequestParam int roomId) {
+        ModelAndView mav = new ModelAndView("roomReservations");
+        Room room = rRepository.getById(roomId);
+        List<Reservation> list = resRepository.findAllReservations(roomId);
+        mav.addObject("room", room );
         mav.addObject("reservation", list);
-        return mav;
+        return  mav;
     }
 
-    // save room to database
-    @PostMapping("/saveReservation")
-    public RedirectView saveReservation(@ModelAttribute Reservation reservation) {
-       Room room = rRepository.findById(reservation.getRoom().getRid()).get();
-       User user  = uRepository.findById(reservation.getUser().getUid()).get();
-
-        reservation.setRoom(room);
-        reservation.setUser(user);
-
-
-        resRepository.save(reservation);
-        return new RedirectView("/ShowReservations");
-    }
-
-
+    //saving a reservation
     @GetMapping("/addReservationForm")
-    public RedirectView addReservationForm(@RequestParam int roomId, @RequestParam int uId) {
+    public ModelAndView showReservationAddForm(@RequestParam int roomId) {
         ModelAndView mav = new ModelAndView("addReservationForm");
         Reservation reservation = new Reservation();
+        mav.addObject("reservation", reservation);
+        Room room = rRepository.findById(roomId).get();
+
+        mav.addObject("room", room);
+        return mav;
+    }
+    @PostMapping("/saveReservation")
+    public RedirectView saveReservation(@ModelAttribute Reservation reservation, @RequestParam int roomId) {
         Room room = (rRepository.findById(roomId)).get();
-        User user = (uRepository.findById(uId)).get();
-        mav.addObject(room);
-        mav.addObject(user);
-        mav.addObject(reservation);
-        return  new RedirectView();
+        reservation.setRoom(room);
+        reservation.setUser(uRepository.findById(1).get());
+        resRepository.save(reservation);
+        return new RedirectView("/showRoom");
     }
 
     @GetMapping("/UpdateReservationForm")
@@ -75,4 +70,44 @@ public class ReservationController {
         resRepository.deleteById(ReservationId);
         return new RedirectView("/showReservation");
     }
+
+    // this method Shows All reservations of all rooms
+//    @GetMapping("/ShowReservations")
+//    public ModelAndView showReservations(){
+//        ModelAndView mav = new ModelAndView("ShowReservations");
+//        List<Reservation> list = resRepository.findAll();
+//        mav.addObject("reservation", list);
+//        return mav;
+//    }
+//
+//    // save room to database
+//    @PostMapping("/saveReservation")
+//    public RedirectView saveReservation(@ModelAttribute Reservation reservation) {
+//       Room room = rRepository.findById(reservation.getRoom().getRid()).get();
+//       User user  = uRepository.findById(reservation.getUser().getUid()).get();
+//
+//        reservation.setRoom(room);
+//        reservation.setUser(user);
+//
+//
+//        resRepository.save(reservation);
+//        return new RedirectView("/ShowReservations");
+//    }
+
+
+//    @GetMapping("/addReservationForm")
+//    public ModelAndView addReservationForm(@RequestParam int roomId, @RequestParam int uId) {
+//
+//        ModelAndView mav = new ModelAndView("addReservationForm");
+//        Reservation reservation = new Reservation();
+//        Room room = (rRepository.findById(roomId)).get();
+//        User user = (uRepository.findById(uId)).get();
+//        mav.addObject(room);
+//        mav.addObject(user);
+//        mav.addObject(reservation);
+//
+//
+//        return mav;
+//    }
+
 }

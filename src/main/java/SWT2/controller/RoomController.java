@@ -47,7 +47,7 @@ public class RoomController {
 
     //Save the Room to the Database
     @PostMapping("/saveRoom")
-    public RedirectView saveRoom(@ModelAttribute Room room, HttpServletRequest request) {
+    public RedirectView saveRoom(@ModelAttribute Room room) {
 
         Optional<Building> buildingOptional = bRepository.findById(room.getBuilding().getBid());
         Building building = buildingOptional.get();

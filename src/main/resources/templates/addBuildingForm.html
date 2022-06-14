@@ -27,18 +27,11 @@
         </ul>
 
     </div>
-    <form th:action="@{/logout}" method="post">
-        <p>
-            Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-        </p>
-        <input type="submit" value="Sign Out" />
-    </form>
+
 </nav>
 
   <main>
       <div class = container>
-          <span>LOGGED IN AS : [[${#request.userPrincipal.principal.fullName}]]</span>
-          <span>[[${#request.userPrincipal.principal.roles}]]</span>
 
 
           <h3>Gebäude hinzufügen</h3>
@@ -80,7 +73,7 @@
         <!-- Section: CTA -->
       </div>
       <!-- Grid container -->
-  
+
       <!-- Copyright -->
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2020 Copyright:

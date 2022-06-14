@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 
 
 <head>
@@ -28,30 +27,16 @@
         </ul>
 
     </div>
-    <form th:action="@{/logout}" method="post">
-        <p>
-            Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-        </p>
-        <input type="submit" value="Sign Out" />
-    </form>
+
 
 </nav>
   <main>
       <div class = container>
 
-          <span>LOGGED IN AS : [[${#request.userPrincipal.principal.fullName}]]  ,</span>
-          <span>YOUR ROLES ARE :[[${#request.userPrincipal.principal.roles}]]</span>
 
-
+          <a th:href="@{/addBuildingForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
       <h3>Alle Gebäude</h3>
           <hr/>
-
-          <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
-              <a th:href="@{/addBuildingForm}" class="btn btn-primary mb-2">Gebäude hinzufügen</a>
-          </div>
-          <div sec:authorize="hasRole('ADMIN')">
-              This content is only shown to administrators.§§
-          </div>
     <table class="table table-bordered table-striped" id="buildingTable">
         <thead>
           <tr>
