@@ -181,3 +181,18 @@ a.article:hover {
         display: none;
     }
 }
+
+
+.form-control {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.form-select {
+    width: 100%;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    top: 100%;
+
+
+}

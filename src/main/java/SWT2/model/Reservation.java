@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
+
 
 @Entity
 @Table(name="tbl_reservation")
@@ -24,10 +24,13 @@ public class Reservation {
     @Column(name = "resid")
     private int resid;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDate fromDT;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDate toDT;
+    @DateTimeFormat(pattern = "YYYY-MM-DD")
+    private Date fromDT;
+
+    @Column(name = "from_time")
+    private String fromTime;
+    @Column(name = "to_time")
+    private String toTime;
 
     @ManyToOne
     private User user;

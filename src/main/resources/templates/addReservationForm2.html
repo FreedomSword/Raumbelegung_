@@ -15,6 +15,9 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </head>
 
 <body>
@@ -86,16 +89,33 @@
                             <form th:action="@{/saveReservation(roomId=${room.rid}, userId=${1})}" method="post">
                                 <!-- Form Group (username)-->
                                 <div>
-                                    <label for="name">Von</label>
-                                    <input type="datetime-local" th:field="*{reservation.fromDT}" placeholder="Bezeichnung eingeben" id="name" class="form-control">
+                                    <label for="date">Datum</label>
+                                    <input type="date" th:field="*{reservation.fromDT}" placeholder="Datum auswählen" id="date" class="form-control" min="2022-06-20" readonly>
+                                    <p class = "error" th:errors="*{reservation.fromDT}"></p>
                                 </div>
                                 <div>
-                                    <label for="type">Bis</label>
-                                    <input type="datetime-local" th:field="*{reservation.toDT}" placeholder="Typ eingeben" id="type" class="form-control"/>
-                                </div>
+                                <label for="time">Uhrzeit von</label>
+                                    <select class="form-select timepicker" aria-label="Default select example" name="time" th:field="*{reservation.toTime}" id="time" min="10:00:00">
+                                        <option selected value="5:00:00">5:00</option>
+                                        <option value="6:00:00">6:00</option>
+                                        <option value="7:00:00">7:00</option>
+                                        <option value="8:00:00">8:00</option>
+                                        <option value="9:00:00">9:00</option>
+                                        <option value="10:00:00">10:00</option>
+                                        <option value="11:00:00">11:00</option>
+                                        <option value="12:00:00">12:00</option>
+                                        <option value="13:00:00">13:00</option>
+                                        <option value="14:00:00">14:00</option>
+                                        <option value="15:00:00">15:00</option>
+                                        <option value="16:00:00">16:00</option>
+                                        <option value="17:00:00">17:00</option>
+                                        <option value="18:00:00">18:00</option>
+                                        <option value="19:00:00">19:00</option>
+                                        <option value="20:00:00">20:00</option>
+                                        <option value="21:00:00">21:00</option>
+                                        <option value="22:00:00">22:00</option>
+                                    </select>
 
-                                <div>
-                                    <input type="hidden" th:field="*{reservation.resid}">
                                 </div>
 
                                 <!-- Save changes button-->
@@ -140,6 +160,33 @@
             });
         });
     </script>
+    <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+             mm = '0' + mm;
+         }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("date").setAttribute("min", today);
+    </script>
+<script>
+    var today = new Date();
+    var hh = today.getHours();
+    var mm = today.getMinutes();
+
+
+    today = hh + ':' + mm + ':00';
+    document.getElementById("timepick").setAttribute("min", today);
+</script>
+
 
 
 </html>
