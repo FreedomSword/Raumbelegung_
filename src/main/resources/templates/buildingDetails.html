@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 
 <head>
     <meta charset="utf-8">
@@ -47,7 +48,12 @@
 
         <ul class="list-unstyled CTAs">
             <li>
-                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Logout</a>
+                <form th:action="@{/logout}" method="post">
+
+                    <button class="btn btn-primary" type="submit" style="margin-top: 10px">Logout</button>
+                 </form>
+
+
             </li>
         </ul>
     </nav>
@@ -125,8 +131,8 @@
                                     </div>
                                 </div>
                             </form>
-                            <div sec:authorize="hasAnyAuthority('CUSTOMER', 'ADMIN')">
-                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/BuildingUpdateForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
+                            <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
+                                <a th:href="@{/BuildingUpdateForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
                             </div>
                         </div>
                     </div>
@@ -140,8 +146,9 @@
                      <div class="card-header">Liste von allen Räumen</div>
 
                     <div class="card-body">
+                        <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
                         <a th:href="@{/AddRoomInBuildingForm(buildingId=${building.bid})}" class="btn btn-success" style="margin-bottom: 10px">Raum hinzufügen</a>
-
+                        </div>
                         <table class="table table-bordered table-striped" id="roomTable">
                             <thead>
                             <tr>
@@ -162,9 +169,10 @@
                                 <td th:text="${room.cur_occupancy}"></td>
                                 <td><a th:text="${room.building.name}" th:href="@{/buildingDetails(buildingId=${room.building.bid})}">room.html</a> </td>
                                 <td>
-                                    <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
-                                    <a th:href="@{/deleteRoom(roomId=${room.rid})}" class="btn btn-danger">Löschen</a>
-                                    <a th:href="@{/addSensorForm(roomId=${room.rid})}" class="btn btn-success">Sensor hinzufügen</a>
+
+                                        <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}"th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
+                                        <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/deleteRoom(roomId=${room.rid})}" class="btn btn-danger">Löschen</a>
+                                        <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/addSensorForm(roomId=${room.rid})}" class="btn btn-success">Sensor hinzufügen</a>
                                     <a th:href="@{/addReservationFormDate(roomId=${room.rid}, userId=${user.uid})}" class="btn btn-info">Room Reservation</a>
                                 </td>
 
