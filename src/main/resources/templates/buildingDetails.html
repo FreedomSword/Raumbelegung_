@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8">
@@ -24,7 +25,6 @@
         <div class="sidebar-header">
             <img th:src="@{/img/fh-logo.png}" class="img-fluid">
         </div>
-
         <ul class="list-unstyled components">
             <li class="active">
                 <a href="/index">Home</a>
@@ -125,8 +125,8 @@
                                     </div>
                                 </div>
                             </form>
-                            <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
-                                <a th:href="@{/BuildingUpdateForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
+                            <div sec:authorize="hasAnyAuthority('CUSTOMER', 'ADMIN')">
+                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/BuildingUpdateForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
                             </div>
                         </div>
                     </div>
@@ -165,7 +165,7 @@
                                     <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
                                     <a th:href="@{/deleteRoom(roomId=${room.rid})}" class="btn btn-danger">Löschen</a>
                                     <a th:href="@{/addSensorForm(roomId=${room.rid})}" class="btn btn-success">Sensor hinzufügen</a>
-                                    <a th:href="@{/addReservationFormDate(roomId=${room.rid}, userId=${1})}" class="btn btn-info">Room Reservation</a>
+                                    <a th:href="@{/addReservationFormDate(roomId=${room.rid}, userId=${user.uid})}" class="btn btn-info">Room Reservation</a>
                                 </td>
 
                             </tr>

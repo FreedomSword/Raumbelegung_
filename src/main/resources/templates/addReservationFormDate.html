@@ -86,16 +86,13 @@
                     <div class="card mb-4">
                         <div class="card-header">Raum reservieren</div>
                         <div class="card-body">
-                            <form th:action="@{/addReservationFormTime(roomId=${room.rid}, userId=${1})}" method="get">
+                            <p style="color: green; font-size: 11px"> &#x1F6C8 Der Raum kann jeweils für eine Stunde reserviert werden. Möchte man den Raum länger reservieren muss dieser mehrfach reserviert werden.</p>
+                            <form th:action="@{/saveReservationDate(roomId=${room.rid}, userId=${user.uid}, date=${reservation.date})}" method="post">
                                 <!-- Form Group (username)-->
-
-                                <div>
-                                    <input type="hidden" th:field="*{reservation.resid}">
-                                </div>
                                 <div>
                                     <label for="date">Datum</label>
-                                    <input type="date" th:field="*{reservation.fromDT}" placeholder="Datum auswählen" id="date" class="form-control" min="2022-06-20">
-                                    <p class = "error" th:errors="*{reservation.fromDT}"></p>
+                                    <input type="date" th:field="*{reservation.date}" placeholder="Datum auswählen" id="date" class="form-control"  value="01.01.1999" min="2022-06-20">
+                                    <p class = "error" th:errors="*{reservation.date}"></p>
                                 </div>
 
                                 <!-- Save changes button-->
@@ -142,7 +139,7 @@
     </script>
     <script>
         var today = new Date();
-        var dd = today.getDate();
+        var dd = today.getDate() +1;
         var mm = today.getMonth() + 1; //January is 0!
         var yyyy = today.getFullYear();
 

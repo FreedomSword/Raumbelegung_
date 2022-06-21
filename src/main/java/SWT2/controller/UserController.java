@@ -58,6 +58,6 @@ public class UserController {
 
         uRepository.save(user);
 
-        return "register_success";
+        return "login";
     }
 }

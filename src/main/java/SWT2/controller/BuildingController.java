@@ -3,9 +3,13 @@ package SWT2.controller;
 
 import SWT2.model.Building;
 import SWT2.model.Room;
+import SWT2.model.User;
 import SWT2.repository.BuildingRepository;
 import SWT2.repository.RoomRepository;
+import SWT2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -17,6 +21,9 @@ import java.util.List;
 public class BuildingController {
     @Autowired
     private BuildingRepository bRepository;
+
+    @Autowired
+    private UserRepository uRepository;
 
     @Autowired
     private RoomRepository rRepository;
@@ -82,10 +89,16 @@ public class BuildingController {
     @GetMapping("/buildingDetails")
     public ModelAndView showRoomListOfBuilding(@RequestParam int buildingId) {
         ModelAndView mav = new ModelAndView("buildingDetails");
+        User user = uRepository.getUsersByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        mav.addObject("user", user);
+
         Building building = bRepository.getById(buildingId);
-        List<Room> list = rRepository.findAllRooms(buildingId);
         mav.addObject("building", building );
+
+        List<Room> list = rRepository.findAllRooms(buildingId);
         mav.addObject("room", list);
+
+
         return  mav;
     }
 }

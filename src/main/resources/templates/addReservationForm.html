@@ -86,34 +86,18 @@
                     <div class="card mb-4">
                         <div class="card-header">Raum reservieren</div>
                         <div class="card-body">
+                            <p style="color: green; font-size: 11px"> &#x1F6C8 Der Raum kann jeweils für eine Stunde reserviert werden. Möchte man den Raum länger reservieren muss dieser mehrfach reserviert werden.</p>
                             <form th:action="@{/saveReservation(roomId=${room.rid}, userId=${1})}" method="post">
                                 <!-- Form Group (username)-->
                                 <div>
                                     <label for="date">Datum</label>
-                                    <input type="date" th:field="*{reservation.fromDT}" placeholder="Datum auswählen" id="date" class="form-control" min="2022-06-20" readonly>
-                                    <p class = "error" th:errors="*{reservation.fromDT}"></p>
+                                    <input type="date" th:field="*{reservation.date}" placeholder="Datum auswählen" id="date" class="form-control"  value="01.01.1999" min="2022-06-20" readonly>
+                                    <p class = "error" th:errors="*{reservation.date}"></p>
                                 </div>
                                 <div>
                                 <label for="time">Uhrzeit von</label>
-                                    <select class="form-select timepicker" aria-label="Default select example" name="time" th:field="*{reservation.toTime}" id="time" min="10:00:00">
-                                        <option selected value="5:00:00">5:00</option>
-                                        <option value="6:00:00">6:00</option>
-                                        <option value="7:00:00">7:00</option>
-                                        <option value="8:00:00">8:00</option>
-                                        <option value="9:00:00">9:00</option>
-                                        <option value="10:00:00">10:00</option>
-                                        <option value="11:00:00">11:00</option>
-                                        <option value="12:00:00">12:00</option>
-                                        <option value="13:00:00">13:00</option>
-                                        <option value="14:00:00">14:00</option>
-                                        <option value="15:00:00">15:00</option>
-                                        <option value="16:00:00">16:00</option>
-                                        <option value="17:00:00">17:00</option>
-                                        <option value="18:00:00">18:00</option>
-                                        <option value="19:00:00">19:00</option>
-                                        <option value="20:00:00">20:00</option>
-                                        <option value="21:00:00">21:00</option>
-                                        <option value="22:00:00">22:00</option>
+                                    <select class="form-select timepicker" aria-label="Default select example" name="time" th:field="*{reservation.time}" id="time" min="10:00:00">
+                                       <option th:each= " slots: ${allSlots}" th:value="${slots}" th:text="${slots}"/>
                                     </select>
 
                                 </div>
@@ -162,7 +146,7 @@
     </script>
     <script>
         var today = new Date();
-        var dd = today.getDate();
+        var dd = today.getDate() +1;
         var mm = today.getMonth() + 1; //January is 0!
         var yyyy = today.getFullYear();
 

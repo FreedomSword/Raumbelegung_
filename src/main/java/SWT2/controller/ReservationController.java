@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,12 +44,43 @@ public class ReservationController {
     }
 
     //saving a reservation
+
     @GetMapping("/addReservationFormDate")
     public ModelAndView showReservationAddFormDate(@RequestParam int roomId,int userId) {
-        ModelAndView mav = new ModelAndView("addReservationForm1");
+        ModelAndView mav = new ModelAndView("addReservationFormDate");
         Reservation reservation = new Reservation();
         Room room = rRepository.findById(roomId).get();
         User user = uRepository.findById(userId).get();
+        mav.addObject("room", room);
+        mav.addObject("user", user);
+        mav.addObject("reservation", reservation);
+        return mav;
+    }
+    @GetMapping("/addReservationForm")
+    public ModelAndView showReservationAddForm(@RequestParam int roomId,int userId, String date) {
+        ModelAndView mav = new ModelAndView("addReservationForm");
+        Reservation reservation = new Reservation();
+        reservation.setDate(date);
+        Room room = rRepository.findById(roomId).get();
+        User user = uRepository.findById(userId).get();
+        
+        List<Reservation> bookedSlots = resRepository.findAllByDate(date);
+
+        List<String> allSlots = new ArrayList<String>();
+        String s = "";
+        for(int i = 5; i <= 22; i++) {
+            allSlots.add(i + ":00:00");
+        }
+
+        for(int i = 0; i < allSlots.size(); i++) {
+            for(int y = 0; y < bookedSlots.size(); y++) {
+                if(bookedSlots.get(y).getTime().equals(allSlots.get(i))) {
+                    allSlots.remove(i);
+                }
+            }
+
+        }
+        mav.addObject("allSlots", allSlots);
         mav.addObject("room", room);
         mav.addObject("user", user);
         mav.addObject("reservation", reservation);
@@ -53,46 +88,26 @@ public class ReservationController {
     }
 
     @PostMapping("/saveReservationDate")
-    public RedirectView saveReservationDate(@ModelAttribute Reservation reservation, @RequestParam int roomId,int userId) {
-        Room room = (rRepository.findById(roomId)).get();
-        reservation.setRoom(room);
-        reservation.setUser((uRepository.findById(userId)).get());
-        reservation.setFromDT(reservation.getFromDT());
-        resRepository.save(reservation);
-        return new RedirectView("/showRoom");
-    }
-    @GetMapping("/addReservationFormTime")
-    public ModelAndView showReservationAddFormTime(@RequestParam int roomId, @RequestParam int userId) {
-        ModelAndView mav = new ModelAndView("addReservationForm2");
-        Room room = rRepository.findById(roomId).get();
-        User user = uRepository.findById(userId).get();
-        Reservation reservation = new Reservation();
-        Date date = reservation.getFromDT();
+    public RedirectView saveReservationDate(@ModelAttribute Reservation reservation, @ModelAttribute String stringDate, @RequestParam int roomId,
+                                            int userId, String date) throws ParseException {
+        date = date.replace(",","");
+        return new RedirectView("/addReservationForm?roomId="+roomId+"&userId="+userId+"&date="+date);
 
-        mav.addObject("room", room);
-        mav.addObject("user", user);
-        mav.addObject("reservation", reservation);
-        return mav;
     }
+
 
     @PostMapping("/saveReservation")
     public RedirectView saveReservation(@ModelAttribute Reservation reservation, @RequestParam int roomId,int userId, Errors errors) {
-
-
         Room room = (rRepository.findById(roomId)).get();
         reservation.setRoom(room);
         reservation.setUser((uRepository.findById(userId)).get());
-        reservation.setFromTime(reservation.getFromTime()+":00");
-        reservation.setToTime(reservation.getToTime()+":00");
         resRepository.save(reservation);
         return new RedirectView("/showRoom");
     }
 
-
-
     @GetMapping("/UpdateReservationForm")
     public ModelAndView showRoomUpdateForm(@RequestParam int ReservationId) {
-        ModelAndView mav = new ModelAndView("addReservationForm1");
+        ModelAndView mav = new ModelAndView("addReservationForm");
         Reservation reservation = resRepository.findById(ReservationId).get();
         mav.addObject("reservation", reservation);
         return mav;
@@ -103,9 +118,6 @@ public class ReservationController {
         resRepository.deleteById(ReservationId);
         return new RedirectView("/showReservation");
     }
-
-
-
 
     // this method Shows All reservations of all rooms
 //    @GetMapping("/ShowReservations")
