@@ -10,10 +10,13 @@ import SWT2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +40,7 @@ public class BuildingController {
             ModelAndView mav = new ModelAndView("index");
             List <Building> list = bRepository.findAll();
 
-            mav.addObject("building", list);
+            mav.addObject("buildings", list);
             return  mav;
         }
 
@@ -53,9 +56,15 @@ public class BuildingController {
 
     //Save building to the database
     @PostMapping("/saveBuilding")
-    public RedirectView saveBuilding(@ModelAttribute Building building) {
+    public RedirectView saveBuilding(@ModelAttribute Building building, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        building.setPhoto(fileName);
+
+        String uploadDir = "C:/Users/simon/Pictures/userUploads" + building.getBid();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         bRepository.save(building);
-        return new RedirectView("/showBuilding");
+        return new RedirectView("/buildingDetails?buildingId=" +building.getBid());
     }
 
     //Show building add form by klicking on "Add Building" button at buildings view
@@ -97,6 +106,10 @@ public class BuildingController {
 
         List<Room> list = rRepository.findAllRooms(buildingId);
         mav.addObject("room", list);
+
+        List<Building> buildings = bRepository.findAll();
+        mav.addObject("buildings", buildings);
+
 
 
         return  mav;

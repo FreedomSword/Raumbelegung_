@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>FH Dortmund</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -19,75 +19,29 @@
 
 <body>
 <div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <img th:src="@{/img/fh-logo.png}" class="img-fluid">
-        </div>
-
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="/index">Home</a>
-            </li>
-            <li>
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gebäude</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li th:each="building :${building}">
-                        <a th:href="@{/buildingDetails(buildingId=${building.bid})}" th:text="${building.name}">Goose</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/showBuilding}">Alle Gebäude</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Mein Account</a>
-            </li>
-        </ul>
-
-        <ul class="list-unstyled CTAs">
-            <li>
-                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Logout</a>
-            </li>
-        </ul>
-    </nav>
+    <div th:replace="fragments/sidebar.html::sidebar"></div>
 
     <!-- Page Content  -->
     <div id="content">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav ml-auto">
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
-                            <i class="fas fa-align-left"></i>
-                            <span>Toggle Sidebar</span>
-                        </button>
-                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fas fa-align-justify"></i>
-                        </button>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+        <div th:replace="fragments/header.html::header"></div>
             <!------------------------ AB HIER DEN CONTENT------------------------->
 
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col" th:each="building :${building}">
+                    <div class="col" th:each="buildings :${buildings}">
                         <div class="card" id="dashboard_card">
                             <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/standard/nature/181.webp"
+                                    th:src="@{${'C:/Users/simon/Pictures/userUploads0/'+ buildings.photo}}"
                                     class="card-img-top"
                                     alt="Waterfall"
+                                    style="width: 420px; height: 240px"
                             />
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${building.name}">Card title</h5>
+                                <h5 class="card-title" th:text="${buildings.name}">Card title</h5>
                                 <hr/>
-                                <a th:href="@{/buildingDetails(buildingId=${building.bid})}" class="btn btn-primary">Jetzt ansehen</a>
+                                <a th:href="@{/buildingDetails(buildingId=${buildings.bid})}" class="btn btn-primary">Jetzt ansehen</a>
                             </div>
                         </div>
                     </div>
@@ -96,9 +50,6 @@
 
 
             <!------------------------BIS HIER DEN CONTENT------------------------->
-
-
-
 
         </div>
     </div>

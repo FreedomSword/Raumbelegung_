@@ -28,15 +28,6 @@ public class RoomController {
 
     /////////////////TABLE VIEWS/////////////////
 
-    //Show Rooms
-    @GetMapping("/showRoom")
-    public ModelAndView showRoomList() {
-        ModelAndView mav = new ModelAndView("room");
-        List<Room> list = rRepository.findAll();
-        mav.addObject("room", list);
-        return  mav;
-    }
-
 
 
     /////////////////ADDING/////////////////
@@ -45,8 +36,7 @@ public class RoomController {
     @PostMapping("/saveRoom")
     public RedirectView saveRoom(@ModelAttribute Room room) {
 
-        Optional<Building> buildingOptional = bRepository.findById(room.getBuilding().getBid());
-        Building building = buildingOptional.get();
+        Building building = bRepository.findById(room.getBuilding().getBid()).get();
         room.setBuilding(building);
         rRepository.save(room);
         return new RedirectView("/buildingDetails(buildingId=${building.bid})");
@@ -72,7 +62,7 @@ public class RoomController {
 
 
     //Show room add form by klicking on "Add Room" button in buildings view without needed to insert building
-    @GetMapping("/AddRoomInBuildingForm")
+    @GetMapping("/addRoomInBuildingForm")
     public ModelAndView showRoomAddForm(@RequestParam int buildingId) {
         ModelAndView mav = new ModelAndView("addRoomInBuildingForm");
         Room room = new Room();

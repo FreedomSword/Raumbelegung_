@@ -19,91 +19,12 @@
 
 <body>
 <div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <img th:src="@{/img/fh-logo.png}" class="img-fluid">
-        </div>
-
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="/index">Home</a>
-            </li>
-            <li>
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gebäude</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li th:each="building :${building}">
-                        <a th:href="@{/buildingDetails(buildingId=${building.bid})}" th:text="${building.name}">Goose</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/showBuilding}">Alle Gebäude</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Mein Account</a>
-            </li>
-        </ul>
-
-        <ul class="list-unstyled CTAs">
-            <li>
-                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Logout</a>
-            </li>
-        </ul>
-    </nav>
+    <div th:replace="fragments/sidebar.html::sidebar"></div>
 
     <!-- Page Content  -->
     <div id="content">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav ml-auto">
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
-                            <i class="fas fa-align-left"></i>
-                            <span>Toggle Sidebar</span>
-                        </button>
-                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fas fa-align-justify"></i>
-                        </button>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-            <!------------------------ AB HIER DEN CONTENT------------------------->
-
-
-        <div class="container-xl px-4 mt-4">
-            <hr class="mt-0 mb-4">
-            <div class="row">
-
-                <div class="col-xl-8">
-                    <!-- Account details card-->
-                    <div class="card mb-4">
-                        <div class="card-header">Sensor hinzufügen</div>
-                        <div class="card-body">
-                            <form th:action="@{/saveSensor(roomId=${room.rid})}" method="post">
-                                <!-- Form Group (username)-->
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="type">Motion sensor</label>
-                                    <select th:field="*{sensor.sensortype}" class="form-control" id="type">
-                                        <option th:each="sensortype : ${sensortype}"
-                                                th:value="${sensortype.stid}"
-                                                th:text="${sensortype.name}">
-                                        </option>
-                                    </select>
-                                </div>
-                                <!-- Save changes button-->
-                                <button class="btn btn-primary" type="submit">Sensor hinzufügen</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <div th:replace="fragments/header.html::header"></div>
 
             <!------------------------BIS HIER DEN CONTENT------------------------->
 

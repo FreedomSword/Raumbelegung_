@@ -13,10 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -64,7 +61,7 @@ public class ReservationController {
         Room room = rRepository.findById(roomId).get();
         User user = uRepository.findById(userId).get();
         
-        List<Reservation> bookedSlots = resRepository.findAllByDate(date);
+        List<Reservation> bookedSlots = resRepository.findAllByDate(date, roomId);
 
         List<String> allSlots = new ArrayList<String>();
         String s = "";
@@ -102,7 +99,7 @@ public class ReservationController {
         reservation.setRoom(room);
         reservation.setUser((uRepository.findById(userId)).get());
         resRepository.save(reservation);
-        return new RedirectView("/showRoom");
+        return new RedirectView("/roomDetails?roomId="+roomId);
     }
 
     @GetMapping("/UpdateReservationForm")
@@ -114,9 +111,9 @@ public class ReservationController {
     }
 
     @GetMapping("/deleteReservation")
-    public RedirectView deleteReservation(@RequestParam int ReservationId) {
-        resRepository.deleteById(ReservationId);
-        return new RedirectView("/showReservation");
+    public RedirectView deleteReservation(@RequestParam int reservationId) {
+        resRepository.deleteById(reservationId);
+        return new RedirectView("/myAccount");
     }
 
     // this method Shows All reservations of all rooms

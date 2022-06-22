@@ -42,7 +42,8 @@
                         <div class="card-header">Gebäude Foto</div>
                         <div class="card-body text-center">
                             <!-- Profile picture image-->
-                            <img class="img-account-profile img-fluid" src="https://www.fh-dortmund.de/karriere/fh/index.php.media/5546/baege_209068.jpg.scaled/ff692c76f934495904b9614c26bf1cbd.jpg" alt="" width="650" height="450">
+                            <img class="img-account-profile img-fluid"  th:src="@{${'/img/userUploads0' + building.photo}}"
+                            width="650" height="450">
                         </div>
                     </div>
                 </div>
@@ -93,47 +94,47 @@
 
                 <div class="row">
                     <div class="col">
-                <div class="card">
-                     <div class="card-header">Liste von allen Räumen</div>
+                        <div class="card">
+                            <div
+                                    class="card-header">Liste von allen Räumen
+                            </div>
 
-                    <div class="card-body">
-                        <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
-                        <a th:href="@{/AddRoomInBuildingForm(buildingId=${building.bid})}" class="btn btn-success" style="margin-bottom: 10px">Raum hinzufügen</a>
+                            <div class="card-body">
+                                <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
+                                    <a th:href="@{/addRoomInBuildingForm(buildingId=${building.bid})}" class="btn btn-success" style="margin-bottom: 10px">Raum hinzufügen</a>
+                                </div>
+                            <table class="table table-bordered table-striped" id="roomTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Bezeichnung</th>
+                                        <th scope="col">Typ</th>
+                                        <th scope="col">Max. Bel.</th>
+                                        <th scope="col">Akt. Bel.</th>
+                                        <th scope="col">Gebäude</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="room: ${room}">
+                                        <td th:text="${room.rid}"></td>
+                                        <td><a th:text="${room.name}" th:href="@{/roomDetails(roomId=${room.rid})}"></a></td>
+                                        <td th:text="${room.type}"></td>
+                                        <td th:text="${room.max_occupancy}"></td>
+                                        <td th:text="${room.cur_occupancy}"></td>
+                                        <td><a th:text="${room.building.name}" th:href="@{/buildingDetails(buildingId=${room.building.bid})}">room.html</a> </td>
+                                        <td>
+                                            <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}"th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
+                                            <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/deleteRoom(roomId=${room.rid})}" class="btn btn-danger">Löschen</a>
+                                            <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/addSensorForm(roomId=${room.rid})}" class="btn btn-success">Sensor hinzufügen</a>
+                                            <a th:href="@{/addReservationFormDate(roomId=${room.rid}, userId=${user.uid})}" class="btn btn-info">Room Reservation</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
                         </div>
-                        <table class="table table-bordered table-striped" id="roomTable">
-                            <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Bezeichnung</th>
-                                <th scope="col">Typ</th>
-                                <th scope="col">Max. Bel.</th>
-                                <th scope="col">Akt. Bel.</th>
-                                <th scope="col">Gebäude</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="room: ${room}">
-                                <td th:text="${room.rid}"></td>
-                                <td><a th:text="${room.name}" th:href="@{/roomDetails(roomId=${room.rid})}"></a></td>
-                                <td th:text="${room.type}"></td>
-                                <td th:text="${room.max_occupancy}"></td>
-                                <td th:text="${room.cur_occupancy}"></td>
-                                <td><a th:text="${room.building.name}" th:href="@{/buildingDetails(buildingId=${room.building.bid})}">room.html</a> </td>
-                                <td>
-
-                                        <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}"th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
-                                        <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/deleteRoom(roomId=${room.rid})}" class="btn btn-danger">Löschen</a>
-                                        <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/addSensorForm(roomId=${room.rid})}" class="btn btn-success">Sensor hinzufügen</a>
-                                    <a th:href="@{/addReservationFormDate(roomId=${room.rid}, userId=${user.uid})}" class="btn btn-info">Room Reservation</a>
-                                </td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div></div>
-                </div>
                     </div>
+                </div>
 
 
             <!------------------------BIS HIER DEN CONTENT------------------------->

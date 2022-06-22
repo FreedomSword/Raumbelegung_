@@ -22,59 +22,12 @@
 
 <body>
 <div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <img th:src="@{/img/fh-logo.png}" class="img-fluid">
-        </div>
-
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="/index">Home</a>
-            </li>
-            <li>
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gebäude</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li th:each="building :${building}">
-                        <a th:href="@{/buildingDetails(buildingId=${building.bid})}" th:text="${building.name}">Goose</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/showBuilding}">Alle Gebäude</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Mein Account</a>
-            </li>
-        </ul>
-
-        <ul class="list-unstyled CTAs">
-            <li>
-                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Logout</a>
-            </li>
-        </ul>
-    </nav>
+    <div th:replace="fragments/sidebar.html::sidebar"></div>
 
     <!-- Page Content  -->
     <div id="content">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav ml-auto">
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
-                            <i class="fas fa-align-left"></i>
-                            <span>Toggle Sidebar</span>
-                        </button>
-                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fas fa-align-justify"></i>
-                        </button>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+        <div th:replace="fragments/header.html::header"></div>
             <!------------------------ AB HIER DEN CONTENT------------------------->
 
 
@@ -87,7 +40,7 @@
                         <div class="card-header">Raum reservieren</div>
                         <div class="card-body">
                             <p style="color: green; font-size: 11px"> &#x1F6C8 Der Raum kann jeweils für eine Stunde reserviert werden. Möchte man den Raum länger reservieren muss dieser mehrfach reserviert werden.</p>
-                            <form th:action="@{/saveReservation(roomId=${room.rid}, userId=${1})}" method="post">
+                            <form th:action="@{/saveReservation(roomId=${room.rid}, userId=${user.uid})}" method="post">
                                 <!-- Form Group (username)-->
                                 <div>
                                     <label for="date">Datum</label>
@@ -97,7 +50,7 @@
                                 <div>
                                 <label for="time">Uhrzeit von</label>
                                     <select class="form-select timepicker" aria-label="Default select example" name="time" th:field="*{reservation.time}" id="time" min="10:00:00">
-                                       <option th:each= " slots: ${allSlots}" th:value="${slots}" th:text="${slots}"/>
+                                       <option th:each= "slots: ${allSlots}" th:value="${slots}" th:text="${slots}"/>
                                     </select>
 
                                 </div>

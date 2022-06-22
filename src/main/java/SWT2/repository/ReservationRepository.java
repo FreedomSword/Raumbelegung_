@@ -16,6 +16,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     @Query("SELECT r FROM Reservation r WHERE r.room.rid = ?1")
     List<Reservation> findAllReservations(int id);
 
-    @Query("SELECT r FROM Reservation r WHERE r.date =?1")
-    List<Reservation> findAllByDate(@DateTimeFormat(pattern = "YYYY-MM-DD") String date);
+    @Query("SELECT r FROM Reservation r WHERE r.date =?1 AND r.room.rid = ?2")
+    List<Reservation> findAllByDate(@DateTimeFormat(pattern = "YYYY-MM-DD") String date, int roomId);
+
+    @Query("SELECT r FROM Reservation r WHERE r.user.uid =?1")
+    List<Reservation> findAllByUser(int uid);
 }

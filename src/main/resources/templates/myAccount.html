@@ -32,49 +32,72 @@
         <!------------------------ AB HIER DEN CONTENT------------------------->
 
         <div class="container-xl px-4 mt-4">
-            <h1>Gebäude</h1>
+            <h1 th:text="'Hallo ' + *{user.full_name}"></h1>
             <!-- Account page navigation-->
             <hr class="mt-0 mb-4">
+            <div class="row">
+                <div class="col">
+                    <!-- Account details card-->
+                    <div class="card mb-4">
+                        <div class="card-header">Meine Account Details</div>
+                        <div class="card-body">
+                            <form>
+                                <!-- Form Group (username)-->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="name">Name </label>
+                                    <input  type="text" th:field="*{user.full_name}" class="form-control" id="name" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="email">Email-Adresse </label>
+                                    <input  type="text" th:field="*{user.email}" class="form-control" id="email" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="password">Passwort </label>
+                                    <input  type="password" th:field="*{user.password}" class="form-control" id="password" readonly>
+                                </div>
 
+                            </form>
+                                <a th:href="@{/updateUser}" class="btn btn-info">Bearbeiten</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr/>
 
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        <div class="card-header">Liste von allen Räumen</div>
+                        <div
+                                class="card-header">Meine Reservierungen
+                        </div>
 
                         <div class="card-body">
-                            <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" style="margin-bottom: 10px" th:href="@{/addBuildingForm}" class="btn btn-info">Gebäude hinzufügen</a>
                             <table class="table table-bordered table-striped" id="roomTable">
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Bezeichnung</th>
-                                    <th scope="col">Straße</th>
-                                    <th scope="col">Hausnummer</th>
-                                    <th scope="col">Postleitzahl</th>
-                                    <th scope="col">Stadt</th>
+                                    <th scope="col">Datum</th>
+                                    <th scope="col">Uhrzeit</th>
+                                    <th scope="col">Raum</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="building: ${building}">
-                                    <td th:text="${building.bid}"></td>
-                                    <td><a th:text="${building.name}" th:href="@{/buildingDetails(buildingId=${building.bid})}"></a></td>
-                                    <td th:text="${building.street}"></td>
-                                    <td th:text="${building.houseNumber}"></td>
-                                    <td th:text="${building.postalCode}"></td>
-                                    <td th:text="${building.city}"></td>
+                                <tr th:each="reservation: ${reservation}">
+                                    <td th:text="${reservation.resid}"></td>
+                                    <td th:text="${reservation.date}"></td>
+                                    <td th:text="${reservation.time}"></td>
+                                    <td><a th:text="${reservation.room.name}" th:href="@{/roomDetails(roomId=${reservation.room.rid})}"></a></td>
                                     <td>
-
-                                        <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}"th:href="@{/UpdateRoomForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
-                                        <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/deleteBuilding(buildingId=${building.bid})}" class="btn btn-danger">Löschen</a>
-                                        <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/addRoomInBuildingForm(buildingId=${building.bid})}" class="btn btn-success">Raum hinzufügen</a>
+<!--                                        <a th:href="@{/UpdateRoomForm(roomId=${reservation.room.rid})}" class="btn btn-info">Bearbeiten</a>-->
+                                        <a th:href="@{/deleteReservation(reservationId=${reservation.resid})}" class="btn btn-danger">Löschen</a>
                                     </td>
-
                                 </tr>
                                 </tbody>
                             </table>
-
-                        </div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

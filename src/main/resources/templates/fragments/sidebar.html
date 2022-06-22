@@ -33,8 +33,8 @@
         <li>
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gebäude</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li th:each="building :${building}">
-                    <a th:href="@{/buildingDetails(buildingId=${building.bid})}" th:text="${building.name}">Goose</a>
+                <li th:each="buildings :${buildings}">
+                    <a th:href="@{/buildingDetails(buildingId=${buildings.bid})}" th:text="${buildings.name}"></a>
                 </li>
                 <li>
                     <a th:href="@{/showBuilding}">Alle Gebäude</a>
@@ -42,7 +42,7 @@
             </ul>
         </li>
         <li>
-            <a href="#">Mein Account</a>
+            <a href="/myAccount">Mein Account</a>
         </li>
     </ul>
 

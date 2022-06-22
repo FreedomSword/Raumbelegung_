@@ -36,6 +36,9 @@ public class Building {
     @Column(name = "city")
     private String city;
 
+    @Column(nullable = true)
+    private String photo;
+
 
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
     private List<Room> room = new ArrayList<>();
