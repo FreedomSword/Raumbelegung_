@@ -8,6 +8,7 @@ import SWT2.repository.BuildingRepository;
 import SWT2.repository.RoomRepository;
 import SWT2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +35,7 @@ public class BuildingController {
     @Autowired
     private RoomRepository rRepository;
 
+
     /////////////////TABLE VIEWS/////////////////
 
     //Show Buildings
@@ -39,10 +44,32 @@ public class BuildingController {
     public ModelAndView index() {
             ModelAndView mav = new ModelAndView("index");
             List <Building> list = bRepository.findAll();
-
             mav.addObject("buildings", list);
-            return  mav;
-        }
+
+            List<Integer> placeAmount = new ArrayList<Integer>();
+            List<Integer> roomAmount = new ArrayList<Integer>();
+            for (int i = 0; i < list.size(); i++)
+            {
+                int amountRooms = 0;
+                int amountPlaces = 0;
+               // String roomListName = "roomsBuilding" + list.get(i).getBid();
+                List<Room>  rooms = rRepository.findAllRooms(list.get(i).getBid());
+
+                for (int y = 0; y < rooms.size(); y++) {
+                    amountRooms++;
+                    amountPlaces+=rooms.get(y).getMax_occupancy();
+                }
+                placeAmount.add(amountPlaces);
+                roomAmount.add(amountRooms);
+
+
+
+            }
+
+            mav.addObject("rooms", roomAmount);
+            mav.addObject("places", placeAmount);
+        return  mav;
+    }
 
     @GetMapping("/showBuilding")
     public ModelAndView showBuilding() {
@@ -61,9 +88,11 @@ public class BuildingController {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         building.setPhoto(fileName);
 
-        String uploadDir = "C:/Users/simon/Pictures/userUploads" + building.getBid();
+       bRepository.save(building);
+
+        String uploadDir = "building-photos/" + building.getName();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        bRepository.save(building);
+
         return new RedirectView("/buildingDetails?buildingId=" +building.getBid());
     }
 

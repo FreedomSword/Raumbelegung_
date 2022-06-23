@@ -38,7 +38,7 @@
                         <div class="card-header">Raum Foto</div>
                         <div class="card-body text-center">
                             <!-- Profile picture image-->
-                            <img class="img-account-profile img-fluid" src="https://www.fh-dortmund.de/karriere/fh/index.php.media/5546/baege_209068.jpg.scaled/ff692c76f934495904b9614c26bf1cbd.jpg" alt="" width="650" height="450">
+                            <img class="img-account-profile img-fluid" th:src="@{${room.photosImagePath}}" alt="" width="650" height="450">
                         </div>
                     </div>
                 </div>
@@ -70,10 +70,11 @@
                                         <label class="small mb-1" for="max_occupancy">Maximale Personenanzahl</label>
                                         <input  type="text" th:field="*{room.max_occupancy}" class="form-control" id="max_occupancy"  placeholder="Bezeichung einfügen" readonly>
                                     </div>
+                                    <p th:text="'Reserviert: ' + ${room.isReservedNow}"></p>
                                 </div>
                             </form>
                             <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
-                                <a th:href="@{/RoomUpdateForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
+                                <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
                             </div>
                         </div>
                     </div>

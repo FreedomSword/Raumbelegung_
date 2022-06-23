@@ -33,14 +33,17 @@
                     <div class="col" th:each="buildings :${buildings}">
                         <div class="card" id="dashboard_card">
                             <img
-                                    th:src="@{${'C:/Users/simon/Pictures/userUploads0/'+ buildings.photo}}"
+                                    th:src="@{${buildings.photosImagePath}}"
                                     class="card-img-top"
-                                    alt="Waterfall"
-                                    style="width: 420px; height: 240px"
+                                    style="height: 13vw;"
                             />
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${buildings.name}">Card title</h5>
                                 <hr/>
+                                <p th:text="'Anzahl Räume: ' + ${buildings.amountRooms}"></p>
+                                <p th:text="'Aktuell freie Räume: ' + ${buildings.FreeRooms}"></p>
+                                <p th:text="'Anzahl Plätze: ' + ${buildings.amountPlaces}"></p>
+                                <p th:text="'Anzahl freie Plätze: ' + ${buildings.FreePlaces}"></p>
                                 <a th:href="@{/buildingDetails(buildingId=${buildings.bid})}" class="btn btn-primary">Jetzt ansehen</a>
                             </div>
                         </div>

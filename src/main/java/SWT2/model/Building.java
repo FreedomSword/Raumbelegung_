@@ -1,8 +1,10 @@
 package SWT2.model;
 
+import SWT2.repository.RoomRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -54,5 +56,62 @@ public class Building {
                 ", stadt='" + city + '\'' +
                 ", raeume=" + room +
                 '}';
+    }
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (photo == null || bid == 0) return null;
+
+        return "/building-photos/" + name + "/" + photo;
+    }
+
+    @Transient
+    public int getAmountRooms() {
+
+        int amountRooms = 0;
+        for(int i = 0; i < room.size(); i++) {
+            amountRooms++;
+        }
+
+        return amountRooms;
+    }
+
+    @Transient
+    public int getAmountPlaces() {
+
+        int amountPlaces = 0;
+        for(int i = 0; i < room.size(); i++) {
+           amountPlaces+=room.get(i).getMax_occupancy();
+        }
+
+        return amountPlaces;
+    }
+
+    @Transient
+    public int getFreeRooms() {
+
+        int freeRooms = getAmountRooms();
+
+        for(int i = 0; i < room.size(); i++) {
+          if(room.get(i).isReservedNow())
+              freeRooms--;
+        }
+
+        return freeRooms;
+    }
+
+    @Transient
+    public int getFreePlaces() {
+
+        int freePlaces = getAmountPlaces();
+
+        for(int i = 0; i < room.size(); i++) {
+            if(room.get(i).isReservedNow())
+                freePlaces-=room.get(i).getMax_occupancy();
+
+            freePlaces-=room.get(i).getCur_occupancy();
+        }
+
+        return freePlaces;
     }
 }

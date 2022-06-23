@@ -21,4 +21,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
     @Query("SELECT r FROM Reservation r WHERE r.user.uid =?1")
     List<Reservation> findAllByUser(int uid);
+
+    @Query("SELECT r FROM Reservation r WHERE r.date =?1 AND r.room.rid = ?2 AND r.time =?3")
+    List<Reservation> findAllReservedNow(@DateTimeFormat(pattern = "YYYY-MM-DD") String date, int roomId, int time);
 }

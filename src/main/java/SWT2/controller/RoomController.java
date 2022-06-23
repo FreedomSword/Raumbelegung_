@@ -8,10 +8,13 @@ import SWT2.repository.RoomRepository;
 import SWT2.repository.SensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,17 +36,16 @@ public class RoomController {
     /////////////////ADDING/////////////////
 
     //Save the Room to the Database
-    @PostMapping("/saveRoom")
-    public RedirectView saveRoom(@ModelAttribute Room room) {
-
-        Building building = bRepository.findById(room.getBuilding().getBid()).get();
-        room.setBuilding(building);
-        rRepository.save(room);
-        return new RedirectView("/buildingDetails(buildingId=${building.bid})");
-    }
 
     @PostMapping("/saveRoomInBuilding")
-    public RedirectView saveRoom(@ModelAttribute Room room, @RequestParam int buildingId) {
+    public RedirectView saveRoom(@ModelAttribute Room room, @RequestParam int buildingId, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        room.setPhoto(fileName);
+
+        String uploadDir = "room-photos/" + room.getName();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
         Building building = (bRepository.findById(buildingId)).get();
         room.setBuilding(building);
         rRepository.save(room);

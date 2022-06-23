@@ -3,8 +3,12 @@ package SWT2.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +37,10 @@ public class Room {
     @Column(name = "cur_occupancy")
     private int cur_occupancy;
 
+    @Column(nullable = true)
+    private String photo;
+
+
     @ManyToOne
     private Building building;
 
@@ -53,4 +61,38 @@ public class Room {
                 ", gebaeude=" + building.getBid() +
                 '}';
     }
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (photo == null || rid == 0) return null;
+
+        return "/room-photos/" + name + "/" + photo;
+    }
+
+    @Transient
+    public boolean isReservedNow() {
+
+        String date = LocalDate.of(2022,06,24).toString();
+
+        System.out.println(date);
+        String hour = LocalTime.now().getHour() +":00:00";
+        System.out.println(hour);
+
+
+        boolean reserved = false;
+
+        for(int i = 0; i < reservations.size(); i++) {
+            System.out.println(reservations.get(i).toString());
+            if(reservations.get(i).getDate().equals(date) && reservations.get(i).getTime().equals(hour)) {
+                    reserved = true;
+                    System.out.println(reserved);
+            }
+            else {
+                System.out.println("Stimmt nicht überein");
+            }
+
+        }
+        return reserved;
+    }
+
 }

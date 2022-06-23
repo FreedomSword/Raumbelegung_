@@ -38,4 +38,15 @@ public class Reservation {
     @ManyToOne
     private Room room;
 
+    @Override
+    public String toString() {
+        return "Raum{" +
+                "id=" + resid +
+                ", Date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", User=" + user.getFull_name() +
+                ", room=" + room.getName() +
+                '}';
+    }
+
 }
