@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-xl-4">
                     <!-- Profile picture card-->
-                    <div class="card mb-4 mb-xl-0">
+                    <div class="card h-100 mb-4 mb-xl-0">
                         <div class="card-header">Gebäude Foto</div>
                         <div class="card-body text-center">
                             <!-- Profile picture image-->
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-xl-8">
                     <!-- Account details card-->
-                    <div class="card mb-4">
+                    <div class="card h-100 mb-4">
                         <div class="card-header">Gebäude Details</div>
                         <div class="card-body">
                             <form>
@@ -86,6 +86,27 @@
                             <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
                                 <a th:href="@{/BuildingUpdateForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
                             </div>
+                            <hr/>
+                            <form>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-3">
+                                        <p>Vorhandene Räume
+                                        <p th:text="*{building.amountRooms}"></p>
+                                     </div>
+                                    <div class="col-md-3">
+                                        <label class="small mb-1" for="freeRooms">Freie Räume</label>
+                                        <input  type="text" th:field="*{building.freeRooms}" class="form-control" id="freeRooms"  placeholder="Bezeichung einfügen" readonly>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="small mb-1" for="currentPlaces">Vorhandene Plätze</label>
+                                        <input  type="text" th:field="*{building.amountPlaces}" class="form-control" id="currentPlaces"  placeholder="Bezeichung einfügen" readonly>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="small mb-1" for="freePlaces">Freie Plätze</label>
+                                        <input  type="text" th:field="*{building.freePlaces}" class="form-control" id="freePlaces"  placeholder="Bezeichung einfügen" readonly>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -111,6 +132,7 @@
                                         <th scope="col">Typ</th>
                                         <th scope="col">Max. Bel.</th>
                                         <th scope="col">Akt. Bel.</th>
+                                        <th scope="col">Akt. Reserviert.</th>
                                         <th scope="col">Gebäude</th>
                                     </tr>
                                 </thead>
@@ -121,6 +143,7 @@
                                         <td th:text="${room.type}"></td>
                                         <td th:text="${room.max_occupancy}"></td>
                                         <td th:text="${room.cur_occupancy}"></td>
+                                        <td th:text="${room.reservedString}"></td>
                                         <td><a th:text="${room.building.name}" th:href="@{/buildingDetails(buildingId=${room.building.bid})}">room.html</a> </td>
                                         <td>
                                             <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}"th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
@@ -135,6 +158,7 @@
                         </div>
                     </div>
                 </div>
+
 
 
             <!------------------------BIS HIER DEN CONTENT------------------------->

@@ -73,26 +73,22 @@ public class Room {
     public boolean isReservedNow() {
 
         String date = LocalDate.of(2022,06,24).toString();
-
-        System.out.println(date);
         String hour = LocalTime.now().getHour() +":00:00";
-        System.out.println(hour);
-
 
         boolean reserved = false;
 
         for(int i = 0; i < reservations.size(); i++) {
-            System.out.println(reservations.get(i).toString());
             if(reservations.get(i).getDate().equals(date) && reservations.get(i).getTime().equals(hour)) {
                     reserved = true;
-                    System.out.println(reserved);
             }
-            else {
-                System.out.println("Stimmt nicht überein");
-            }
-
         }
         return reserved;
+    }
+
+    @Transient
+    public String reservedString() {
+        if (isReservedNow()) return "Reserviert";
+        else return "Frei";
     }
 
 }

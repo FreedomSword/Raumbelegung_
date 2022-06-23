@@ -68,12 +68,7 @@ public class Building {
     @Transient
     public int getAmountRooms() {
 
-        int amountRooms = 0;
-        for(int i = 0; i < room.size(); i++) {
-            amountRooms++;
-        }
-
-        return amountRooms;
+        return room.size();
     }
 
     @Transient
@@ -90,7 +85,7 @@ public class Building {
     @Transient
     public int getFreeRooms() {
 
-        int freeRooms = getAmountRooms();
+        int freeRooms = room.size();
 
         for(int i = 0; i < room.size(); i++) {
           if(room.get(i).isReservedNow())
