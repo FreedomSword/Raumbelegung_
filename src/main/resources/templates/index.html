@@ -30,8 +30,8 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col" th:each="buildings :${buildings}">
-                        <div class="card" id="dashboard_card">
+                    <div class="col-lg-3" th:each="buildings :${buildings}">
+                        <div class="" id="dashboard_card">
                             <img
                                     th:src="@{${buildings.photosImagePath}}"
                                     class="card-img-top"
@@ -58,9 +58,9 @@
     </div>
 </body>
 
-<footer class="text-center text-white" style="background-color: #7386D5;">
+<footer class="text-center text-white">
 
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-3">
 
         © 2022 Copyright:
         <a class="text-white" href="https://mdbootstrap.com/">DIGITAL HEROES</a>

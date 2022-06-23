@@ -42,7 +42,7 @@ a:focus {
 .line {
     width: 100%;
     height: 1px;
-    border-bottom: 1px dashed #ddd;
+
     margin: 40px 0;
 }
 
@@ -73,9 +73,10 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
     color: #fff;
     transition: all 0.3s;
+    background: rgb(252,208,174);
+    background: radial-gradient(circle, rgba(252,208,174,1) 0%, rgba(255,130,49,1) 100%);
 }
 
 #sidebar.active {
@@ -84,12 +85,12 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+
 }
 
 #sidebar ul p {
@@ -104,14 +105,14 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    color: #ffffff;
+    background: #ff8333;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: #ff8333;
 }
 
 a[data-toggle="collapse"] {
@@ -129,8 +130,9 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: none;
 }
+
 
 ul.CTAs {
     padding: 20px;
@@ -140,20 +142,24 @@ ul.CTAs a {
     text-align: center;
     font-size: 0.9em !important;
     display: block;
-    border-radius: 5px;
     margin-bottom: 5px;
 }
 
 a.download {
     background: #fff;
-    color: #7386D5;
+    color: #ff6400;
 }
 
-a.article,
-a.article:hover {
-    background: #6d7fcc !important;
+a.article
+ {
+    background: #ff8333 !important;
     color: #fff !important;
 }
+
+a.article:hover {
+    background: #fd8811 !important;
+}
+
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -195,4 +201,22 @@ a.article:hover {
     top: 100%;
 
 
+}
+
+.btn-primary {
+    background: #ff8333 !important;
+    border: none !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background: #fc891d !important;
+    border: none;
+    color: white;
+}
+
+footer {
+    font-weight: bold;
+    background-color: #ff8333 !important;
+    color: white !important;
 }

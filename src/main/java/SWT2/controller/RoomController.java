@@ -1,12 +1,10 @@
 package SWT2.controller;
 
-import SWT2.model.Building;
-import SWT2.model.Room;
-import SWT2.model.Sensor;
-import SWT2.repository.BuildingRepository;
-import SWT2.repository.RoomRepository;
-import SWT2.repository.SensorRepository;
+import SWT2.model.*;
+import SWT2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.ListResourceBundle;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +29,12 @@ public class RoomController {
 
     @Autowired
     private SensorRepository sRepository;
+
+    @Autowired
+    private ReservationRepository resRepository;
+
+    @Autowired
+    UserRepository uRepository;
 
     /////////////////TABLE VIEWS/////////////////
 
@@ -55,6 +62,14 @@ public class RoomController {
     public ModelAndView showSensorListOfRoom(@RequestParam int roomId) {
         ModelAndView mav = new ModelAndView("roomDetails");
         Room room = rRepository.findById(roomId).get();
+
+
+        User user = uRepository.getUsersByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        mav.addObject("user", user);
+
+
+        List<Reservation> reservations = resRepository.findAllByDate(LocalDate.now().toString(), roomId);
+        mav.addObject("reservations", reservations);
         List<Sensor> list = sRepository.findAllSensors(roomId);
         mav.addObject("room", room );
         mav.addObject("sensor", list);

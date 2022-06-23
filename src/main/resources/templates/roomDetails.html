@@ -47,34 +47,34 @@
                     <div class="card mb-4">
                         <div class="card-header">Raum Details</div>
                         <div class="card-body">
-                            <form>
-                                <!-- Form Group (username)-->
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="bezeichnung">Raum </label>
-                                    <input  type="text" th:field="*{room.name}" class="form-control" id="bezeichnung" readonly>
-                                </div>
-                                <!-- Form Row-->
-                                <div class="mb-3">
-                                    <!-- Form Group (location)-->
-                                        <label class="small mb-1" for="type">Typ</label>
-                                        <input  type="text" th:field="*{room.type}" class="form-control" id="type" readonly>
-                                </div>
-                                <!-- Form Row        -->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="cur_occupancy">Akutelle Personenanzahl</label>
-                                        <input  type="text" th:field="*{room.cur_occupancy}" class="form-control" id="cur_occupancy"  readonly>
+                                        <h6 class="font-weight-bold">Typ:</h6>
+                                        <p class="" th:text="*{room.type}"></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="max_occupancy">Maximale Personenanzahl</label>
-                                        <input  type="text" th:field="*{room.max_occupancy}" class="form-control" id="max_occupancy"  placeholder="Bezeichung einfügen" readonly>
+                                        <h6 class="font-weight-bold">Aktuelle Personenanzahl:</h6>
+                                        <p class="" th:text="*{room.cur_occupancy}"></p>
                                     </div>
-                                    <p th:text="'Reserviert: ' + ${room.isReservedNow}"></p>
                                 </div>
-                            </form>
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (location)-->
+                                    <div class="col-md-6">
+                                        <h6 class="font-weight-bold">Maximale Personenanzahl:</h6>
+                                        <p class="" th:text="*{room.max_occupancy}"></p>
+                                    </div>
+                                </div>
                             <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
                                 <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
+                            </div>
+
+                            <hr/>
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-3">
+                                    <p>Reservierung</p>
+                                    <p th:text="*{room.reservedString()}"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,13 +82,38 @@
             </div>
             <hr/>
 
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Heutige Reservierungen</div>
+
+                        <div class="card-body">
+                            <a  th:href="@{/addReservationFormDate(roomId=${room.rid}, userId=${user.uid})}" class="btn btn-primary" style="margin-bottom: 10px">Jetzt reservieren</a>
+
+                            <table class="table table-bordered table-striped" id="reservation-Table">
+                                <thead>
+                                <tr>
+
+                                    <th scope="col">Zeit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="reservations: ${reservations}">
+                                    <td th:text="${reservations.time}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div></div>
+                </div>
+            </div>
             <div class="row" th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
                 <div class="col">
                     <div class="card">
                         <div class="card-header">Liste von allen Sensoren</div>
 
                         <div class="card-body">
-                            <a  th:href="@{/addSensorForm(roomId=${room.rid})}" class="btn btn-success" style="margin-bottom: 10px">Sensor hinzufügen</a>
+                            <a  th:href="@{/addSensorForm(roomId=${room.rid})}" class="btn btn-primary" style="margin-bottom: 10px">Sensor hinzufügen</a>
 
                             <table class="table table-bordered table-striped" id="roomTable">
                                 <thead>

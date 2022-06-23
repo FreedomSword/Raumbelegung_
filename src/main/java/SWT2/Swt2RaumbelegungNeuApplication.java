@@ -12,9 +12,9 @@ public class Swt2RaumbelegungNeuApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Swt2RaumbelegungNeuApplication.class, args);
-		SimulationData sm = new SimulationData();
+		/*SimulationData sm = new SimulationData();
 		Thread thread = new Thread (sm);
-		thread.start();
+		thread.start();*/
 	}
 
 }

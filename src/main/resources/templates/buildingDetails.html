@@ -52,61 +52,52 @@
                     <div class="card h-100 mb-4">
                         <div class="card-header">Gebäude Details</div>
                         <div class="card-body">
-                            <form>
+
                                 <!-- Form Group (username)-->
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="bezeichnung">Gebäude </label>
-                                    <input  type="text" th:field="*{building.name}" class="form-control" id="bezeichnung"  placeholder="Bezeichung einfügen" readonly>
-                                </div>
-                                <!-- Form Row-->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="street">Straße</label>
-                                        <input  type="text" th:field="*{building.street}" class="form-control" id="street"  placeholder="Bezeichung einfügen" readonly>
+                                        <h6 class="font-weight-bold">Straße:</h6>
+                                        <p class="" th:text="*{building.street}"></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="houseNumber">Hausnummer</label>
-                                        <input  type="text" th:field="*{building.houseNumber}" class="form-control" id="houseNumber"  placeholder="Bezeichung einfügen" readonly>
+                                        <h6 class="font-weight-bold">Hausnummer:</h6>
+                                        <p class="" th:text="*{building.houseNumber}"></p>
                                     </div>
                                 </div>
-                                <!-- Form Row        -->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="postalcode">Postleitzahl</label>
-                                        <input  type="text" th:field="*{building.postalCode}" class="form-control" id="postalcode"  placeholder="Bezeichung einfügen" readonly>
+                                        <h6 class="font-weight-bold">Postleitzahl:</h6>
+                                        <p class="" th:text="*{building.postalCode}"></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="city">Stadt</label>
-                                        <input  type="text" th:field="*{building.city}" class="form-control" id="city"  placeholder="Bezeichung einfügen" readonly>
+                                        <h6 class="font-weight-bold">Stadt:</h6>
+                                        <p class="" th:text="*{building.city}"></p>
                                     </div>
                                 </div>
-                            </form>
                             <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
                                 <a th:href="@{/BuildingUpdateForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
                             </div>
                             <hr/>
-                            <form>
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-3">
                                         <p>Vorhandene Räume
                                         <p th:text="*{building.amountRooms}"></p>
                                      </div>
                                     <div class="col-md-3">
-                                        <label class="small mb-1" for="freeRooms">Freie Räume</label>
-                                        <input  type="text" th:field="*{building.freeRooms}" class="form-control" id="freeRooms"  placeholder="Bezeichung einfügen" readonly>
+                                        <p>Freie Räume
+                                        <p th:text="*{building.freeRooms}"></p>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="small mb-1" for="currentPlaces">Vorhandene Plätze</label>
-                                        <input  type="text" th:field="*{building.amountPlaces}" class="form-control" id="currentPlaces"  placeholder="Bezeichung einfügen" readonly>
+                                        <p>Vorhandene Plätze
+                                        <p th:text="*{building.amountPlaces}"></p>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="small mb-1" for="freePlaces">Freie Plätze</label>
-                                        <input  type="text" th:field="*{building.freePlaces}" class="form-control" id="freePlaces"  placeholder="Bezeichung einfügen" readonly>
+                                        <p>Freie Plätze
+                                        <p th:text="*{building.freePlaces}"></p>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
