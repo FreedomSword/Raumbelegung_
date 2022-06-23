@@ -19,11 +19,11 @@ public class MqttController {
 
     @Autowired
     MqttGateway mqtGateway;
-    //@PostMapping("/sendMessage")
-    public ResponseEntity<?> publish(@RequestBody String mqttMessage) {
+
+    public ResponseEntity<?> publish(String mqttMessage,String topic) {
         try {
-            JsonObject convertObject = new Gson().fromJson(mqttMessage,JsonObject.class);
-            mqtGateway.sendToMqtt(convertObject.get("message").toString(), convertObject.get("topic").toString());
+//            JsonObject convertObject = new Gson().fromJson(mqttMessage,JsonObject.class);
+            mqtGateway.sendToMqtt(mqttMessage,topic);
             return ResponseEntity.ok("Success");
         }
         catch (Exception ex) {

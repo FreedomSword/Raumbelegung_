@@ -9,8 +9,12 @@ import java.io.File;
 @SpringBootApplication
 public class Swt2RaumbelegungNeuApplication {
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(Swt2RaumbelegungNeuApplication.class, args);
+		SimulationData sm = new SimulationData();
+		Thread thread = new Thread (sm);
+		thread.start();
 	}
 
 }
