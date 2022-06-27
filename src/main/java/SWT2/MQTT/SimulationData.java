@@ -1,4 +1,4 @@
-package SWT2;
+package SWT2.MQTT;
 
 import SWT2.controller.MqttController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,9 @@ String message = "{\"id\":"+id+" ,\"type\":"+type+ ",\"value\":"+value+ "}";
               id = (int)(Math.random() * ((100)));
                 type = /* (int)(Math.random() * ((2- 0)));*/  0;
                 value =  (int)(Math.random() * ((1)));
-
+                message = "{\"id\":"+id+" ,\"type\":"+type+ ",\"value\":"+value+ "}";
                 Thread.sleep(3000);
-                mqttController.publish(message,"myTopic");
+                mqttController.index(message);
             } catch (InterruptedException e) {
                 Thread.currentThread().isInterrupted();
                 e.printStackTrace();

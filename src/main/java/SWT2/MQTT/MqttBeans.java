@@ -1,4 +1,5 @@
-package SWT2;
+package SWT2.MQTT;
+
 
 import SWT2.model.Room;
 import SWT2.model.Sensor;
@@ -124,7 +125,7 @@ public class MqttBeans {
                         Sensor s = sOp.get();
                         Room r = s.getRoom();
 
-                       //Determination of the insert value
+                        //Determination of the insert value
 
                         //0 = Going out
                         if (Integer.parseInt(payload[2]) == 0) {
@@ -144,7 +145,7 @@ public class MqttBeans {
                                 System.out.println("Alte Belegung: " + (r.getCur_occupancy() + 1) + " Neue Belegung: " + r.getCur_occupancy());
                             }
 
-                        //1 = Going in
+                            //1 = Going in
                         } else {
                             r.setCur_occupancy(r.getCur_occupancy() + 1);
                             System.out.println("Aktuelle Belegung um 1 erhoeht");
@@ -156,7 +157,7 @@ public class MqttBeans {
                         rRepo.save(r);
 
 
-                                           //Temperature sensor
+                        //Temperature sensor
 
                         //Light sensor
 

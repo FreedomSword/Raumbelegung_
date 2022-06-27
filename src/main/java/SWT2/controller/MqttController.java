@@ -1,34 +1,28 @@
 package SWT2.controller;
 
 
-import SWT2.MqttGateway;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import SWT2.MQTT.MQTTPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.lang.reflect.Type;
-
 
 @RestController
 public class MqttController {
+    public static String Topic = "myTopic";
 
     @Autowired
-    MqttGateway mqtGateway;
+    MQTTPublisher publisher = new MQTTPublisher();
 
-    public ResponseEntity<?> publish(String mqttMessage,String topic) {
-        try {
-//            JsonObject convertObject = new Gson().fromJson(mqttMessage,JsonObject.class);
-            mqtGateway.sendToMqtt(mqttMessage,topic);
-            return ResponseEntity.ok("Success");
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-            return ResponseEntity.ok("fail");
-        }
+    /**
+     * @param data
+     * @return
+     */
+    @RequestMapping(value = "myTopic", method = RequestMethod.POST)
+    public String index(@RequestBody String data) {
+        publisher.publishMessage("myTopic", data);
+        return "Success";
     }
+
 }
