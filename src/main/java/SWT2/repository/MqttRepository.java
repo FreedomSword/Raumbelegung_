@@ -1,6 +1,6 @@
 package SWT2.repository;
 
-public interface IMQTTPublisherRepository {
+public interface MqttRepository {
     /**
      * @param topic
      * @param message

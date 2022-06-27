@@ -1,6 +1,6 @@
 package SWT2.MQTT;
 
-import SWT2.repository.IMQTTPublisherRepository;
+import SWT2.repository.MqttRepository;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class MQTTPublisher extends MQTTConfig implements MqttCallback, IMQTTPublisherRepository {
+public class MqttPublisher extends MqttConfig implements MqttCallback, MqttRepository {
 
     private String ipUrl = null;
 
@@ -20,19 +20,19 @@ public class MQTTPublisher extends MQTTConfig implements MqttCallback, IMQTTPubl
     private MqttConnectOptions connectionOptions = null;
     private MemoryPersistence persistence = null;
 
-    private static final Logger logger = LoggerFactory.getLogger(MQTTPublisher.class);
+    private static final Logger logger = LoggerFactory.getLogger(MqttPublisher.class);
 
     /**
      * Private default constructor
      */
-    public MQTTPublisher() {
+    public MqttPublisher() {
         this.config();
     }
 
     /**
      * Private constructor
      */
-    private MQTTPublisher(String ip, Integer port, Boolean ssl, Boolean withUserNamePass) {
+    private MqttPublisher(String ip, Integer port, Boolean ssl, Boolean withUserNamePass) {
         this.config(ip, port, ssl, withUserNamePass);
     }
 
@@ -41,8 +41,8 @@ public class MQTTPublisher extends MQTTConfig implements MqttCallback, IMQTTPubl
      *
      * @return MQTTPublisher
      */
-    public static MQTTPublisher getInstance() {
-        return new MQTTPublisher();
+    public static MqttPublisher getInstance() {
+        return new MqttPublisher();
     }
 
     /**
@@ -53,8 +53,8 @@ public class MQTTPublisher extends MQTTConfig implements MqttCallback, IMQTTPubl
      * @param withUserNamePass
      * @return MQTTPublisher
      */
-    public static MQTTPublisher getInstance(String ip, Integer port, Boolean ssl, Boolean withUserNamePass) {
-        return new MQTTPublisher(ip, port, ssl, withUserNamePass);
+    public static MqttPublisher getInstance(String ip, Integer port, Boolean ssl, Boolean withUserNamePass) {
+        return new MqttPublisher(ip, port, ssl, withUserNamePass);
     }
 
 

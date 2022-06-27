@@ -1,7 +1,7 @@
 package SWT2.controller;
 
 
-import SWT2.MQTT.MQTTPublisher;
+import SWT2.MQTT.MqttPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ public class MqttController {
     public static String Topic = "myTopic";
 
     @Autowired
-    MQTTPublisher publisher = new MQTTPublisher();
+    MqttPublisher publisher = new MqttPublisher();
 
     /**
      * @param data
