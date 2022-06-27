@@ -3,6 +3,7 @@ package SWT2.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -40,8 +41,10 @@ public class Room {
     @Column(nullable = true)
     private String photo;
 
+    @Column(name = "curr_temperature")
     private int currentTemperature;
 
+    @Column(name = "curr_lightning_level")
     private int currentLightLevel;
 
 

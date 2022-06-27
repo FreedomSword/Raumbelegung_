@@ -7,17 +7,18 @@ import SWT2.repository.SensorRepository;
 
 import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.logging.Logger;
 
 
 public class SimulationData implements Runnable {
 
-
-//    SENSOR REPOSITORY IST NULL KEIN AHNUNG WARUM !!
    private SensorRepository getSensor() {
        return SpringContext.getBean(SensorRepository.class);
    }
 
     MqttController mqttController = new MqttController();
+
+   Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     @Override
     public void run() {
@@ -27,13 +28,14 @@ public class SimulationData implements Runnable {
         while (!Thread.currentThread().isInterrupted()) {
 
 
-                try {
-                    for(int i = 0; i < 3; i++){
-                    int min = 0;
-                    int max = 100;
+            try {
+                for(int i = 0; i < 3; i++) {
+                    int min = 1;
+                    int max = 3;
+                    int range = max-min+1;
                     //Random generate Sensor ID between MIN and MAX.
 
-                    id = (int) Math.random() * (max - min) + min;
+                    id = (int) (Math.random() * range) + min;
 
                     //Get Type of Sensor with id ID.
 
@@ -51,7 +53,7 @@ public class SimulationData implements Runnable {
 
                             //We make sure that the occupancy cannot be under or overcut
 
-                            if (currenOccupacity < 0 && currenOccupacity < getMaxOccupacity(id)) {
+                            if (currenOccupacity > 0 && currenOccupacity < getMaxOccupacity(id)) {
                                 output = roomPick.nextInt(roomArray.length);
                             } else if (currenOccupacity == 0) {
                                 output = 1;
@@ -61,6 +63,7 @@ public class SimulationData implements Runnable {
 
                             message = "{\"id\":" + id + " ,\"type\":" + 1 + ",\"value\":" + output + "}";
                             mqttController.index(message);
+
                             break;
 
 
@@ -87,6 +90,7 @@ public class SimulationData implements Runnable {
 
                             message = "{\"id\":" + id + " ,\"type\":" + 2 + ",\"value\":" + temperatureValue + "}";
                             mqttController.index(message);
+
                             break;
 
 
@@ -112,23 +116,18 @@ public class SimulationData implements Runnable {
                             }
 
                             message = "{\"id\":" + id + " ,\"type\":" + 3 + ",\"value\":" + lightningvalue + "}";
+
                             mqttController.index(message);
                             break;
+                        }
                     }
-                }
                     Thread.sleep(5000);
 
-
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    e.printStackTrace();
-                } catch (Exception ee) {
-                    ee.printStackTrace();
-                    System.out.println(" this  RANDOM SENSOR ID doesnt EXIST ");
-                    Thread.currentThread().interrupt();
                 }
-
-
+            catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+            }
         }
     }
 
@@ -141,11 +140,10 @@ public class SimulationData implements Runnable {
                     .getStid();
         }
         catch (NoSuchElementException noSuchElementException) {
-            System.out.println("Kein Element mit dieser ID gefunden Simulation verworfen");
+            logger.warning("SensorID: " + id  + " Kein Element mit dieser ID gefunden Simulation verworfen");
             return -1;
 
         }
-
     }
 
     public int getCurrentTemperature(int id) throws NoSuchElementException {
@@ -157,7 +155,7 @@ public class SimulationData implements Runnable {
                     .getCurrentTemperature();
         }
         catch (NoSuchElementException noSuchElementException) {
-            System.out.println("Kein Element mit dieser ID gefunden Simulation verworfen");
+            logger.warning("SensorID: " + id  + " Kein Element mit dieser ID gefunden Simulation verworfen");
             return -1;
         }
     }
@@ -170,7 +168,7 @@ public class SimulationData implements Runnable {
                     .getRoom()
                     .getCurrentLightLevel();
         } catch (NoSuchElementException noSuchElementException) {
-            System.out.println("Kein Element mit dieser ID gefunden Simulation verworfen");
+            logger.warning("SensorID: " + id  + " Kein Element mit dieser ID gefunden Simulation verworfen");
             return -1;
         }
     }
@@ -183,10 +181,9 @@ public class SimulationData implements Runnable {
                     .getRoom()
                     .getCur_occupancy();
         } catch (NoSuchElementException noSuchElementException) {
-            System.out.println("Kein Element mit dieser ID gefunden Simulation verworfen");
+            logger.warning("SensorID: " + id  + " Kein Element mit dieser ID gefunden Simulation verworfen");
             return -1;
         }
-
     }
 
         public int getMaxOccupacity(int id) throws NoSuchElementException {
@@ -197,7 +194,7 @@ public class SimulationData implements Runnable {
                         .getRoom()
                         .getMax_occupancy();
             } catch (NoSuchElementException noSuchElementException) {
-                System.out.println("Kein Element mit dieser ID gefunden Simulation verworfen");
+                logger.warning("SensorID: " + id  + " Kein Element mit dieser ID gefunden Simulation verworfen");
                 return -1;
             }
     }

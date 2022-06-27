@@ -55,6 +55,8 @@ public class RoomController {
 
         Building building = (bRepository.findById(buildingId)).get();
         room.setBuilding(building);
+        room.setCurrentLightLevel(10);
+        room.setCurrentTemperature(20);
         rRepository.save(room);
         return new RedirectView("/buildingDetails?buildingId=" + buildingId );
     }

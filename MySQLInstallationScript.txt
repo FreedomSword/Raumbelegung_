@@ -17,6 +17,8 @@ CREATE TABLE tbl_room
     type VARCHAR(255) NOT NULL,
     max_occupancy INT NOT NULL,
     cur_occupancy INT NOT NULL,
+    curr_lightning_level INT unsigned NOT NULL,
+    curr_temperature INT unsigned NOT NULL,
     building_bid INT NOT NULL,
     FOREIGN KEY (building_bid)
     REFERENCES tbl_building(bid)

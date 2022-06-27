@@ -112,26 +112,34 @@ public class MqttBeans {
 
 
 try {
-    Optional<Sensor> sOp = sRepo.findById(Integer.parseInt(payload[0]));
-    Sensor s = sOp.get();
-    Room r = s.getRoom();
+    Room room = sRepo.findById(Integer.parseInt(payload[0])).get().getRoom();
+    System.out.println(room.getName());
     switch (Integer.parseInt(payload[1])) {
         case 1:
             System.out.println("Case 1: Bewegungsssensor erkannt");
 
-          r.setCur_occupancy(Integer.parseInt(payload[2]));
-                        rRepo.save(r);
+            if(Integer.parseInt(payload[2]) == 0) {
+                room.setCur_occupancy(room.getCur_occupancy()-1);
+            }
+            else if (Integer.parseInt(payload[2]) == 1) {
+                room.setCur_occupancy(room.getCur_occupancy()+1);
+            }
+            else {
 
+            }
+            rRepo.save(room);
             break;
+
         case 2:
-//            r.setTemperatur = Integer.parseInt(payload[2]);
-            System.out.println("Case 2: Temperatur erkannt");
-
-
+            room.setCurrentTemperature(Integer.parseInt(payload[2]));
+            System.out.println("Case 2: Temperatur erkannt ");
+            rRepo.save(room);
             break;
+
         case 3:
-//            r.setLightning = Integer.parseInt(payload[2]);
+            room.setCurrentLightLevel(Integer.parseInt(payload[2]));
             System.out.println("Case 3: Lightning erkannt");
+            rRepo.save(room);
             break;
 
     }
