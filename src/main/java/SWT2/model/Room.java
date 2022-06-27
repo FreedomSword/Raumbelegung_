@@ -40,6 +40,10 @@ public class Room {
     @Column(nullable = true)
     private String photo;
 
+    private int currentTemperature;
+
+    private int currentLightLevel;
+
 
     @ManyToOne
     private Building building;

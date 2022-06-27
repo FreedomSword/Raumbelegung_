@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MqttController {
     public static String Topic = "myTopic";
 
-    @Autowired
     MqttPublisher publisher = new MqttPublisher();
 
     /**
