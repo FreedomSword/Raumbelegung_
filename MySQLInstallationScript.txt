@@ -30,6 +30,7 @@ CREATE TABLE tbl_sensortype
 
 INSERT INTO tbl_sensortype (name) VALUES ("Bewegungssensor");
 INSERT INTO tbl_sensortype (name) VALUES ("Temperatursensor");
+INSERT INTO tbl_sensortype (name) VALUES ("Beleuchtungsensor");
 
 CREATE TABLE tbl_sensor
 (

@@ -111,11 +111,6 @@ public class MqttBeans {
                     System.out.println("");
 
 
-                    //payload[0] = id
-                    //payload[1] = type
-                    //payload[2] = insert value
-
-
 try {
     Optional<Sensor> sOp = sRepo.findById(Integer.parseInt(payload[0]));
     Sensor s = sOp.get();
