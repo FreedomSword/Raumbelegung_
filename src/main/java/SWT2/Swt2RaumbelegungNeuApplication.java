@@ -2,6 +2,9 @@ package SWT2;
 
 
 import SWT2.MQTT.SimulationData;
+import SWT2.controller.MqttController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

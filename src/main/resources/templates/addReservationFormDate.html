@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>FH Dortmund der Zukunft</title>
+    <title>Collapsible sidebar using Bootstrap 4</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -15,6 +15,9 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </head>
 
 <body>
@@ -42,7 +45,7 @@
                                 <!-- Form Group (username)-->
                                 <div>
                                     <label for="date">Datum</label>
-                                    <input type="date" th:field="*{reservation.date}" placeholder="Datum auswählen" id="date" class="form-control"  value="01.01.1999" min="2022-06-20" required="required">
+                                    <input type="date" th:field="*{reservation.date}" placeholder="Datum auswählen" id="date" class="form-control"  value="01.01.1999" min="2022-06-20">
                                     <p class = "error" th:errors="*{reservation.date}"></p>
                                 </div>
 
@@ -65,17 +68,15 @@
     </div>
 </body>
 
-<footer class="text-center text-white" th:fragment="footer">
+<footer class="text-center text-white" style="background-color: #7386D5;">
 
-    <div class="text-center p-3">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
 
         © 2022 Copyright:
         <a class="text-white" href="https://mdbootstrap.com/">DIGITAL HEROES</a>
     </div>
     <!-- Copyright -->
 </footer>
-
-
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
@@ -90,14 +91,11 @@
             });
         });
     </script>
-
     <script>
-        let today = new Date();
-        const tomorrow = new Date(today)
-        tomorrow.setDate(tomorrow.getDate()+1)
-        let dd = tomorrow.getDate();
-        let mm = tomorrow.getMonth() + 1; //January is 0!
-        const yyyy = tomorrow.getFullYear();
+        var today = new Date();
+        var dd = today.getDate() +1;
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
 
         if (dd < 10) {
             dd = '0' + dd;
@@ -110,6 +108,15 @@
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("date").setAttribute("min", today);
     </script>
+<script>
+    var today = new Date();
+    var hh = today.getHours();
+    var mm = today.getMinutes();
+
+
+    today = hh + ':' + mm + ':00';
+    document.getElementById("timepick").setAttribute("min", today);
+</script>
 
 
 

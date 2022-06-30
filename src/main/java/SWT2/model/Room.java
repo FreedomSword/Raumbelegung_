@@ -55,9 +55,6 @@ public class Room {
     private List<Sensor> sensor = new ArrayList<>();
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private List<Actor> actor = new ArrayList<>();
-
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 
     @Override

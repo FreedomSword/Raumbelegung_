@@ -34,13 +34,8 @@ public class RoomController {
     private ReservationRepository resRepository;
 
     @Autowired
-    private UserRepository uRepository;
+    UserRepository uRepository;
 
-    @Autowired
-    private ActorRepository aRepository;
-
-    @Autowired
-    private ActortypeRepository atRepository;
     /////////////////TABLE VIEWS/////////////////
 
 
@@ -62,28 +57,12 @@ public class RoomController {
         room.setBuilding(building);
         room.setCurrentLightLevel(10);
         room.setCurrentTemperature(20);
-
-        rRepository.save(room);
-
-
-        Actor lightActor = new Actor();
-        lightActor.setRoom(room);
-        lightActor.setActortype(atRepository.findByName("Lichtsteuerung"));
-        aRepository.save(lightActor);
-        Actor tempActor = new Actor();
-        tempActor.setRoom(room);
-        tempActor.setActortype(atRepository.findByName("Temperatursteuerung"));
-        aRepository.save(tempActor);
-
-
         rRepository.save(room);
         return new RedirectView("/buildingDetails?buildingId=" + buildingId );
     }
     @GetMapping("/roomDetails")
     public ModelAndView showSensorListOfRoom(@RequestParam int roomId) {
         ModelAndView mav = new ModelAndView("roomDetails");
-        List <Building> listb = bRepository.findAll();
-        mav.addObject("buildings", listb);
         Room room = rRepository.findById(roomId).get();
 
 
@@ -105,8 +84,6 @@ public class RoomController {
     @GetMapping("/addRoomInBuildingForm")
     public ModelAndView showRoomAddForm(@RequestParam int buildingId) {
         ModelAndView mav = new ModelAndView("addRoomInBuildingForm");
-        List <Building> list = bRepository.findAll();
-        mav.addObject("buildings", list);
         Room room = new Room();
         mav.addObject("room", room);
         Building building = bRepository.findById(buildingId).get();
@@ -127,8 +104,6 @@ public class RoomController {
     @GetMapping("/UpdateRoomForm")
     public ModelAndView showRoomUpdateForm(@RequestParam int roomId) {
         ModelAndView mav = new ModelAndView("addRoomInBuildingForm");
-        List <Building> list = bRepository.findAll();
-        mav.addObject("buildings", list);
         Room room = rRepository.findById(roomId).get();
         Building building = bRepository.findById(room.getBuilding().getBid()).get();
         mav.addObject("building", building);
