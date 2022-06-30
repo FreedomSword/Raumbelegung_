@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>FH Dortmund der Zukunft</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div th:replace="fragments/sidebar.html::sidebar"></div>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <div th:replace="fragments/header.html::header"></div>
+
+
+            <!------------------------ AB HIER DEN CONTENT------------------------->
+
+
+            <div class="container-xl px-4 mt-4">
+                <hr class="mt-0 mb-4">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <!-- Account details card-->
+                        <div class="card mb-4">
+                            <div class="card-header">Gebäude hinzufügen</div>
+                            <div class="card-body">
+                                <form th:action="@{/saveBuilding}" method="post" enctype="multipart/form-data">
+                                    <!-- Form Group (username)-->
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="bezeichnung">Bezeichnung</label>
+                                        <input  type="text" th:field="*{building.name}" class="form-control" id="bezeichnung"  placeholder="Bezeichung einfügen"  required="required">
+                                    </div>
+                                    <!-- Form Row-->
+                                    <div class="row gx-3 mb-3">
+                                        <!-- Form Group (first name)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="street">Street</label>
+                                            <input type="text" th:field="*{building.street}" class="form-control" id="street" placeholder="Enter your Street" required="required">
+                                        </div>
+                                        <!-- Form Group (last name)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="houseNumber">House number</label>
+                                            <input input type="number" th:field="*{building.houseNumber}" class="form-control" id="houseNumber"  placeholder="Enter your last name" min="1"  required="required">
+                                        </div>
+                                    </div>
+                                    <!-- Form Row-->
+                                    <div class="row gx-3 mb-3">
+                                        <!-- Form Group (organization name)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="city">City</label>
+                                            <input type="text" th:field="*{building.city}" class="form-control" id="city"  placeholder="Enter your City"  required="required">
+                                        </div>
+                                        <!-- Form Group (location)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="plz">PLZ</label>
+                                            <input type="text" th:field="*{building.postalCode}" class="form-control" id="plz" placeholder="Enter your location"  required="required" pattern="^[0-9]{5}$">
+                                        </div>
+                                        <!-- Form Group (username)-->
+                                        <div class="col-md-12">
+                                            <label class="small mb-1" for="image">Bild</label>
+                                            <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg" required="required">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <input type="hidden" th:field="*{building.bid}" class="form-control" id="bid">
+                                        </div>
+                                    </div>
+                                    <!-- Save changes button-->
+                                    <button class="btn btn-primary" type="submit">Speichern</button>
+                                </form>
+                                <hr/>
+                                <a th:href="@{showBuilding}"> Zur Liste zurückkehren</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!------------------------BIS HIER DEN CONTENT------------------------->
+
+
+
+
+        </div>
+    </div>
+</body>
+
+<div th:replace="fragments/footer.html::footer"></div>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+
+
+</html>

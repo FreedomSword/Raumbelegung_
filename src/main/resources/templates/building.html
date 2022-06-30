@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>FH Dortmund der Zukunft</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <div th:replace="fragments/sidebar.html::sidebar"></div>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <div th:replace="fragments/header.html::header"></div>
+
+
+        <!------------------------ AB HIER DEN CONTENT------------------------->
+
+        <div class="container-xl px-4 mt-4">
+            <h1>Gebäude</h1>
+            <!-- Account page navigation-->
+            <hr class="mt-0 mb-4">
+
+
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Liste von allen Räumen</div>
+
+                        <div class="card-body">
+                            <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" style="margin-bottom: 10px" th:href="@{/addBuildingForm}" class="btn btn-info">Gebäude hinzufügen</a>
+                            <table class="table table-bordered table-striped" id="roomTable">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Bezeichnung</th>
+                                    <th scope="col">Straße</th>
+                                    <th scope="col">Hausnummer</th>
+                                    <th scope="col">Postleitzahl</th>
+                                    <th scope="col">Stadt</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="building: ${building}">
+                                    <td th:text="${building.bid}"></td>
+                                    <td><a th:text="${building.name}" th:href="@{/buildingDetails(buildingId=${building.bid})}"></a></td>
+                                    <td th:text="${building.street}"></td>
+                                    <td th:text="${building.houseNumber}"></td>
+                                    <td th:text="${building.postalCode}"></td>
+                                    <td th:text="${building.city}"></td>
+                                    <td>
+
+                                        <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}"th:href="@{/UpdateRoomForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
+                                        <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/deleteBuilding(buildingId=${building.bid})}" class="btn btn-danger">Löschen</a>
+                                        <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/addRoomInBuildingForm(buildingId=${building.bid})}" class="btn btn-success">Raum hinzufügen</a>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div></div>
+                </div>
+            </div>
+
+
+            <!------------------------BIS HIER DEN CONTENT------------------------->
+
+
+        </div>
+    </div>
+</div>
+</body>
+
+<div th:replace="fragments/footer.html::footer"></div>
+
+
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+
+
+</html>

@@ -16,6 +16,17 @@ import java.lang.reflect.Type;
 
 @RestController
 public class MqttController {
+<<<<<<< Updated upstream
+=======
+
+    MqttPublisher publisher = new MqttPublisher();
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String index(String topic, @RequestBody String data) {
+        publisher.publishMessage(topic, data);
+        return "Success";
+    }
+>>>>>>> Stashed changes
 
     @Autowired
     MqttGateway mqtGateway;

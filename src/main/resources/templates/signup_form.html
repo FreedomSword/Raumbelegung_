@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>FH Dortmund der Zukunft</title>
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Font Awesome JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+
+<body style=" background: rgb(252,208,174);
+background: radial-gradient(circle, rgba(252,208,174,1) 0%, rgba(255,112,1,1) 100%); ">
+<section class="w-100 bg-image " style="margin-top: 25vh; height: 25vh">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Account erstellen</h2>
+              <form th:action="@{/process_register}" method="post">
+                <div class="form-outline mb-4">
+                  <input type="text" th:field="*{user.full_name}" class="form-control form-control-lg" />
+                  <label class="form-label">Dein Name</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="email" th:field="*{user.email}"  class="form-control form-control-lg" />
+                  <label class="form-label">Deine Email</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password"  th:field="*{user.password}"class="form-control form-control-lg" />
+                  <label class="form-label" >Passwort</label>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <button type="submit"
+                          class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Du hast keinen Account? <a href="/login"
+                                                                                        class="fw-bold text-body"><u>Hier einloggen</u></a></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</body>
+
+</html>

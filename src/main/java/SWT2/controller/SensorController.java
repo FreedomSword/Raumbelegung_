@@ -1,8 +1,17 @@
 package SWT2.controller;
 
+<<<<<<< Updated upstream
 import SWT2.model.Raum;
 import SWT2.model.Sensor;
 import SWT2.repository.RaumRepository;
+=======
+import SWT2.model.Building;
+import SWT2.model.Room;
+import SWT2.model.Sensor;
+import SWT2.model.Sensortype;
+import SWT2.repository.BuildingRepository;
+import SWT2.repository.RoomRepository;
+>>>>>>> Stashed changes
 import SWT2.repository.SensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,19 +31,39 @@ public class SensorController {
     private RaumRepository raumRepository;
 
 
+<<<<<<< Updated upstream
+=======
+    @Autowired
+    private BuildingRepository bRepository;
+
+    /////////////////TABLE VIEWS/////////////////
+>>>>>>> Stashed changes
 
     @GetMapping("/showSensor")
     public ModelAndView showSensor() {
         ModelAndView mav = new ModelAndView("sensor");
+<<<<<<< Updated upstream
         List<Sensor> sList = sensorRepository.findAll();
         List<Sensor> list = sensorRepository.findAll();
+=======
+        List <Building> listb = bRepository.findAll();
+        mav.addObject("buildings", listb);
+        List<Sensor> list = sRepository.findAll();
+>>>>>>> Stashed changes
         mav.addObject("sensor", list);
         return  mav;
     }
 
     @GetMapping("/addSensorForm")
+<<<<<<< Updated upstream
     public ModelAndView addSensorForm() {
         ModelAndView mav = new ModelAndView("addSensorForm");
+=======
+    public ModelAndView showSensorAddForm(@RequestParam int roomId) {
+        ModelAndView mav = new ModelAndView("addSensorInRoomForm");
+        List <Building> list = bRepository.findAll();
+        mav.addObject("buildings", list);
+>>>>>>> Stashed changes
         Sensor newSensor = new Sensor();
         mav.addObject("sensor", newSensor);
         return mav;
@@ -52,7 +81,16 @@ public class SensorController {
         System.out.println(raum);
         sensorRepository.save(sensor);
 
+<<<<<<< Updated upstream
         return new RedirectView("/showSensor");
+=======
+    //Delete the Sensor from database
+    @GetMapping("/deleteSensor")
+    public RedirectView deleteSensor(@RequestParam int sensorId) {
+        Room room = rRepository.getById(sRepository.getById(sensorId).getRoom().getRid());
+        sRepository.deleteById(sensorId);
+        return new RedirectView("/roomDetails?roomId="+room.getRid());
+>>>>>>> Stashed changes
     }
 /*
     @PostMapping("/saveRaum/{gebaeudeId}")
@@ -74,6 +112,7 @@ public class SensorController {
         return  mav;
     }
 
+<<<<<<< Updated upstream
     @GetMapping("/showSensorUpdateForm")
     public ModelAndView showSensorUpdateForm(@RequestParam int sensorId) {
         ModelAndView mav = new ModelAndView("addSensorForm");
@@ -81,6 +120,8 @@ public class SensorController {
         mav.addObject("sensor", sensor);
         return mav;
     }
+=======
+>>>>>>> Stashed changes
 
     @GetMapping("/deleteSensor")
     public RedirectView deleteSensor(@RequestParam int sensorId) {
