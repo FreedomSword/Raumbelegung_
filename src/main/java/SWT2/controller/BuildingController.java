@@ -7,6 +7,7 @@ import SWT2.model.User;
 import SWT2.repository.BuildingRepository;
 import SWT2.repository.RoomRepository;
 import SWT2.repository.UserRepository;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -85,13 +87,22 @@ public class BuildingController {
     @PostMapping("/saveBuilding")
     public RedirectView saveBuilding(@ModelAttribute Building building, @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        building.setPhoto(fileName);
+
+
+        if(multipartFile.isEmpty()) {
+
+        }
+
+        else {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            building.setPhoto(fileName);
+            String uploadDir = "building-photos/" + building.getName();
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        }
 
        bRepository.save(building);
 
-        String uploadDir = "building-photos/" + building.getName();
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
 
         return new RedirectView("/buildingDetails?buildingId=" +building.getBid());
     }
@@ -100,6 +111,8 @@ public class BuildingController {
     @GetMapping("/addBuildingForm")
     public ModelAndView addBuildingForm() {
         ModelAndView mav = new ModelAndView("addBuildingForm");
+        List <Building> list = bRepository.findAll();
+        mav.addObject("buildings", list);
         Building building = new Building();
         mav.addObject("building", building);
         return mav;
@@ -111,6 +124,8 @@ public class BuildingController {
     @GetMapping("/BuildingUpdateForm")
     public ModelAndView showBuildingUpdateForm(@RequestParam int buildingId) {
         ModelAndView mav = new ModelAndView("addBuildingForm");
+        List <Building> list = bRepository.findAll();
+        mav.addObject("buildings", list);
         Building building = bRepository.findById(buildingId).get();
         mav.addObject("building", building);
         return mav;

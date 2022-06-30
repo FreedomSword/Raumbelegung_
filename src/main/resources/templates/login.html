@@ -1,34 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <title>FH Dortmund der Zukunft</title>
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Material Design for Bootstrap</title>
-    <!-- MDB icon -->
-    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
-    <!-- Font Awesome -->
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <!-- Google Fonts Roboto -->
-    <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
-    />
-    <!-- MDB -->
-    <link rel="stylesheet" href="css/mdb.min.css" />
+    <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/montserrat-font.css">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
 
 <body style=" background: rgb(252,208,174);
-background: radial-gradient(circle, rgba(252,208,174,1) 0%, rgba(255,130,49,1) 100%); ">
+background: radial-gradient(circle, rgba(252,208,174,1) 0%, rgba(255,112,1,1) 100%); ">
 
 
         <!------------------------ AB HIER DEN CONTENT------------------------->
@@ -44,27 +34,27 @@ background: radial-gradient(circle, rgba(252,208,174,1) 0%, rgba(255,130,49,1) 1
                                     <h2 class="text-uppercase text-center mb-5">Login</h2>
                                     <form th:action="login" method="post">
                                         <div th:if="${param.error}" >
-                                            INVALID USERNAME OR PASSWORD !!!!
+                                            Passwort oder Benutzername falsch
                                         </div>
                                         <div th:if="${param.logout}">
-                                            YOU HAVE BEEN LOGGED OUT
+                                            Du wurdest ausgeloggt
                                         </div>
                                         <div class="form-outline mb-4">
                                             <input type="text" id="form3Example1cg" class="form-control form-control-lg" name="username"/>
-                                            <label class="form-label" for="form3Example1cg">Username</label>
+                                            <label class="form-label" for="form3Example1cg">Benutzername</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <input type="password" id="form3Example3cg" class="form-control form-control-lg" name="password" />
-                                            <label class="form-label" for="form3Example3cg">Password</label>
+                                            <label class="form-label" for="form3Example3cg">Passwort</label>
                                         </div>
                                         <div class="d-flex justify-content-center">
                                         <button type="submit"
                                                 class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Login</button>
                                         </div>
 
-                                        <p class="text-center text-muted mt-5 mb-0">Dont have an Account? <a href="/register"
-                                                                                                                class="fw-bold text-body"><u>Register here</u></a></p>
+                                        <p class="text-center text-muted mt-5 mb-0">Noch keinen Account? <a href="/register"
+                                                                                                                class="fw-bold text-body"><u>Jetzt registrieren</u></a></p>
                                     </form>
                                 </div>
                             </div>

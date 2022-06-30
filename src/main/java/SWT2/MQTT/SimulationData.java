@@ -29,7 +29,7 @@ public class SimulationData implements Runnable {
 
 
             try {
-                for(int i = 0; i < 3; i++) {
+                for(int i = 0; i < 4; i++) {
                     int min = 1;
                     int max = 3;
                     int range = max-min+1;
@@ -48,16 +48,16 @@ public class SimulationData implements Runnable {
                         case 1:
                             final int[] roomArray = new int[]{0, 1};
                             Random roomPick = new Random();
-                            int currenOccupacity = getCurrenOccupacity(id);
+                            int currentOccupacity = getCurrenOccupacity(id);
                             int output = 0;
 
                             //We make sure that the occupancy cannot be under or overcut
 
-                            if (currenOccupacity > 0 && currenOccupacity < getMaxOccupacity(id)) {
+                            if (currentOccupacity > 0 && currentOccupacity < getMaxOccupacity(id)) {
                                 output = roomPick.nextInt(roomArray.length);
-                            } else if (currenOccupacity == 0) {
+                            } else if (currentOccupacity == 0) {
                                 output = 1;
-                            } else if (currenOccupacity == getMaxOccupacity(id)) {
+                            } else if (currentOccupacity == getMaxOccupacity(id)) {
                                 output = 0;
                             }
 

@@ -1,6 +1,7 @@
 package SWT2.controller;
 
 import SWT2.model.*;
+import SWT2.repository.BuildingRepository;
 import SWT2.repository.ReservationRepository;
 import SWT2.repository.RoleRepository;
 import SWT2.repository.UserRepository;
@@ -24,13 +25,16 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserRepository uRepository;
+    private UserRepository uRepository;
 
     @Autowired
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
-    ReservationRepository resRepository;
+    private ReservationRepository resRepository;
+
+    @Autowired
+    private BuildingRepository bRepository;
     @GetMapping("")
 
     public String viewHomePage() {
@@ -89,6 +93,8 @@ public class UserController {
     @GetMapping("/updateUser")
     public ModelAndView updateUser() {
         ModelAndView mav = new ModelAndView("myAccountUpdate");
+        List <Building> list = bRepository.findAll();
+        mav.addObject("buildings", list);
         User user = uRepository.getUsersByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject("user", user);
         return mav;
@@ -98,6 +104,8 @@ public class UserController {
     @GetMapping("/myAccount")
         public ModelAndView showMyAccount() {
         ModelAndView mav = new ModelAndView("myAccount");
+        List <Building> list = bRepository.findAll();
+        mav.addObject("buildings", list);
             User user = uRepository.getUsersByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
             mav.addObject("user", user);
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>FH Dortmund der Zukunft</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -16,7 +16,6 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
-
 <body>
 <div class="wrapper">
     <div th:replace="fragments/sidebar.html::sidebar"></div>
@@ -42,19 +41,19 @@
                                     <!-- Form Group (username)-->
                                     <div class="mb-3">
                                         <label class="small mb-1" for="bezeichnung">Bezeichnung</label>
-                                        <input  type="text" th:field="*{building.name}" class="form-control" id="bezeichnung"  placeholder="Bezeichung einfügen" >
+                                        <input  type="text" th:field="*{building.name}" class="form-control" id="bezeichnung"  placeholder="Bezeichung einfügen"  required="required">
                                     </div>
                                     <!-- Form Row-->
                                     <div class="row gx-3 mb-3">
                                         <!-- Form Group (first name)-->
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="street">Street</label>
-                                            <input type="text" th:field="*{building.street}" class="form-control" id="street" placeholder="Enter your Street">
+                                            <input type="text" th:field="*{building.street}" class="form-control" id="street" placeholder="Enter your Street" required="required">
                                         </div>
                                         <!-- Form Group (last name)-->
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="houseNumber">House number</label>
-                                            <input input type="number" th:field="*{building.houseNumber}" class="form-control" id="houseNumber"  placeholder="Enter your last name">
+                                            <input input type="number" th:field="*{building.houseNumber}" class="form-control" id="houseNumber"  placeholder="Enter your last name" min="1"  required="required">
                                         </div>
                                     </div>
                                     <!-- Form Row-->
@@ -62,17 +61,17 @@
                                         <!-- Form Group (organization name)-->
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="city">City</label>
-                                            <input type="text" th:field="*{building.city}" class="form-control" id="city"  placeholder="Enter your City">
+                                            <input type="text" th:field="*{building.city}" class="form-control" id="city"  placeholder="Enter your City"  required="required">
                                         </div>
                                         <!-- Form Group (location)-->
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="plz">PLZ</label>
-                                            <input type="number" th:field="*{building.postalCode}" class="form-control" id="plz" placeholder="Enter your location">
+                                            <input type="text" th:field="*{building.postalCode}" class="form-control" id="plz" placeholder="Enter your location"  required="required" pattern="^[0-9]{5}$">
                                         </div>
                                         <!-- Form Group (username)-->
                                         <div class="col-md-12">
                                             <label class="small mb-1" for="image">Bild</label>
-                                            <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg">
+                                            <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg" required="required">
                                         </div>
 
                                         <div class="col-md-6">
@@ -100,15 +99,7 @@
     </div>
 </body>
 
-<footer class="text-center text-white" style="background-color: #7386D5;">
-
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-
-        © 2022 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">DIGITAL HEROES</a>
-    </div>
-    <!-- Copyright -->
-</footer>
+<div th:replace="fragments/footer.html::footer"></div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->

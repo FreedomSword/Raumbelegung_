@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>FH Dortmund der Zukunft</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -41,19 +41,23 @@
                                 <!-- Form Group (username)-->
                                 <div>
                                     <label for="name">Bezeichnung</label>
-                                    <input type="text" th:field="*{room.name}" placeholder="Bezeichnung eingeben" id="name" class="form-control">
+                                    <input type="text" th:field="*{room.name}" placeholder="Bezeichnung eingeben" id="name" class="form-control" required="required">
                                 </div>
                                 <div>
                                     <label for="type">Raumtyp</label>
-                                    <input type="text" th:field="*{room.type}" placeholder="Typ eingeben" id="type" class="form-control"/>
+                                    <select th:field="*{room.type}" id="type" class="form-control" required>
+                                        <option value="Gemeinschaftsraum">Gemeinschaftsraum</option>
+                                        <option value="Kleiner Gruppenraum"> Kleiner Gruppenraum (bis 8 Personen)</option>
+                                        <option value="Großer Gruppenraum">Großer Gruppenraum (bis 16 Personen)</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label for="max">Max</label>
-                                    <input type="number" th:field="*{room.max_occupancy}" placeholder="Maximale Belegung eingeben" id="max" class="form-control">
+                                    <input type="number" th:field="*{room.max_occupancy}" placeholder="Maximale Belegung eingeben" id="max" min="1" class="form-control" required="required">
                                 </div>
                                 <div>
                                     <label for="image">Bild</label>
-                                    <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg">
+                                    <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg" required="required">
                                 </div>
                                 <div>
                                     <input type="hidden" th:field="*{room.rid}">
@@ -79,15 +83,9 @@
     </div>
 </body>
 
-<footer class="text-center text-white" style="background-color: #7386D5;">
+<div th:replace="fragments/footer.html::footer"></div>
 
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
 
-        © 2022 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">DIGITAL HEROES</a>
-    </div>
-    <!-- Copyright -->
-</footer>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
