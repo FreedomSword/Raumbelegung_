@@ -3,8 +3,6 @@ package SWT2.MQTT;
 import SWT2.SpringContext;
 import SWT2.controller.MqttController;
 import SWT2.repository.SensorRepository;
-
-
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.logging.Logger;

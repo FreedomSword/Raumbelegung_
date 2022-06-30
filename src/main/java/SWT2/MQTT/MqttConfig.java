@@ -1,7 +1,6 @@
 package SWT2.MQTT;
 
 
-
 public abstract class MqttConfig {
 
     protected String ip = "127.0.0.1";

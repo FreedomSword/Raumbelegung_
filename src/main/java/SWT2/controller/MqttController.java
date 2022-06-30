@@ -2,7 +2,6 @@ package SWT2.controller;
 
 
 import SWT2.MQTT.MqttPublisher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +19,7 @@ public class MqttController {
      */
     @RequestMapping(value = "myTopic", method = RequestMethod.POST)
     public String index(@RequestBody String data) {
-        publisher.publishMessage("myTopic", data);
+        publisher.publishMessage("myTopic" , data);
         return "Success";
     }
 

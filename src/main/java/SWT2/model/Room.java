@@ -37,16 +37,20 @@ public class Room {
     private int max_occupancy;
     @Column(name = "cur_occupancy")
     private int cur_occupancy;
-
     @Column(nullable = true)
     private String photo;
 
     @Column(name = "curr_temperature")
     private int currentTemperature;
 
+    @Column(name = "target_temperature")
+    private int targetTemperature;
+
     @Column(name = "curr_lightning_level")
     private int currentLightLevel;
 
+    @Column(name = "target_lightning_level")
+    private int targetLightLevel;
 
     @ManyToOne
     private Building building;
@@ -55,8 +59,10 @@ public class Room {
     private List<Sensor> sensor = new ArrayList<>();
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private List<Reservation> reservations = new ArrayList<>();
+    private List<Actor> actor = new ArrayList<>();
 
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
     @Override
     public String toString() {
         return "Raum{" +

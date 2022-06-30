@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
 
-
     //Find all Rooms where Building = x
     @Query("SELECT r FROM Room r WHERE r.building.bid = ?1")
     List<Room> findAllRooms(int id);

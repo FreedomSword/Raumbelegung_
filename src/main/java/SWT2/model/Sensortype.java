@@ -17,8 +17,6 @@ import java.util.List;
 
 @NoArgsConstructor
 
-
-
 public class Sensortype {
 
         @Id
