@@ -60,7 +60,10 @@ public class SimulationData implements Runnable {
                             }
 
                             message = "{\"id\":" + id + " ,\"type\":" + 1 + ",\"value\":" + output + "}";
-                            mqttController.index(message);
+                            mqttController.index(getSensor()
+                                    .findById(id)
+                                    .get()
+                                    .getRoom().getName(),message);
 
                             break;
 
@@ -87,7 +90,10 @@ public class SimulationData implements Runnable {
 
 
                             message = "{\"id\":" + id + " ,\"type\":" + 2 + ",\"value\":" + temperatureValue + "}";
-                            mqttController.index(message);
+                            mqttController.index(getSensor()
+                                    .findById(id)
+                                    .get()
+                                    .getRoom().getName(),message);
 
                             break;
 
@@ -115,7 +121,10 @@ public class SimulationData implements Runnable {
 
                             message = "{\"id\":" + id + " ,\"type\":" + 3 + ",\"value\":" + lightningvalue + "}";
 
-                            mqttController.index(message);
+                            mqttController.index(getSensor()
+                                    .findById(id)
+                                    .get()
+                                    .getRoom().getName(),message);
                             break;
                         }
                     }

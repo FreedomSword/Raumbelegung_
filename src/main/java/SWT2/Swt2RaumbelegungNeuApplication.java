@@ -1,6 +1,7 @@
 package SWT2;
 
 
+import SWT2.MQTT.SendActorData;
 import SWT2.MQTT.SimulationData;
 import SWT2.controller.MqttController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,9 @@ public class Swt2RaumbelegungNeuApplication {
 		SimulationData sd = new SimulationData();
 		Thread thread = new Thread (sd);
 		thread.start();
+
+		SendActorData sad = new SendActorData();
+		Thread thread2 = new Thread(sad);
+		thread2.start();
 	}
 }

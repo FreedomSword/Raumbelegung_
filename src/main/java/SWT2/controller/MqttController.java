@@ -17,9 +17,9 @@ public class MqttController {
      * @param data
      * @return
      */
-    @RequestMapping(value = "myTopic", method = RequestMethod.POST)
-    public String index(@RequestBody String data) {
-        publisher.publishMessage("myTopic" , data);
+    @RequestMapping(method = RequestMethod.POST)
+    public String index(String topic,@RequestBody String data) {
+        publisher.publishMessage(topic , data);
         return "Success";
     }
 
