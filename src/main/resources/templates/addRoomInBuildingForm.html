@@ -37,28 +37,29 @@
                     <div class="card mb-4">
                         <div class="card-header">Raum hinzufügen</div>
                         <div class="card-body">
-                            <form th:action="@{/saveRoomInBuilding(buildingId=${building.bid})}" method="post" enctype="multipart/form-data">
+                            <form th:action="@{/saveRoomInBuilding(buildingId=*{building.bid})}" method="post" enctype="multipart/form-data">
                                 <!-- Form Group (username)-->
                                 <div>
                                     <label for="name">Bezeichnung</label>
-                                    <input type="text" th:field="*{room.name}" placeholder="Bezeichnung eingeben" id="name" class="form-control">
+                                    <input type="text" th:field="*{room.name}" placeholder="Bezeichnung eingeben" id="name" class="form-control" required="required">
                                 </div>
                                 <div>
                                     <label for="type">Raumtyp</label>
-                                    <input type="text" th:field="*{room.type}" placeholder="Typ eingeben" id="type" class="form-control"/>
+                                    <select th:field="*{room.type}"  id="type" class="form-control" required="required">
+                                        <option value="Kleiner Raum (Bis 8 Personen)">Kleiner Raum (Bis 8 Personen)</option>
+                                        <option value="Großer Raum (Bis 16 Personen)">Großer Raum (Bis 16 Personen)</option>
+                                        <option value="Gemeinschaftsraum">Gemeinschaftsraum</option>
+                                    </select>
                                 </div>
                                 <div>
-                                    <label for="max">Max</label>
-                                    <input type="number" th:field="*{room.max_occupancy}" placeholder="Maximale Belegung eingeben" id="max" class="form-control">
+                                    <label for="max">Maximale Belegung</label>
+                                    <input type="number" th:field="*{room.max_occupancy}" placeholder="Maximale Belegung eingeben" id="max" class="form-control" required="required">
                                 </div>
                                 <div>
                                     <label for="image">Bild</label>
-                                    <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg">
+                                    <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg" required="required">
                                 </div>
-                                <div>
-                                    <input type="hidden" th:field="*{room.rid}">
-                                </div>
-
+                                <hr/>
 
                                 <!-- Save changes button-->
                                 <button class="btn btn-primary" type="submit" style="margin-top: 10px">Raum hinzufügen</button>
@@ -79,9 +80,9 @@
     </div>
 </body>
 
-<footer class="text-center text-white" style="background-color: #7386D5;">
+<footer class="text-center text-white">
 
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-3">
 
         © 2022 Copyright:
         <a class="text-white" href="https://mdbootstrap.com/">DIGITAL HEROES</a>

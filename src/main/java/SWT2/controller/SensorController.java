@@ -1,5 +1,6 @@
 package SWT2.controller;
 
+import SWT2.model.Building;
 import SWT2.model.Room;
 import SWT2.model.Sensor;
 import SWT2.model.Sensortype;
@@ -20,14 +21,6 @@ public class SensorController {
     @Autowired
     FactoryService fs;
 
-    //Show Sensors
-    @GetMapping("/showSensor")
-    public ModelAndView showSensor() {
-        ModelAndView mav = new ModelAndView("sensor");
-        List<Sensor> list = repo.findAllSensors();
-        mav.addObject("sensor", list);
-        return  mav;
-    }
 
     //Show Sensors in Explicit Rooms
 
@@ -49,6 +42,11 @@ public class SensorController {
         mav.addObject("sensor", newSensor);
         Room room = repo.findRoomById(roomId);
         mav.addObject("room", room);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
+
+
         return mav;
     }
 
@@ -71,6 +69,10 @@ public class SensorController {
         Room room = repo.findRoomById(sensor.getRoom().getRid());
         mav.addObject("room", room);
         mav.addObject("sensor", sensor);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
+
         return mav;
     }
 

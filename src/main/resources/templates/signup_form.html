@@ -35,30 +35,30 @@ background: radial-gradient(circle, rgba(252,208,174,1) 0%, rgba(255,112,1,1) 10
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+              <h2 class="text-uppercase text-center mb-5">Account erstellen</h2>
               <form th:action="@{/process_register}" method="post">
                 <div class="form-outline mb-4">
                   <input type="text" th:field="*{user.full_name}" class="form-control form-control-lg" />
-                  <label class="form-label">Your Name</label>
+                  <label class="form-label">Vollständiger Name</label>
                 </div>
 
                 <div class="form-outline mb-4">
                   <input type="email" th:field="*{user.email}"  class="form-control form-control-lg" />
-                  <label class="form-label">Your Email</label>
+                  <label class="form-label">E-mail</label>
                 </div>
 
                 <div class="form-outline mb-4">
                   <input type="password"  th:field="*{user.password}"class="form-control form-control-lg" />
-                  <label class="form-label" >Password</label>
+                  <label class="form-label" >Passwort</label>
                 </div>
 
                 <div class="d-flex justify-content-center">
                   <button type="submit"
-                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                          class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Registrieren</button>
                 </div>
 
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
-                                                                                        class="fw-bold text-body"><u>Login here</u></a></p>
+                <p class="text-center text-muted mt-5 mb-0">Account vorhanden? <a href="/login"
+                                                                                        class="fw-bold text-body"><u>Hier einloggen</u></a></p>
               </form>
             </div>
           </div>

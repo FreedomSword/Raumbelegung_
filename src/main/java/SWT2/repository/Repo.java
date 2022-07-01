@@ -50,7 +50,7 @@ public class Repo  {
     //Reservation Repo
     public List<Reservation> findAllReservations(){return resRepository.findAll();}
     public Reservation saveReservations( Reservation res){return resRepository.save(res);}
-    public List<Reservation> findReservations(int id){return resRepository.findAllReservations(id);}
+    public List<Reservation> findReservations(int roomId){return resRepository.findAllReservations(roomId);}
     public List<Reservation> findReservationsByDate(String date,int roomId){return resRepository.findAllByDate(date,roomId);}
     public Reservation findReservationById(int id ){return resRepository.findById(id).get();}
     public void deleteReservationById(int id ){ resRepository.deleteById(id);}

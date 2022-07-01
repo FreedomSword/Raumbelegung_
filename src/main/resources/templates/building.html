@@ -65,7 +65,7 @@
                                     <td th:text="${building.city}"></td>
                                     <td>
 
-                                        <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}"th:href="@{/UpdateRoomForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
+                                        <a  th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}"th:href="@{/UpdateBuildingForm(buildingId=${building.bid})}" class="btn btn-info">Bearbeiten</a>
                                         <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/deleteBuilding(buildingId=${building.bid})}" class="btn btn-danger">Löschen</a>
                                         <a th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}" th:href="@{/addRoomInBuildingForm(buildingId=${building.bid})}" class="btn btn-success">Raum hinzufügen</a>
                                     </td>

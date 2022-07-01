@@ -49,9 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/register", "/register_success", "/", "/process_register","/css/**", "/js/**", "/webjars/**", "/login", "/logout", "*", "/resources/**").permitAll() // here i allowed the CSS pages  so it dont get blocked by spring security
                 .antMatchers("/").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/new").hasAnyAuthority("ADMIN")
-                .antMatchers("/edit/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/delete/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST, "/").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -60,6 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/index",true)
                 .and()
                 .logout()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login");
+
+
     }
 }

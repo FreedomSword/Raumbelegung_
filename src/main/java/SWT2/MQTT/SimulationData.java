@@ -58,9 +58,9 @@ public class SimulationData implements Runnable {
 
                             if (currenOccupacity > 0 && currenOccupacity < getMaxOccupacity(id)) {
                                 output = roomPick.nextInt(roomArray.length);
-                            } else if (currenOccupacity == 0) {
+                            } else if (currenOccupacity <= 0) {
                                 output = 1;
-                            } else if (currenOccupacity == getMaxOccupacity(id)) {
+                            } else if (currenOccupacity >= getMaxOccupacity(id)) {
                                 output = 0;
                             }
 
@@ -134,7 +134,7 @@ public class SimulationData implements Runnable {
                             break;
                         }
                     }
-                    Thread.sleep(30000);
+                    Thread.sleep(1000);
 
                 }
             catch (InterruptedException e) {

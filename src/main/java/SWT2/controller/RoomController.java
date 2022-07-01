@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -47,8 +48,22 @@ public class RoomController {
         room.setCurrentLightLevel(10);
         room.setCurrentTemperature(20);
         fs.save(room);
-        return new RedirectView("/buildingDetails?buildingId=" + buildingId );
+        return new RedirectView("/roomDetails?roomId=" + room.getRid() );
     }
+
+    @PostMapping("/updateSaveRoomInBuilding")
+    public RedirectView UpdatesaveRoom(@ModelAttribute Room room, @RequestParam int buildingId) {
+
+        Room currRoom = repo.getRoomById(room.getRid());
+        String image = currRoom.getPhoto();
+
+        Building building = repo.findBuildingById(buildingId);
+        room.setBuilding(building);
+        room.setPhoto(image);
+        fs.save(room);
+        return new RedirectView("/roomDetails?roomId=" + room.getRid() );
+    }
+
     @GetMapping("/roomDetails")
     public ModelAndView showSensorListOfRoom(@RequestParam int roomId) {
         ModelAndView mav = new ModelAndView("roomDetails");
@@ -58,8 +73,12 @@ public class RoomController {
         User user = repo.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject("user", user);
 
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
 
-        List<Reservation> reservations = repo.findReservations(roomId);
+        String date =  LocalDate.now().toString();
+
+        List<Reservation> reservations = repo.findReservationsByDate(date, roomId);
         mav.addObject("reservations", reservations);
         List<Sensor> list = repo.findAllRoomSensors(roomId);
         mav.addObject("room", room );
@@ -77,6 +96,10 @@ public class RoomController {
         mav.addObject("room", room);
         Building building = repo.findBuildingById(buildingId);
         mav.addObject("building", building);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
+
         return mav;
     }
     /////////////////DELETE AND UPDATE/////////////////
@@ -91,12 +114,29 @@ public class RoomController {
 
     //Show room update form
     @GetMapping("/UpdateRoomForm")
-    public ModelAndView showRoomUpdateForm(@RequestParam int roomId) {
-        ModelAndView mav = new ModelAndView("addRoomInBuildingForm");
+    public ModelAndView updatreValuesInRoom(@RequestParam int roomId) {
+        ModelAndView mav = new ModelAndView("UpdateValuesInRoomForm");
         Room room = repo.findRoomById(roomId);
         Building building = repo.findBuildingById(room.getBuilding().getBid());
         mav.addObject("building", building);
         mav.addObject("room", room);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
+        return mav;
+    }
+
+    @GetMapping("/updateRoomInBuilding")
+    public ModelAndView updateRoom(@RequestParam int roomId,@RequestParam int buildingId) {
+        ModelAndView mav = new ModelAndView("UpdateRoomForm");
+        Room room = repo.getRoomById(roomId);
+        Building building = repo.getBuildingById(buildingId);
+
+        mav.addObject("room", room);
+        mav.addObject("building", building);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
         return mav;
     }
 

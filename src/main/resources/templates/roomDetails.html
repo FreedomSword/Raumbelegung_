@@ -65,22 +65,24 @@
                                         <p class="" th:text="*{room.max_occupancy}"></p>
                                     </div>
                                 </div>
-
+                            <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
+                                <a th:href="@{/updateRoomInBuilding(roomId=${room.rid}, buildingId=${room.building.bid})}" class="btn btn-info">Bearbeiten</a>
+                            </div>
 
                             <hr/>
                             <div class="row gx-3 mb-3">
                                     <div class="col-md-3">
-                                    <p>Aktuelle Helligkeit</p>
+                                        <h6 class="font-weight-bold">Aktuelle Helligkeit:</h6>
                                     <p  type="number" th:text="${room.currentLightLevel}"></p>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>Aktuelle Temperatur</p>
+                                    <h6 class="font-weight-bold">Aktuelle Temperatur:</h6>
                                     <p  type="number" th:text="${room.currentTemperature}"></p>
                                 </div>
 
                             </div>
 
-                            <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
+                            <div>
                                 <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Anpassen</a>
                             </div>
                         </div>
@@ -160,9 +162,9 @@
 </div>
 </body>
 
-<footer class="text-center text-white" style="background-color: #7386D5;">
+<footer class="text-center text-white">
 
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-3">
 
         © 2022 Copyright:
         <a class="text-white" href="https://mdbootstrap.com/">DIGITAL HEROES</a>

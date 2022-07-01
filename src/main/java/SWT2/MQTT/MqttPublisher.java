@@ -21,37 +21,22 @@ public class MqttPublisher extends MqttConfig implements MqttCallback, MqttRepos
 
     private static final Logger logger = LoggerFactory.getLogger(MqttPublisher.class);
 
-    /**
-     * Private default constructor
-     */
+
     public MqttPublisher() {
         this.config();
     }
 
-    /**
-     * Private constructor
-     */
+
     private MqttPublisher(String ip, Integer port, Boolean ssl, Boolean withUserNamePass) {
         this.config(ip, port, ssl, withUserNamePass);
     }
 
-    /**
-     * Factory method to get instance of MQTTPublisher
-     *
-     * @return MQTTPublisher
-     */
+
     public static MqttPublisher getInstance() {
         return new MqttPublisher();
     }
 
-    /**
-     *
-     * @param ip
-     * @param port
-     * @param ssl
-     * @param withUserNamePass
-     * @return MQTTPublisher
-     */
+
     public static MqttPublisher getInstance(String ip, Integer port, Boolean ssl, Boolean withUserNamePass) {
         return new MqttPublisher(ip, port, ssl, withUserNamePass);
     }

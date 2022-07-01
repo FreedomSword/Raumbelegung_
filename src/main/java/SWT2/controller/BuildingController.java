@@ -81,6 +81,7 @@ public class BuildingController {
 
         fs.save(building);
 
+
         String uploadDir = "building-photos/" + building.getName();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
@@ -104,6 +105,8 @@ public class BuildingController {
         ModelAndView mav = new ModelAndView("addBuildingForm");
         Building building = repo.findBuildingById(buildingId);
         mav.addObject("building", building);
+        List<Building>list = repo.findAllBuildings();
+        mav.addObject("buildings", list);
         return mav;
     }
 

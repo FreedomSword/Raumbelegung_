@@ -20,7 +20,7 @@ public class FactoryService {
             case "Building":
                 repo.saveBuilding((Building)obj);
                 break;
-            case "Resevation":
+            case "Reservation":
                 repo.saveReservations((Reservation) obj);
                 break;
             case "User":

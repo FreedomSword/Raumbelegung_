@@ -35,43 +35,48 @@
                 <div class="col-xl-12">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header">Raum hinzufügen</div>
+                        <div class="card-header">Raum bearbeiten</div>
                         <div class="card-body">
-                            <form th:action="@{/saveRoomInBuilding(buildingId=${building.bid})}" method="post" enctype="multipart/form-data">
+                            <form th:action="@{/updateSaveRoomInBuilding(buildingId=*{building.bid})}" method="post" enctype="multipart/form-data">
                                 <!-- Form Group (username)-->
-                                <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
+                                <div>
                                     <label for="name">Bezeichnung</label>
-                                    <input type="text" th:field="*{room.name}" placeholder="Bezeichnung eingeben" id="name" class="form-control">
+                                    <input type="text" th:field="*{room.name}" id="name" class="form-control" required="required">
                                 </div>
-                                <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
+                                <div>
                                     <label for="type">Raumtyp</label>
-                                    <input type="text" th:field="*{room.type}" placeholder="Typ eingeben" id="type" class="form-control"/>
+                                    <select th:field="*{room.type}"  id="type" class="form-control" required="required">
+                                        <option value="Kleiner Raum (Bis 8 Personen)">Kleiner Raum (Bis 8 Personen)</option>
+                                        <option value="Großer Raum (Bis 16 Personen)">Großer Raum (Bis 16 Personen)</option>
+                                        <option value="Gemeinschaftsraum">Gemeinschaftsraum</option>
+                                    </select>
                                 </div>
-                                <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
+                                <div>
                                     <label for="max">Max</label>
-                                    <input type="number" th:field="*{room.max_occupancy}" placeholder="Maximale Belegung eingeben" id="max" class="form-control">
+                                    <input type="number" th:field="*{room.max_occupancy}" placeholder="Maximale Belegung eingeben" id="max" class="form-control" required="required">
                                 </div>
-                                <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
-                                    <label for="image">Bild</label>
-                                    <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg">
-                                </div>
-                                <hr>
+                                <hr/>
                                 <div>
-                                    <label for="temp">Zieltemperatur</label>
-                                    <input  type="number" th:field="*{room.targetTemperature}"  class="form-control" id="temp">
-                                </div>
-
-                                <div>
-                                    <label for="brightness">Zielhelligkeit</label>
-                                    <input  type="number" th:field="*{room.targetLightLevel}" class="form-control" id="brightness">
+                                    <label for="temp">Temperatur</label>
+                                    <input type="number" th:field="*{room.targetLightLevel}" placeholder="Wunschtemperatur" min="0" max="20" id="temp" class="form-control" required="required">
                                 </div>
                                 <div>
-                                    <input type="hidden" th:field="*{room.rid}">
+                                    <label for="brightness">Helligkeit</label>
+                                    <input type="number" th:field="*{room.targetTemperature}" placeholder="Wunschhelligkeit" id="brightness"  min="18" max="24" class="form-control" required="required">
                                 </div>
+                                    <div hidden>
+                                        <input type="number" th:field="*{room.currentTemperature}" placeholder="Wunschhelligkeit" class="form-control" required="required">
+                                    </div>
+                                    <div hidden>
+                                        <input type="number" th:field="*{room.currentLightLevel}" placeholder="Wunschhelligkeit"  class="form-control" required="required">
+                                    </div>
+                                    <div>
+                                        <input type="hidden" th:field="*{room.rid}">
+                                    </div>
 
 
                                 <!-- Save changes button-->
-                                <button class="btn btn-primary" type="submit" style="margin-top: 10px">Raum hinzufügen</button>
+                                <button class="btn btn-primary" type="submit" style="margin-top: 10px">Änderungen speichern</button>
                             </form>
                         </div>
                     </div>
@@ -89,9 +94,9 @@
     </div>
 </body>
 
-<footer class="text-center text-white" style="background-color: #7386D5;">
+<footer class="text-center text-white">
 
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-3">
 
         © 2022 Copyright:
         <a class="text-white" href="https://mdbootstrap.com/">DIGITAL HEROES</a>

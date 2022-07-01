@@ -81,6 +81,10 @@ public class UserController {
         ModelAndView mav = new ModelAndView("myAccountUpdate");
         User user = repo.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject("user", user);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
+
         return mav;
     }
 
@@ -93,6 +97,9 @@ public class UserController {
 
             List<Reservation> reservations = repo.findReservationsByUserId(user.getUid());
             mav.addObject("reservation", reservations);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
             return mav;
         }
 }

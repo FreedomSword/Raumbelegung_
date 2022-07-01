@@ -1,5 +1,6 @@
 package SWT2.controller;
 
+import SWT2.model.Building;
 import SWT2.model.Reservation;
 import SWT2.model.Room;
 import SWT2.model.User;
@@ -25,16 +26,6 @@ public class ReservationController {
     @Autowired
     FactoryService fs;
 
-    //Show all the Reservations of one Room
-    @GetMapping("/roomReservations")
-    public ModelAndView roomReservations(@RequestParam int roomId) {
-        ModelAndView mav = new ModelAndView("roomReservations");
-        Room room = repo.getRoomById(roomId);
-        List<Reservation> list = repo.findReservations(roomId);
-        mav.addObject("room", room );
-        mav.addObject("reservation", list);
-        return  mav;
-    }
 
     //saving a reservation
 
@@ -44,6 +35,10 @@ public class ReservationController {
         Reservation reservation = new Reservation();
         Room room = repo.findRoomById(roomId);
         User user = repo.findUserById(userId);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
+
         mav.addObject("room", room);
         mav.addObject("user", user);
         mav.addObject("reservation", reservation);
@@ -57,6 +52,9 @@ public class ReservationController {
         reservation.setDate(date);
         Room room = repo.findRoomById(roomId);
         User user = repo.findUserById(userId);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
         
         List<Reservation> bookedSlots = repo.findReservationsByDate(date, roomId);
 
@@ -94,8 +92,8 @@ public class ReservationController {
 
 
     @PostMapping("/saveReservation")
-    public RedirectView saveReservation(@ModelAttribute Reservation reservation, @RequestParam int roomId,int userId, Errors errors) {
-        Room room = (repo.findRoomById(roomId));
+    public RedirectView saveReservation(@ModelAttribute Reservation reservation, @RequestParam int roomId, @RequestParam int userId) {
+        Room room = repo.findRoomById(roomId);
         reservation.setRoom(room);
         reservation.setUser((repo.findUserById(userId)));
         fs.save(reservation);
@@ -107,6 +105,9 @@ public class ReservationController {
         ModelAndView mav = new ModelAndView("addReservationForm");
         Reservation reservation = repo.findReservationById(ReservationId);
         mav.addObject("reservation", reservation);
+
+        List<Building>buildingList = repo.findAllBuildings();
+        mav.addObject("buildings", buildingList);
         return mav;
     }
 

@@ -44,27 +44,27 @@ background: radial-gradient(circle, rgba(252,208,174,1) 0%, rgba(255,130,49,1) 1
                                     <h2 class="text-uppercase text-center mb-5">Login</h2>
                                     <form th:action="login" method="post">
                                         <div th:if="${param.error}" >
-                                            INVALID USERNAME OR PASSWORD !!!!
+                                            Login Daten falsch!
                                         </div>
                                         <div th:if="${param.logout}">
-                                            YOU HAVE BEEN LOGGED OUT
+                                            Du wurdest ausgeloggt.
                                         </div>
                                         <div class="form-outline mb-4">
                                             <input type="text" id="form3Example1cg" class="form-control form-control-lg" name="username"/>
-                                            <label class="form-label" for="form3Example1cg">Username</label>
+                                            <label class="form-label" for="form3Example1cg">E-Mail</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <input type="password" id="form3Example3cg" class="form-control form-control-lg" name="password" />
-                                            <label class="form-label" for="form3Example3cg">Password</label>
+                                            <label class="form-label" for="form3Example3cg">Passwort</label>
                                         </div>
                                         <div class="d-flex justify-content-center">
                                         <button type="submit"
                                                 class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Login</button>
                                         </div>
 
-                                        <p class="text-center text-muted mt-5 mb-0">Dont have an Account? <a href="/register"
-                                                                                                                class="fw-bold text-body"><u>Register here</u></a></p>
+                                        <p class="text-center text-muted mt-5 mb-0">Noch keinen Account? <a href="/register"
+                                                                                                                class="fw-bold text-body"><u>Hier registrieren</u></a></p>
                                     </form>
                                 </div>
                             </div>

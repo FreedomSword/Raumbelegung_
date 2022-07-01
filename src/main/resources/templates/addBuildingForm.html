@@ -42,19 +42,19 @@
                                     <!-- Form Group (username)-->
                                     <div class="mb-3">
                                         <label class="small mb-1" for="bezeichnung">Bezeichnung</label>
-                                        <input  type="text" th:field="*{building.name}" class="form-control" id="bezeichnung"  placeholder="Bezeichung einfügen" >
+                                        <input  type="text" th:field="*{building.name}" class="form-control" id="bezeichnung"  placeholder="Bezeichung einfügen" required="required">
                                     </div>
                                     <!-- Form Row-->
                                     <div class="row gx-3 mb-3">
                                         <!-- Form Group (first name)-->
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="street">Street</label>
-                                            <input type="text" th:field="*{building.street}" class="form-control" id="street" placeholder="Enter your Street">
+                                            <input type="text" th:field="*{building.street}" class="form-control" id="street" placeholder="Enter your Street" required="required">
                                         </div>
                                         <!-- Form Group (last name)-->
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="houseNumber">House number</label>
-                                            <input input type="number" th:field="*{building.houseNumber}" class="form-control" id="houseNumber"  placeholder="Enter your last name">
+                                            <input input type="number" th:field="*{building.houseNumber}" class="form-control" id="houseNumber"  placeholder="Enter your last name" required="required">
                                         </div>
                                     </div>
                                     <!-- Form Row-->
@@ -62,17 +62,17 @@
                                         <!-- Form Group (organization name)-->
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="city">City</label>
-                                            <input type="text" th:field="*{building.city}" class="form-control" id="city"  placeholder="Enter your City">
+                                            <input type="text" th:field="*{building.city}" class="form-control" id="city"  placeholder="Enter your City" required="required">
                                         </div>
                                         <!-- Form Group (location)-->
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="plz">PLZ</label>
-                                            <input type="number" th:field="*{building.postalCode}" class="form-control" id="plz" placeholder="Enter your location">
+                                            <input type="number" th:field="*{building.postalCode}" class="form-control" id="plz" placeholder="Enter your location" required="required">
                                         </div>
                                         <!-- Form Group (username)-->
                                         <div class="col-md-12">
                                             <label class="small mb-1" for="image">Bild</label>
-                                            <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg">
+                                            <input  type="file" name="image" class="form-control" id="image"  accept="image/png, image/jpeg, image/jpg" required="required">
                                         </div>
 
                                         <div class="col-md-6">
@@ -100,9 +100,9 @@
     </div>
 </body>
 
-<footer class="text-center text-white" style="background-color: #7386D5;">
+<footer class="text-center text-white">
 
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-3">
 
         © 2022 Copyright:
         <a class="text-white" href="https://mdbootstrap.com/">DIGITAL HEROES</a>

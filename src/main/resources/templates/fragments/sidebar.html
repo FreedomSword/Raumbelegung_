@@ -47,9 +47,12 @@
     </ul>
 
     <ul class="list-unstyled CTAs">
-        <li>
-            <a href="/logout" class="article">Logout</a>
-        </li>
+        <div sec:authorize="isAuthenticated()">
+            <a href="javascript: document.logoutForm.submit()" class="dropdown-toggle">Sign out</a>
+            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                <input hidden type="submit" value="Sign Out" />
+            </form>
+        </div>
     </ul>
 </nav>
 

@@ -73,7 +73,7 @@ public class SendActorData implements Runnable {
                     logger.info("Nachricht mit Topic: " + topic + " gesendet. Output = " + output);
 
                 }
-                Thread.sleep(45000);
+                Thread.sleep(1000);
             }
 
             catch (InterruptedException e) {
