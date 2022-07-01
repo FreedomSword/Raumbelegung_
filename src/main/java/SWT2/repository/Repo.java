@@ -33,51 +33,77 @@ public class Repo  {
 
 
 
-// Building Repo
+    // Building Repo
     public List<Building> findAllBuildings(){
         return bRepository.findAll();
     }
-    public Building saveBuilding(Building b){
-        return bRepository.save(b);
-    }
-    public Building findById (int id ){return bRepository.findById(id).get();}
-    public  Building getById(int id ){return bRepository.getById(id);}
-    public void deleteById(int id ){ bRepository.deleteById(id);}
+    public Building saveBuilding(Building b){return bRepository.save(b);}
+    public Building findBuildingById(int id ){return bRepository.findById(id).get();}
+    public  Building getBuildingById(int id ){return bRepository.getById(id);}
+    public void deleteBuildingById(int id ){ bRepository.deleteById(id);}
 
     //Room Repo
     public List<Room> findAllRooms(){return rRepository.findAll();}
     public Room saveRoom ( Room r){
         return rRepository.save(r);
     }
-    public List<Room> findRoom (int id){return rRepository.findRoom(id);}
+    public List<Room> findRooms(int id){return rRepository.findRooms(id);}
+    public Room getRoomById(int id){return rRepository.getById(id);}
+    public Room findRoomById(int id ){return rRepository.findById(id).get();}
+    public void deleteRoomById(int id ){ rRepository.deleteById(id);}
 
 
-//  USER Repo
-    public List<User> findAllUsers(){return uRepository.findAll();}
-    public User saveUser ( User u){
-        return uRepository.save(u);
-    }
-    public  User getUserByUserName(String username ){return uRepository.getUsersByUsername(username);}
 
 
-// Sensor Repo
+    //Reservation Repo
+    public List<Reservation> findAllReservations(){return resRepository.findAll();}
+    public Reservation saveReservations( Reservation res){return resRepository.save(res);}
+    public List<Reservation> findReservations(int id){return resRepository.findAllReservations(id);}
+    public List<Reservation> findReservationsByDate(String date,int roomId){return resRepository.findAllByDate(date,roomId);}
+    public Reservation findReservationById(int id ){return resRepository.findById(id).get();}
+    public void deleteReservationById(int id ){ resRepository.deleteById(id);}
+    public List<Reservation> findReservationsByUserId(int userId ){return resRepository.findAllByUser(userId);}
+
+    // Sensor Repo
     public List<Sensor> findAllSensors(){return sRepository.findAll();}
     public Sensor saveSensor( Sensor s){
         return sRepository.save(s);
     }
-
+    public List<Sensor> findAllRoomSensors(int roomId){return sRepository.findAllSensors(roomId);}
+    public void deleteSensorById(int id ){ sRepository.deleteById(id);}
+    public Sensor findSensorById(int id ){return sRepository.findById(id).get();}
 
     // SensorType Repo
     public List<Sensortype> findAllSensorsTypes(){return stRepository.findAll();}
     public Sensortype saveSensorType( Sensortype st){return stRepository.save(st);}
 
-    //Reservation Repo
-    public List<Reservation> findAllReservations(){return resRepository.findAll();}
-    public Reservation saveReservations( Reservation res){return resRepository.save(res);}
+
+    //  USER Repo
+    public List<User> findAllUsers(){return uRepository.findAll();}
+    public User saveUser ( User u){
+        return uRepository.save(u);
+    }
+    public  User getUserByUsername(String username ){return uRepository.getUsersByUsername(username);}
+    public User findUserById(int id ){return uRepository.findById(id).get();}
 
     //role repo
     public List<Role> findAllRoles(){return roleRepository.findAll();}
-    public Role saveReservations( Role role){return roleRepository.save(role);}
+    public Role saveRole( Role role){return roleRepository.save(role);}
+    public Role findRoleByName(String name){return roleRepository.findByName(name);}
+
+
+    //save
+    public void save(Object obj){
+        System.out.println(obj.getClass().getSimpleName());
+      switch (obj.getClass().getSimpleName()){
+          case "Room":
+              saveRoom((Room)obj);
+              break;
+          case "Building":
+              saveBuilding((Building)obj);
+              break;
+      }
+    }
 
 
 

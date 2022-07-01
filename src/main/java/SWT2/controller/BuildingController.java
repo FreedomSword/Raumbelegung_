@@ -22,13 +22,6 @@ public class BuildingController {
     @Autowired
     Repo repo;
 
-//    @Autowired
-//    private BuildingRepository bRepository;
-//    @Autowired
-//    private UserRepository uRepository;
-//
-//    @Autowired
-//    private RoomRepository rRepository;
 
 
     /////////////////TABLE VIEWS/////////////////
@@ -38,7 +31,7 @@ public class BuildingController {
     @GetMapping("/index")
     public ModelAndView index() {
             ModelAndView mav = new ModelAndView("index");
-//            List <Building> list = bRepository.findAll();
+
         List<Building>list = repo.findAllBuildings();
             mav.addObject("buildings", list);
 
@@ -48,8 +41,8 @@ public class BuildingController {
             {
                 int amountRooms = 0;
                 int amountPlaces = 0;
-               // String roomListName = "roomsBuilding" + list.get(i).getBid();
-                List<Room>  rooms = repo.findRoom(list.get(i).getBid());
+
+                List<Room>  rooms = repo.findRooms(list.get(i).getBid());
 
                 for (int y = 0; y < rooms.size(); y++) {
                     amountRooms++;
@@ -107,7 +100,7 @@ public class BuildingController {
     @GetMapping("/BuildingUpdateForm")
     public ModelAndView showBuildingUpdateForm(@RequestParam int buildingId) {
         ModelAndView mav = new ModelAndView("addBuildingForm");
-        Building building = repo.findById(buildingId);
+        Building building = repo.findBuildingById(buildingId);
         mav.addObject("building", building);
         return mav;
     }
@@ -115,7 +108,7 @@ public class BuildingController {
     //Delete the building from database
     @GetMapping("/deleteBuilding")
         public RedirectView deleteBuilding(@RequestParam int buildingId) {
-        repo.deleteById(buildingId);
+        repo.deleteBuildingById(buildingId);
         return new RedirectView("/showBuilding");
     }
 
@@ -123,13 +116,13 @@ public class BuildingController {
     @GetMapping("/buildingDetails")
     public ModelAndView showRoomListOfBuilding(@RequestParam int buildingId) {
         ModelAndView mav = new ModelAndView("buildingDetails");
-        User user = repo.getUserByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = repo.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject("user", user);
 
-        Building building = repo.getById(buildingId);
+        Building building = repo.getBuildingById(buildingId);
         mav.addObject("building", building );
 
-        List<Room> list = repo.findRoom(buildingId);
+        List<Room> list = repo.findRooms(buildingId);
         mav.addObject("room", list);
 
         List<Building> buildings = repo.findAllBuildings();

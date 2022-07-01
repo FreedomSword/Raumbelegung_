@@ -3,6 +3,7 @@ package SWT2.controller;
 import SWT2.model.Room;
 import SWT2.model.Sensor;
 import SWT2.model.Sensortype;
+import SWT2.repository.Repo;
 import SWT2.repository.RoomRepository;
 import SWT2.repository.SensorRepository;
 import SWT2.repository.SensortypeRepository;
@@ -17,21 +18,14 @@ import java.util.List;
 @RestController
 public class SensorController {
     @Autowired
-    private SensorRepository sRepository;
-
-    @Autowired
-    private RoomRepository rRepository;
-
-    @Autowired
-    private SensortypeRepository stRepository;
-
+    Repo repo;
     /////////////////TABLE VIEWS/////////////////
 
     //Show Sensors
     @GetMapping("/showSensor")
     public ModelAndView showSensor() {
         ModelAndView mav = new ModelAndView("sensor");
-        List<Sensor> list = sRepository.findAll();
+        List<Sensor> list = repo.findAllSensors();
         mav.addObject("sensor", list);
         return  mav;
     }
@@ -43,8 +37,8 @@ public class SensorController {
     //Save sensor to the database
     @PostMapping("/saveSensor")
     public RedirectView saveSensor(@ModelAttribute Sensor sensor, @RequestParam int roomId) {
-        sensor.setRoom((rRepository.findById(roomId)).get());
-        sRepository.save(sensor);
+        sensor.setRoom((repo.findRoomById(roomId)));
+        repo.saveSensor(sensor);
         return new RedirectView("/roomDetails?roomId=" + roomId);
     }
 
@@ -54,7 +48,7 @@ public class SensorController {
         ModelAndView mav = new ModelAndView("addSensorInRoomForm");
         Sensor newSensor = new Sensor();
         mav.addObject("sensor", newSensor);
-        Room room = rRepository.findById(roomId).get();
+        Room room = repo.findRoomById(roomId);
         mav.addObject("room", room);
         return mav;
     }
@@ -64,16 +58,18 @@ public class SensorController {
     //Delete the Sensor from database
     @GetMapping("/deleteSensor")
     public RedirectView deleteSensor(@RequestParam int sensorId) {
-        sRepository.deleteById(sensorId);
-        return new RedirectView("/showSensor");
+        Room room = repo.getRoomById(repo.findSensorById(sensorId).getRoom().getRid());
+
+        repo.deleteSensorById(sensorId);
+        return new RedirectView("/roomDetails?roomId="+room.getRid());
     }
 
     //Show sensor update form
     @GetMapping("/SensorUpdateForm")
     public ModelAndView showSensorUpdateForm(@RequestParam int sensorId) {
         ModelAndView mav = new ModelAndView("addSensorInRoomForm");
-        Sensor sensor = sRepository.findById(sensorId).get();
-        Room room = rRepository.findById(sensor.getRoom().getRid()).get();
+        Sensor sensor = repo.findSensorById(sensorId);
+        Room room = repo.findRoomById(sensor.getRoom().getRid());
         mav.addObject("room", room);
         mav.addObject("sensor", sensor);
         return mav;
@@ -83,14 +79,14 @@ public class SensorController {
 
     @ModelAttribute("room")
     public List<Room> populateList(@NotNull Model model) {
-        List<Room> list = rRepository.findAll();
+        List<Room> list = repo.findAllRooms();
         model.addAttribute("raueme", list);
         return  list;
     }
 
     @ModelAttribute("sensortype")
     public List<Sensortype> populateListSensortype(Model model) {
-        List <Sensortype> list = stRepository.findAll();
+        List <Sensortype> list = repo.findAllSensorsTypes();
         model.addAttribute("sensortype", list);
         return  list;
     }

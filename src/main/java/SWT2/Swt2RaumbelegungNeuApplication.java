@@ -19,12 +19,12 @@ public class Swt2RaumbelegungNeuApplication {
 	public static void main(String[] args) {
 
 		ConfigurableApplicationContext appContext = SpringApplication.run(Swt2RaumbelegungNeuApplication.class, args);
-		SimulationData sd = new SimulationData();
-		Thread thread = new Thread (sd);
-		thread.start();
-
-		SendActorData sad = new SendActorData();
-		Thread thread2 = new Thread(sad);
-		thread2.start();
+//		SimulationData sd = new SimulationData();
+//		Thread thread = new Thread (sd);
+//		thread.start();
+//
+//		SendActorData sad = new SendActorData();
+//		Thread thread2 = new Thread(sad);
+//		thread2.start();
 	}
 }

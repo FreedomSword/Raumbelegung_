@@ -130,7 +130,7 @@
                                     <td><a th:text="${sensor.room.name}" th:href="@{/roomDetails(roomId=${sensor.room.rid})}"></a> </td>
                                     <td>
 
-                                        <a th:href="@{/UpdateSensorForm(sensorId=${sensor.sid})}" class="btn btn-info">Bearbeiten</a>
+                                        <a th:href="@{/SensorUpdateForm(sensorId=${sensor.sid})}" class="btn btn-info">Bearbeiten</a>
                                         <a th:href="@{/deleteSensor(sensorId=${sensor.sid})}" class="btn btn-danger">Löschen</a>
                                     </td>
 

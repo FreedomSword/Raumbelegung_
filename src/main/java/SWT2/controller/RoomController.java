@@ -3,7 +3,6 @@ package SWT2.controller;
 import SWT2.model.*;
 import SWT2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -11,30 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import javax.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.List;
-import java.util.ListResourceBundle;
-import java.util.Optional;
 
 @RestController
 public class RoomController {
-    @Autowired
-    private RoomRepository rRepository;
+
 
     @Autowired
-    private BuildingRepository bRepository;
-
-    @Autowired
-    private SensorRepository sRepository;
-
-    @Autowired
-    private ReservationRepository resRepository;
-
-    @Autowired
-    UserRepository uRepository;
+    Repo repo;
 
     /////////////////TABLE VIEWS/////////////////
 
@@ -53,26 +39,27 @@ public class RoomController {
         String uploadDir = "room-photos/" + room.getName();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
-        Building building = (bRepository.findById(buildingId)).get();
+        Building building = repo.findBuildingById(buildingId);
         room.setBuilding(building);
         room.setCurrentLightLevel(10);
         room.setCurrentTemperature(20);
-        rRepository.save(room);
+//        repo.saveRoom(room);
+        repo.save(room);
         return new RedirectView("/buildingDetails?buildingId=" + buildingId );
     }
     @GetMapping("/roomDetails")
     public ModelAndView showSensorListOfRoom(@RequestParam int roomId) {
         ModelAndView mav = new ModelAndView("roomDetails");
-        Room room = rRepository.findById(roomId).get();
+        Room room = repo.findRoomById(roomId);
 
 
-        User user = uRepository.getUsersByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = repo.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject("user", user);
 
 
-        List<Reservation> reservations = resRepository.findAllByDate(LocalDate.now().toString(), roomId);
+        List<Reservation> reservations = repo.findReservations(roomId);
         mav.addObject("reservations", reservations);
-        List<Sensor> list = sRepository.findAllSensors(roomId);
+        List<Sensor> list = repo.findAllRoomSensors(roomId);
         mav.addObject("room", room );
         mav.addObject("sensor", list);
         return  mav;
@@ -86,7 +73,7 @@ public class RoomController {
         ModelAndView mav = new ModelAndView("addRoomInBuildingForm");
         Room room = new Room();
         mav.addObject("room", room);
-        Building building = bRepository.findById(buildingId).get();
+        Building building = repo.findBuildingById(buildingId);
         mav.addObject("building", building);
         return mav;
     }
@@ -95,8 +82,8 @@ public class RoomController {
     //Delete the Room from the Database
     @GetMapping("/deleteRoom")
     public RedirectView deleteRaum(@RequestParam int roomId) {
-        Building building = bRepository.findById(rRepository.findById(roomId).get().getBuilding().getBid()).get();
-        rRepository.deleteById(roomId);
+        Building building = repo.findBuildingById(repo.findRoomById(roomId).getBuilding().getBid());
+        repo.deleteRoomById(roomId);
         return new RedirectView("/buildingDetails?buildingId=" + building.getBid());
     }
 
@@ -104,8 +91,8 @@ public class RoomController {
     @GetMapping("/UpdateRoomForm")
     public ModelAndView showRoomUpdateForm(@RequestParam int roomId) {
         ModelAndView mav = new ModelAndView("addRoomInBuildingForm");
-        Room room = rRepository.findById(roomId).get();
-        Building building = bRepository.findById(room.getBuilding().getBid()).get();
+        Room room = repo.findRoomById(roomId);
+        Building building = repo.findBuildingById(room.getBuilding().getBid());
         mav.addObject("building", building);
         mav.addObject("room", room);
         return mav;
@@ -115,9 +102,12 @@ public class RoomController {
 
     @ModelAttribute("building")
     public List<Building> populateList(Model model) {
-        List <Building> buildingList = bRepository.findAll();
+        List <Building> buildingList = repo.findAllBuildings();
         model.addAttribute("building", buildingList);
         return  buildingList;
     }
+
+
+
 }
 
