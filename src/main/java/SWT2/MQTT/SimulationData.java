@@ -211,4 +211,8 @@ public class SimulationData implements Runnable {
                 return -1;
             }
     }
+
+    public boolean isRunning() {
+        return Thread.currentThread().isAlive();
+    }
 }

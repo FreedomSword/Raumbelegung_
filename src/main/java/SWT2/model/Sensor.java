@@ -28,11 +28,7 @@ public class Sensor {
 
         @ManyToOne
         private Sensortype sensortype;
-
-
-
-
-
+        
         @Override
         public String toString() {
                 return "Sensor{" +

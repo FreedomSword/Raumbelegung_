@@ -64,6 +64,11 @@
                                         <h6 class="font-weight-bold">Maximale Personenanzahl:</h6>
                                         <p class="" th:text="*{room.max_occupancy}"></p>
                                     </div>
+                                    <!--<div class="col-md-6">
+                                        <h6 class="font-weight-bold">Sensorenstatus:</h6>
+                                        <span th:if="${sm.isRunning()}" class='dot_success'></span>
+                                        <span th:if="${!sm.isRunning()}" class='dot_error'></span>
+                                    </div>-->
                                 </div>
                             <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
                                 <a th:href="@{/updateRoomInBuilding(roomId=${room.rid}, buildingId=${room.building.bid})}" class="btn btn-info">Bearbeiten</a>

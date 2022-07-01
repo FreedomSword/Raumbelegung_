@@ -1,5 +1,6 @@
 package SWT2.controller;
 
+import SWT2.MQTT.SimulationData;
 import SWT2.model.*;
 import SWT2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class RoomController {
 
     @Autowired
     FactoryService fs;
+
+    MqttController mqttController = new MqttController();
+    SimulationData simulationData = new SimulationData(mqttController);
 
     /////////////////TABLE VIEWS/////////////////
 
@@ -70,6 +74,7 @@ public class RoomController {
         Room room = repo.findRoomById(roomId);
 
 
+        mav.addObject("sm", simulationData);
         User user = repo.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         mav.addObject("user", user);
 
@@ -86,8 +91,6 @@ public class RoomController {
         return  mav;
     }
 
-
-
     //Show room add form by klicking on "Add Room" button in buildings view without needed to insert building
     @GetMapping("/addRoomInBuildingForm")
     public ModelAndView showRoomAddForm(@RequestParam int buildingId) {
@@ -102,6 +105,7 @@ public class RoomController {
 
         return mav;
     }
+
     /////////////////DELETE AND UPDATE/////////////////
 
     //Delete the Room from the Database
@@ -114,7 +118,7 @@ public class RoomController {
 
     //Show room update form
     @GetMapping("/UpdateRoomForm")
-    public ModelAndView updatreValuesInRoom(@RequestParam int roomId) {
+    public ModelAndView updateValuesInRoom(@RequestParam int roomId) {
         ModelAndView mav = new ModelAndView("UpdateValuesInRoomForm");
         Room room = repo.findRoomById(roomId);
         Building building = repo.findBuildingById(room.getBuilding().getBid());
@@ -148,6 +152,8 @@ public class RoomController {
         model.addAttribute("building", buildingList);
         return  buildingList;
     }
+
+
 
 
 

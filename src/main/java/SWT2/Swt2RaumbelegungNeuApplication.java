@@ -21,13 +21,21 @@ public class Swt2RaumbelegungNeuApplication {
 		ConfigurableApplicationContext appContext = SpringApplication.run(Swt2RaumbelegungNeuApplication.class, args);
 
 		MqttController mqttController = new MqttController();
+
+		/*startSimulation(mqttController);
+		startActors(mqttController);*/
+
+	}
+
+	public static void startSimulation(MqttController mqttController) {
 		SimulationData sd = new SimulationData(mqttController);
 		Thread thread = new Thread (sd);
 		thread.start();
+	}
 
+	public static void startActors(MqttController mqttController) {
 		SendActorData sad = new SendActorData(mqttController);
 		Thread thread2 = new Thread(sad);
 		thread2.start();
-
 	}
 }
