@@ -12,6 +12,12 @@ import java.util.logging.Logger;
 
 public class SendActorData implements Runnable {
 
+    MqttController mqttController;
+
+    public SendActorData(MqttController mqttController){
+        this.mqttController = mqttController;
+    }
+
     private SensorRepository getSensorRepo() {
 
         return SpringContext.getBean(SensorRepository.class);
@@ -21,7 +27,6 @@ public class SendActorData implements Runnable {
         return SpringContext.getBean(RoomRepository.class);
     }
 
-    MqttController mqttController = new MqttController();
 
     Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -41,8 +46,9 @@ public class SendActorData implements Runnable {
                     Room room = rooms.get(i);
                     int output = 0;
                     String topic ="";
-
+                    System.out.println("Send Actor Data Current temp: " + room.getCurrentTemperature() + " targetTemp " + room.getTargetTemperature());
                     if(room.getCurrentTemperature() > room.getTargetTemperature()) {
+
                         output = room.getTargetTemperature() - room.getCurrentTemperature();
                     }
                     else if(room.getTargetTemperature() > room.getCurrentTemperature()) {
@@ -51,7 +57,7 @@ public class SendActorData implements Runnable {
                     topic = room.getName() + "_2";
                     message = "{\"value\":" + output + "}";
                     mqttController.index(topic, message);
-                    logger.info("Nachricht mir Topic: " + topic + " gesendet. Output = " + output);
+                    logger.info("Nachricht mit Topic: " + topic + " gesendet. Output = " + output);
 
 
                     if(room.getCurrentLightLevel() < room.getTargetLightLevel()) {
@@ -64,10 +70,10 @@ public class SendActorData implements Runnable {
                     topic = room.getName() + "_3";
                     message = "{\"value\":" + output + "}";
                     mqttController.index(topic, message);
-                    logger.info("Nachricht mir Topic: " + topic + " gesendet. Output = " + output);
+                    logger.info("Nachricht mit Topic: " + topic + " gesendet. Output = " + output);
 
                 }
-                Thread.sleep(4000);
+                Thread.sleep(45000);
             }
 
             catch (InterruptedException e) {

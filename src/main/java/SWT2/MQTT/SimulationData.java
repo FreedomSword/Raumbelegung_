@@ -10,11 +10,16 @@ import java.util.logging.Logger;
 
 public class SimulationData implements Runnable {
 
+    MqttController mqttController;
+
+    public SimulationData(MqttController mqttController){
+        this.mqttController = mqttController;
+    }
+
    private SensorRepository getSensor() {
        return SpringContext.getBean(SensorRepository.class);
    }
 
-    MqttController mqttController = new MqttController();
 
    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -64,7 +69,7 @@ public class SimulationData implements Runnable {
                                     .findById(id)
                                     .get()
                                     .getRoom().getName(),message);
-
+                            logger.info("Sensordaten gesendet" + message);
                             break;
 
 
@@ -94,7 +99,7 @@ public class SimulationData implements Runnable {
                                     .findById(id)
                                     .get()
                                     .getRoom().getName(),message);
-
+                            logger.info("Sensordaten gesendet" + message);
                             break;
 
 
@@ -125,10 +130,11 @@ public class SimulationData implements Runnable {
                                     .findById(id)
                                     .get()
                                     .getRoom().getName(),message);
+                            logger.info("Sensordaten gesendet" + message);
                             break;
                         }
                     }
-                    Thread.sleep(5000);
+                    Thread.sleep(30000);
 
                 }
             catch (InterruptedException e) {

@@ -13,10 +13,6 @@ public class MqttController {
 
     MqttPublisher publisher = new MqttPublisher();
 
-    /**
-     * @param data
-     * @return
-     */
     @RequestMapping(method = RequestMethod.POST)
     public String index(String topic,@RequestBody String data) {
         publisher.publishMessage(topic , data);

@@ -29,7 +29,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rid")
     private int rid;
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
     @Column(name = "type")
     private String type;

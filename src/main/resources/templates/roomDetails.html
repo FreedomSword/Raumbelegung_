@@ -65,16 +65,23 @@
                                         <p class="" th:text="*{room.max_occupancy}"></p>
                                     </div>
                                 </div>
-                            <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
-                                <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Bearbeiten</a>
-                            </div>
+
 
                             <hr/>
                             <div class="row gx-3 mb-3">
-                                <div class="col-md-3">
-                                    <p>Reservierung</p>
-                                    <p th:text="*{room.reservedString()}"></p>
+                                    <div class="col-md-3">
+                                    <p>Aktuelle Helligkeit</p>
+                                    <p  type="number" th:text="${room.currentLightLevel}"></p>
                                 </div>
+                                <div class="col-md-3">
+                                    <p>Aktuelle Temperatur</p>
+                                    <p  type="number" th:text="${room.currentTemperature} + "></p>
+                                </div>
+
+                            </div>
+
+                            <div th:if="${#strings.contains(#request.userPrincipal.principal.authorities,'ADMIN')}">
+                                <a th:href="@{/UpdateRoomForm(roomId=${room.rid})}" class="btn btn-info">Anpassen</a>
                             </div>
                         </div>
                     </div>

@@ -19,6 +19,7 @@ public class Swt2RaumbelegungNeuApplication {
 	public static void main(String[] args) {
 
 		ConfigurableApplicationContext appContext = SpringApplication.run(Swt2RaumbelegungNeuApplication.class, args);
+<<<<<<< Updated upstream
 //		SimulationData sd = new SimulationData();
 //		Thread thread = new Thread (sd);
 //		thread.start();
@@ -26,5 +27,16 @@ public class Swt2RaumbelegungNeuApplication {
 //		SendActorData sad = new SendActorData();
 //		Thread thread2 = new Thread(sad);
 //		thread2.start();
+=======
+
+		MqttController mqttController = new MqttController();
+		SimulationData sd = new SimulationData(mqttController);
+		Thread thread = new Thread (sd);
+		thread.start();
+
+		SendActorData sad = new SendActorData(mqttController);
+		Thread thread2 = new Thread(sad);
+		thread2.start();
+>>>>>>> Stashed changes
 	}
 }

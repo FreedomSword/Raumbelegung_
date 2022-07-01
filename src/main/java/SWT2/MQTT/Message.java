@@ -10,8 +10,6 @@ public class Message {
 
         public String convertMessage(String input) {
 
-
-
             boolean save = false;
 
             //Char Array for the Input
@@ -61,6 +59,7 @@ public class Message {
             //Trim the char Array after the last value so there are no whitespaces / null
             return String.valueOf(output).trim();
         }
+        
 
 
 

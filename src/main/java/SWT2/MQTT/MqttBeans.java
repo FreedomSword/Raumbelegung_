@@ -1,10 +1,12 @@
 package SWT2.MQTT;
 
 
+import SWT2.model.Actor;
 import SWT2.model.Room;
-import SWT2.model.Sensor;
+import SWT2.repository.ActorRepository;
 import SWT2.repository.RoomRepository;
 import SWT2.repository.SensorRepository;
+import org.checkerframework.checker.units.qual.A;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +25,8 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.logging.Logger;
 
 
 @Configuration
@@ -35,7 +38,7 @@ public class MqttBeans {
     @Value("${MQTT.URL}")
     private String url;
 
-
+    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public MqttPahoClientFactory mqttPahoClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
@@ -81,16 +84,17 @@ public class MqttBeans {
 
             @Autowired
             private SensorRepository sRepo;
-            Message n  = new Message();
+
+            @Autowired
+            private ActorRepository aRepo;
+            Message m = new Message();
 
 
             @Override
-            public void handleMessage(org.springframework.messaging.Message<?> message) throws MessagingException {
+            public synchronized void  handleMessage(org.springframework.messaging.Message<?> message) throws MessagingException {
                 String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-//
-//                try {
 
-
+                if(topic.matches("[A-Z].[A-Z].[0-9][0-9]")) {
                     //Convert sensor data in string
                     String msg = message.getPayload().toString();
 
@@ -100,125 +104,88 @@ public class MqttBeans {
 
                     //Save data as individual strings
                     for (int i = 0; i < payload.length; i++) {
-                        payload[i] = n.convertMessage(payload[i]);
+                        payload[i] = m.convertMessage(payload[i]);
                     }
-                    System.out.println("");
-                    System.out.println("------------------------");
-                    System.out.println("NEUE SENSORDATEN:");
-                    System.out.println("Sensor ID: " + payload[0]);
-                    System.out.println("Sensor Typ: " + payload[1]);
-                    System.out.println("Sensor Value: " + payload[2]);
-                    System.out.println("");
+
+                    logger.info("Neue Sensordaten: SensorID " + payload[0] + " SensorTyp " + payload[1] + " SensorValue " + payload[2]);
 
 
-try {
-    Room room = sRepo.findById(Integer.parseInt(payload[0])).get().getRoom();
-    System.out.println(room.getName());
-    switch (Integer.parseInt(payload[1])) {
-        case 1:
-            System.out.println("Case 1: Bewegungsssensor erkannt");
+                    try {
+                        Room room = sRepo.findById(Integer.parseInt(payload[0])).get().getRoom();
 
-            if(Integer.parseInt(payload[2]) == 0) {
-                room.setCur_occupancy(room.getCur_occupancy()-1);
-            }
-            else if (Integer.parseInt(payload[2]) == 1) {
-                room.setCur_occupancy(room.getCur_occupancy()+1);
-            }
-            else {
+                        switch (Integer.parseInt(payload[1])) {
+                            case 1:
+                                //System.out.println("Case 1: Bewegungsssensor erkannt");
 
-            }
-            rRepo.save(room);
-            break;
+                                if (Integer.parseInt(payload[2]) == 0) {
+                                    room.setCur_occupancy(room.getCur_occupancy() - 1);
+                                } else if (Integer.parseInt(payload[2]) == 1) {
+                                    room.setCur_occupancy(room.getCur_occupancy() + 1);
+                                } else {
 
-        case 2:
-            room.setCurrentTemperature(Integer.parseInt(payload[2]));
-            System.out.println("Case 2: Temperatur erkannt ");
-            rRepo.save(room);
-            break;
+                                }
+                                rRepo.save(room);
+                                break;
 
-        case 3:
-            room.setCurrentLightLevel(Integer.parseInt(payload[2]));
-            System.out.println("Case 3: Lightning erkannt");
-            rRepo.save(room);
-            break;
+                            case 2:
+                                room.setCurrentTemperature(Integer.parseInt(payload[2]));
+                               // System.out.println("Case 2: Temperatur erkannt ");
+                                rRepo.save(room);
+                                break;
 
-    }
-}catch (Exception e){
+                            case 3:
+                                room.setCurrentLightLevel(Integer.parseInt(payload[2]));
+                               //System.out.println("Case 3: Lightning erkannt");
+                                rRepo.save(room);
+                                break;
 
-}
-//                    //1 = Motion sensor
-//                    if (Integer.parseInt(payload[1]) == 1) {
-//                        System.out.println("Case 0: Bewegungsssensor erkannt");
-//                        Optional<Sensor> sOp = sRepo.findById(Integer.parseInt(payload[0]));
-//                        Sensor s = sOp.get();
-//                        Room r = s.getRoom();
-//
-//                        //Determination of the insert value
-//
-//                        //0 = Going out
-//                        if (Integer.parseInt(payload[2]) == 0) {
-//
-//                            //Current occupancy = 0?
-//                            if (r.getCur_occupancy() == 0) {
-//
-//                                //Do nothing (Due to the simulation of the data, incorrect entries can logically occur, which are intercepted here)
-//                                System.out.println("Aktuelle Belegung = 0! Deshalb wurden die Daten verworfen");
-//                            } else {
-//
-//                                //Current occupancy - 1
-//                                r.setCur_occupancy(r.getCur_occupancy() - 1);
-//                                System.out.println("Aktuelle Belegung um 1 verringert");
-//                                System.out.println("Alte Belegung: " + (r.getCur_occupancy() + 1) + " Neue Belegung: " + r.getCur_occupancy());
-//                            }
-//
-//                            //1 = Going in
-//                        } else {
-//                            r.setCur_occupancy(r.getCur_occupancy() + 1);
-//                            System.out.println("Aktuelle Belegung um 1 erhoeht");
-//                            System.out.println("Aktuelle Belegung um 1 verringert");
-//                            System.out.println("Alte Belegung: " + (r.getCur_occupancy() - 1) + " Neue Belegung: " + r.getCur_occupancy());
-//
-//                        }
-//
-//                        rRepo.save(r);
-//
-//                    }
-//                        //Temperature sensor
-//                    if (Integer.parseInt(payload[1]) == 2) {
-//                        System.out.println("Case 2: Temperatur Sensor erkannt");
-////                        Optional<Sensor> sOp = sRepo.findById(Integer.parseInt(payload[0]));
-////                        Sensor s = sOp.get();
-////                        Room r = s.getRoom();
-//
-////                        r.setTemperatur =payload[2];
-//
-//
-////                        rRepo.save(r);
-//
-//                    }
-//
-//
-//
-//                        //Lightning sensor
-//                    if (Integer.parseInt(payload[1]) == 3) {
-//                        System.out.println("Case 3: Lightning Sensor erkannt");
-////                        Optional<Sensor> sOp = sRepo.findById(Integer.parseInt(payload[0]));
-////                        Sensor s = sOp.get();
-////                        Room r = s.getRoom();
-//
-////                        r.setLightLevel =payload[2];
-//
-//
-////                        rRepo.save(r);
-//
-//                    }
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+
+                else if (topic.matches("[A-Z].[A-Z].[0-9][0-9].[2-3]")) {
+
+                    String msg = message.getPayload().toString();
+                    int value = Integer.parseInt(m.convertMessage(msg));
+
+                    String roomName = topic.substring(0, topic.length()-2);
+                    int type = Integer.parseInt(topic.substring(topic.length()-1, topic.length()));
+
+                    Room room = rRepo.findByName(roomName);
+                    List<Actor> actors = aRepo.getByRoomId(room.getRid());
 
 
-//                }
-//                catch(Exception e) {
-//
-//                }
+                    if(type == 2) {
+                        room.setCurrentTemperature(room.getCurrentTemperature()+value);
+                        rRepo.save(room);
 
+                        for(int i = 0; i < actors.size(); i++) {
+                            Actor a = actors.get(i);
+                            if(a.getActortype().getAtid() == 5) {
+                                a.setActivity(value);
+                                aRepo.save(a);
+                            }
+
+                        }
+
+                    }
+
+                    if(type == 3) {
+                        room.setCurrentLightLevel(room.getCurrentLightLevel()+value);
+
+                        for(int i = 0; i < actors.size(); i++) {
+                            Actor a = actors.get(i);
+                            if(a.getActortype().getAtid() == 6) {
+                                a.setActivity(value);
+                                aRepo.save(a);
+                            }
+
+                        }
+
+                    }
+
+                }
             }
         };
 
@@ -235,8 +202,8 @@ try {
     public MessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler("serverOut", mqttPahoClientFactory());
 
-        messageHandler.setAsync(true);
-        messageHandler.setDefaultTopic("'");
+        messageHandler.setAsync(false);
+        messageHandler.setDefaultTopic("");
         return messageHandler;
     }
 }

@@ -123,8 +123,6 @@ public class MqttPublisher extends MqttConfig implements MqttCallback, MqttRepos
 
     @Override
     public void deliveryComplete(IMqttDeliveryToken arg0) {
-        logger.info("delivery completed");
-
     }
 
 
