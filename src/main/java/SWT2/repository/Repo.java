@@ -30,9 +30,6 @@ public class Repo  {
     private RoleRepository roleRepository;
 
 
-
-
-
     // Building Repo
     public List<Building> findAllBuildings(){
         return bRepository.findAll();
@@ -44,16 +41,11 @@ public class Repo  {
 
     //Room Repo
     public List<Room> findAllRooms(){return rRepository.findAll();}
-    public Room saveRoom ( Room r){
-        return rRepository.save(r);
-    }
+    public Room saveRoom ( Room r){return rRepository.save(r);}
     public List<Room> findRooms(int id){return rRepository.findRooms(id);}
     public Room getRoomById(int id){return rRepository.getById(id);}
     public Room findRoomById(int id ){return rRepository.findById(id).get();}
     public void deleteRoomById(int id ){ rRepository.deleteById(id);}
-
-
-
 
     //Reservation Repo
     public List<Reservation> findAllReservations(){return resRepository.findAll();}
@@ -75,35 +67,19 @@ public class Repo  {
 
     // SensorType Repo
     public List<Sensortype> findAllSensorsTypes(){return stRepository.findAll();}
-    public Sensortype saveSensorType( Sensortype st){return stRepository.save(st);}
-
+//    public Sensortype saveSensorType( Sensortype st){return stRepository.save(st);}
 
     //  USER Repo
-    public List<User> findAllUsers(){return uRepository.findAll();}
-    public User saveUser ( User u){
+//    public List<User> findAllUsers(){return uRepository.findAll();}
+    public User saveUser(User u){
         return uRepository.save(u);
     }
     public  User getUserByUsername(String username ){return uRepository.getUsersByUsername(username);}
     public User findUserById(int id ){return uRepository.findById(id).get();}
 
     //role repo
-    public List<Role> findAllRoles(){return roleRepository.findAll();}
-    public Role saveRole( Role role){return roleRepository.save(role);}
     public Role findRoleByName(String name){return roleRepository.findByName(name);}
 
-
-    //save
-    public void save(Object obj){
-        System.out.println(obj.getClass().getSimpleName());
-      switch (obj.getClass().getSimpleName()){
-          case "Room":
-              saveRoom((Room)obj);
-              break;
-          case "Building":
-              saveBuilding((Building)obj);
-              break;
-      }
-    }
 
 
 

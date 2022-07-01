@@ -3,6 +3,7 @@ package SWT2.controller;
 import SWT2.model.Reservation;
 import SWT2.model.Room;
 import SWT2.model.User;
+import SWT2.repository.FactoryService;
 import SWT2.repository.Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -21,7 +22,8 @@ public class ReservationController {
     @Autowired
     Repo repo;
 
-
+    @Autowired
+    FactoryService fs;
 
     //Show all the Reservations of one Room
     @GetMapping("/roomReservations")
@@ -72,11 +74,14 @@ public class ReservationController {
             }
 
         }
+
         mav.addObject("allSlots", allSlots);
         mav.addObject("room", room);
         mav.addObject("user", user);
         mav.addObject("reservation", reservation);
+
         return mav;
+
     }
 
     @PostMapping("/saveReservationDate")
@@ -93,7 +98,7 @@ public class ReservationController {
         Room room = (repo.findRoomById(roomId));
         reservation.setRoom(room);
         reservation.setUser((repo.findUserById(userId)));
-        repo.saveReservations(reservation);
+        fs.save(reservation);
         return new RedirectView("/roomDetails?roomId="+roomId);
     }
 

@@ -4,6 +4,7 @@ package SWT2.controller;
 import SWT2.model.Building;
 import SWT2.model.Room;
 import SWT2.model.User;
+import SWT2.repository.FactoryService;
 import SWT2.repository.Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +23,8 @@ public class BuildingController {
     @Autowired
     Repo repo;
 
-
+    @Autowired
+    FactoryService fs;
 
     /////////////////TABLE VIEWS/////////////////
 
@@ -77,7 +79,7 @@ public class BuildingController {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         building.setPhoto(fileName);
 
-       repo.saveBuilding(building);
+        fs.save(building);
 
         String uploadDir = "building-photos/" + building.getName();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);

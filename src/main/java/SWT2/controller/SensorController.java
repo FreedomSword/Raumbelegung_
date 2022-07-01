@@ -3,10 +3,7 @@ package SWT2.controller;
 import SWT2.model.Room;
 import SWT2.model.Sensor;
 import SWT2.model.Sensortype;
-import SWT2.repository.Repo;
-import SWT2.repository.RoomRepository;
-import SWT2.repository.SensorRepository;
-import SWT2.repository.SensortypeRepository;
+import SWT2.repository.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,6 +17,8 @@ public class SensorController {
     @Autowired
     Repo repo;
     /////////////////TABLE VIEWS/////////////////
+    @Autowired
+    FactoryService fs;
 
     //Show Sensors
     @GetMapping("/showSensor")
@@ -38,7 +37,7 @@ public class SensorController {
     @PostMapping("/saveSensor")
     public RedirectView saveSensor(@ModelAttribute Sensor sensor, @RequestParam int roomId) {
         sensor.setRoom((repo.findRoomById(roomId)));
-        repo.saveSensor(sensor);
+        fs.save(sensor);
         return new RedirectView("/roomDetails?roomId=" + roomId);
     }
 

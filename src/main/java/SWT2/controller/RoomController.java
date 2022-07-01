@@ -22,6 +22,9 @@ public class RoomController {
     @Autowired
     Repo repo;
 
+    @Autowired
+    FactoryService fs;
+
     /////////////////TABLE VIEWS/////////////////
 
 
@@ -43,8 +46,7 @@ public class RoomController {
         room.setBuilding(building);
         room.setCurrentLightLevel(10);
         room.setCurrentTemperature(20);
-//        repo.saveRoom(room);
-        repo.save(room);
+        fs.save(room);
         return new RedirectView("/buildingDetails?buildingId=" + buildingId );
     }
     @GetMapping("/roomDetails")

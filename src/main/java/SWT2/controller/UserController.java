@@ -1,6 +1,7 @@
 package SWT2.controller;
 
 import SWT2.model.*;
+import SWT2.repository.FactoryService;
 import SWT2.repository.Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     Repo repo;
+
+    @Autowired
+    FactoryService fs;
 
     public String viewHomePage() {
 
@@ -52,7 +56,7 @@ public class UserController {
         Role roleUser = repo.findRoleByName("User");
         user.addRole(roleUser);
 
-        repo.saveUser(user);
+        fs.save(user);
 
         return "login";
     }
@@ -66,7 +70,7 @@ public class UserController {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         myUser.setPassword(encodedPassword);
 
-        repo.saveUser(myUser);
+        fs.save(myUser);
 
         return new RedirectView("/login");
 
